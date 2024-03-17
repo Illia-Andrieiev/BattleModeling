@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,23 +128,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArmoredVehickle.h" />
     <ClInclude Include="Army.h" />
-    <ClInclude Include="Artilery.h" />
-    <ClInclude Include="Aviation.h" />
+    <ClInclude Include="ModernUnit.h" />
     <ClInclude Include="BattleModeling.h" />
-    <ClInclude Include="Infantry.h" />
+    <ClInclude Include="Clonable.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Circumstance.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitHelpers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArmoredVehickle.cpp" />
     <ClCompile Include="Army.cpp" />
-    <ClCompile Include="Artilery.cpp" />
-    <ClCompile Include="Aviation.cpp" />
+    <ClCompile Include="ModernUnit.cpp" />
     <ClCompile Include="BattleModeling.cpp" />
-    <ClCompile Include="Infantry.cpp" />
+    <ClCompile Include="Clonable.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Circumstance.cpp" />
     <ClCompile Include="Source.cpp" />

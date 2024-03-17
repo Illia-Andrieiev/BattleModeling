@@ -1,19 +1,27 @@
 #pragma once
 #include<vector>
 #include"Item.h"
+#include"Clonable.h"
+#include<iostream>
 class Unit
 {
-private:
+protected:
 	char name[256]; /// Unit`s name
 	bool alive; /// Is unit can influence on battle
-	Power power; /// Display how much unit influence on foe`s army
+	double power; /// Default unit damage
 	double viability; /// Display unit`s chance to survive 
 	std::vector<Item> items; /// All unit`s items
+	double morality;
 public:
-	Unit(char name[256], Power& power, double viability);
-	Unit(char name[256], Power& power, double viability, std::vector<Item>& items);
+	Unit(char name[256], double power, double viability);
+	Unit(char name[256], double power, double viability, std::vector<Item>& items);
 	bool isAlive() const;
-	Power getPower() const;
-	void getDamage(double damage);
+	double getPower() const;
+	double getViability() const;
+	void takeDamage(double damage);
+	std::string getName() const;
+	std::vector<Item> getItems() const;
+	void setMorality(double newMorality);
+	double getMorality() const;
 };
 

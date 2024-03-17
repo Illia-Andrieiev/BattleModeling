@@ -1,22 +1,18 @@
 #pragma once
 #include<vector>
-#include"Aviation.h"
-#include"ArmoredVehickle.h"
-#include"Infantry.h"
-#include"Artilery.h"
+#include"ModernUnit.h"
 class Army
 {
-
-public:
-	std::vector<Unit> aviation;/// All aviation units
-	std::vector<Unit> vehickles;/// All ArmoredVehickle units
-	std::vector<Unit> infantry;/// All infantry units
-	std::vector<Unit> artilery; /// All artilery units
+	std::vector<ModernUnit> aviation;/// All aviation units
+	std::vector<ModernUnit> vehickles;/// All ArmoredVehickle units
+	std::vector<ModernUnit> infantry;/// All infantry units
+	std::vector<ModernUnit> artilery; /// All artilery units
+	Unit fortification; /// Take 50% of all foe`s units damage and damage them. By default viability and power = 0.  
 	Power power; /// General army power
 	int positionOfLastAlive[4]; /// Positions of last alive unit in appropriate vectors
-	double countPower();
+public:
+	void countPower();
 	Army();
-	Army(std::vector<Unit> units);
-	void addUnit(Unit unit);
+	void addUnit(ModernUnit& unit, modernUnitTypes type);
 };
 
