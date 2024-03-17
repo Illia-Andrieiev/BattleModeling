@@ -8,7 +8,7 @@ class Army
 	std::vector<ModernUnit> infantry;/// All infantry units
 	std::vector<ModernUnit> artilery; /// All artilery units
 	Unit fortification; /// Take 50% of all foe`s units damage and damage them. By default viability and power = 0.  
-	Power power; /// General army power
+	ModernPowerCoef power; /// General army power
 	int positionOfLastAlive[4]; /// Positions of last alive unit in appropriate vectors
 public:
 	void countPower();
