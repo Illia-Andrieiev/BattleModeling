@@ -30,7 +30,7 @@
     <ClInclude Include="Item.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Army.h">
+    <ClInclude Include="ModernArmy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Clonable.h">
@@ -59,7 +59,7 @@
     <ClCompile Include="Source.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Army.cpp">
+    <ClCompile Include="ModernArmy.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Clonable.cpp">

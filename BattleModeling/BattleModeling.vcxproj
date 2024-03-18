@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Army.h" />
+    <ClInclude Include="ModernArmy.h" />
     <ClInclude Include="ModernUnit.h" />
     <ClInclude Include="BattleModeling.h" />
     <ClInclude Include="Clonable.h" />
@@ -138,7 +138,7 @@
     <ClInclude Include="UnitHelpers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Army.cpp" />
+    <ClCompile Include="ModernArmy.cpp" />
     <ClCompile Include="ModernUnit.cpp" />
     <ClCompile Include="BattleModeling.cpp" />
     <ClCompile Include="Clonable.cpp" />

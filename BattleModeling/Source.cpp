@@ -1,10 +1,10 @@
 #include<iostream>
 #include"Item.h"
-#include"Army.h"
+#include"ModernArmy.h"
 
 
 using namespace std;
 int main() {
-	Army ar;
+	ModernArmy ar;
 	return 0;
 }

@@ -19,7 +19,7 @@ public:
 	virtual void applyItems();
 	double getBasePower() const;
 	double getViability() const;
-	void takeDamage(double damage);
+	void takeDamage(double& damage);
 	std::string getName() const;
 	std::vector<Item> getItems() const;
 	void setMorality(double newMorality);

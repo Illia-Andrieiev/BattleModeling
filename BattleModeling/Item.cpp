@@ -13,13 +13,14 @@ Item::Item(ModernPowerCoef& powerChanges, char name[256], double changeViability
 	for (int i = 0; i < 256; i++)
 		this->name[i] = name[i];
 	this->changeViability = changeViability;
+	isApplied = false;
 }
 /// Return power changes for unit
 ModernPowerCoef Item::getPowerChanges() const{
 	return powerCoefChanges;
 }
 void Item::apply() {
-	isApplyed = true;
+	isApplied = true;
 }
 double Item::getBasePowerChanges() const {
 	return changeBasePower;
@@ -28,5 +29,5 @@ double Item::getViabilityChanges() const {
 	return changeViability;
 }
 bool Item::isApply() const {
-	return isApplyed;
+	return isApplied;
 }

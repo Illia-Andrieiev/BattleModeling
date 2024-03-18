@@ -26,11 +26,15 @@ Unit::Unit(std::string name, double power, double viability, std::vector<Item>& 
 	this->items = items;
 	this->morality = 100;
 }
-/// Decrease viability on damage. If viability <= 0 set alive = false
-void Unit::takeDamage(double damage) {
+/// Decrease viability on damage. If viability <= 0 set alive = false. Decrease damage on viability points
+void Unit::takeDamage(double& damage) {
 	this->viability -= damage;
-	if (viability <= 0)
+	if (viability <= 0) {
 		alive = false;
+		damage = -viability;
+	}
+	else
+		damage = 0;
 }
 double Unit::getBasePower() const {
 	return power;

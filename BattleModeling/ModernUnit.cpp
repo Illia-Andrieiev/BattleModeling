@@ -1,4 +1,5 @@
 #include "ModernUnit.h"
+#include<random>
 ModernUnit::ModernUnit(std::string name, double power, double viability, bool fortificationTarget, Cycling cycling,
 	ModernPowerCoef powerCoef):Unit(name,power,viability) {
 	this->cycling = cycling;
@@ -55,5 +56,80 @@ void ModernUnit::applyItems() {
 			ModernPowerCoef itemsPower = items[i].getPowerChanges();
 			powerCoef = powerCoef * itemsPower;
 		}
+	}
+}
+/// Choose type of unit to attack.
+/*!
+* Use uniform_real_distribution. Weight of types to attack defines as power*unit`sTypeCoef 
+*/
+modernUnitTypes ModernUnit::chooseTarget(ModernArmy& army) const{
+	double aviationParam = power * powerCoef.aviationDamagekoef;
+	double artileryParam = aviationParam + power * powerCoef.artileryDamagekoef;
+	double infantryParam = artileryParam + power * powerCoef.infantryDamagekoef;
+	double summPower =  infantryParam + power * powerCoef.vehickleDamagekoef;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> distr(0, summPower);
+	for (int i = 0; i < 100;i++) {
+		double param = distr(gen);
+		if (param <= aviationParam && army.positionOfFirstAlive[0] != -1)
+			return modernUnitTypes::aviation;
+		if (param <= artileryParam && army.positionOfFirstAlive[3] != -1)
+			return modernUnitTypes::artilery;
+		if (param <= infantryParam && army.positionOfFirstAlive[2] != -1)
+			return modernUnitTypes::infantry;
+		if(param <= summPower && army.positionOfFirstAlive[1] != -1)
+			return modernUnitTypes::armoredVehickle;
+	}
+	return modernUnitTypes::infantry;
+}
+void ModernUnit::attackFortification(Unit& fortification, double& damage) {
+	if (fortification.isAlive()) {
+		double dam = damage / 2;
+		fortification.takeDamage(dam);
+		damage = damage / 2 + dam;
+	}
+}
+int ModernUnit::chooseTargetNomer(std::vector<ModernUnit>& units, int firstAlive) {
+	if (firstAlive == -1)
+		return -1;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(firstAlive, units.size()-1);
+	return distr(gen);
+}
+void ModernUnit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<ModernUnit>& units) {
+	if (posFirstAlive == -1 || units.size() == 0)
+		return;
+	attackFortification(fortification, damage);
+	while (damage > 0 && posFirstAlive != -1) {
+		int pos = chooseTargetNomer(units, posFirstAlive);
+		units[pos].takeDamage(damage);
+		if (!units[pos].isAlive()) {
+			std::swap(units[pos], units[posFirstAlive]);
+			posFirstAlive++;
+			if (posFirstAlive == units.size()) {
+				posFirstAlive = -1;
+			}
+		}
+	}
+}
+void ModernUnit::attackArmy(ModernArmy& army) {
+	modernUnitTypes type = chooseTarget(army);
+	if (type == modernUnitTypes::aviation) {
+		double damage = power * powerCoef.aviationDamagekoef;
+		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[0], army.aviation);
+	}
+	if (type == modernUnitTypes::artilery) {
+		double damage = power * powerCoef.aviationDamagekoef;
+		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[3], army.artilery);
+	}
+	if (type == modernUnitTypes::infantry) {
+		double damage = power * powerCoef.aviationDamagekoef;
+		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[2], army.infantry);
+	}
+	if (type == modernUnitTypes::armoredVehickle) {
+		double damage = power * powerCoef.aviationDamagekoef;
+		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[1], army.vehickles);
 	}
 }

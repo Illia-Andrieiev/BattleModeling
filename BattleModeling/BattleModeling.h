@@ -2,14 +2,13 @@
 #include<vector>
 #include"Circumstance.h"
 #include"Unit.h"
-#include"Army.h"
+#include"ModernArmy.h"
 class BattleModeling
 {
 private:
-	Army army1;
-	Army army2;
-	Circumstance battleLocation;
-	Circumstance weather;
+	ModernArmy army1;
+	ModernArmy army2;
+	std::vector<Circumstance> circumstances;
 public:
 };
 
