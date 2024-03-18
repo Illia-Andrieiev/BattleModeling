@@ -48,5 +48,24 @@ void ModernArmy::addUnit(ModernUnit& unit, modernUnitTypes type) {
 }
 
 void ModernArmy::attackArmy(ModernArmy& army) {
-	
+	if (positionOfFirstAlive[0] != -1) {
+		for (int i = positionOfFirstAlive[0]; i < aviation.size(); i++) {
+			aviation[i].attackArmy(army);
+		}
+	}
+	if (positionOfFirstAlive[1] != -1) {
+		for (int i = positionOfFirstAlive[1]; i < vehickles.size(); i++) {
+			vehickles[i].attackArmy(army);
+		}
+	}
+	if (positionOfFirstAlive[2] != -1) {
+		for (int i = positionOfFirstAlive[2]; i < infantry.size(); i++) {
+			infantry[i].attackArmy(army);
+		}
+	}
+	if (positionOfFirstAlive[3] != -1) {
+		for (int i = positionOfFirstAlive[3]; i < artilery.size(); i++) {
+			artilery[i].attackArmy(army);
+		}
+	}
 }
