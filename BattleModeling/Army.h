@@ -1,6 +1,7 @@
 #pragma once
 #include<vector>
 #include"ModernUnit.h"
+class ModernUnit;
 class Army
 {
 	std::vector<ModernUnit> aviation;/// All aviation units
@@ -11,8 +12,8 @@ class Army
 	ModernPowerCoef power; /// General army power
 	int positionOfLastAlive[4]; /// Positions of last alive unit in appropriate vectors
 public:
-	void countPower();
 	Army();
+	void countPower();
 	void addUnit(ModernUnit& unit, modernUnitTypes type);
 };
 

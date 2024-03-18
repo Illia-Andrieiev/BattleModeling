@@ -9,10 +9,16 @@ class Item
 {
 private:
 	char name[256]; /// Item name
-	ModernPowerCoef powerChanges; /// Add to unit`s power. Parameters can be < 0
+	ModernPowerCoef powerCoefChanges; /// Multiply unit`s powerCoef. Parameters cannot be < 0
 	double changeViability; /// Add to unit`s viability. Can be < 0
+	double changeBasePower; /// Add to unit`s base power. Can be < 0
+	bool isApplyed;
 public:
-	Item(ModernPowerCoef& powerChanges, char name[256], double changeViability);
+	void apply();
+	Item(ModernPowerCoef& powerChanges, char name[256], double changeViability, double changeBasePower);
 	ModernPowerCoef getPowerChanges() const;
+	double getBasePowerChanges() const;
+	double getViabilityChanges() const;
+	bool isApply() const;
 };
 

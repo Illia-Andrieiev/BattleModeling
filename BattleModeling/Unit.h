@@ -13,10 +13,11 @@ protected:
 	std::vector<Item> items; /// All unit`s items
 	double morality;
 public:
-	Unit(char name[256], double power, double viability);
-	Unit(char name[256], double power, double viability, std::vector<Item>& items);
+	Unit(std::string name, double power, double viability);
+	Unit(std::string name, double power, double viability, std::vector<Item>& items);
 	bool isAlive() const;
-	double getPower() const;
+	virtual void applyItems();
+	double getBasePower() const;
 	double getViability() const;
 	void takeDamage(double damage);
 	std::string getName() const;

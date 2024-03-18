@@ -1,11 +1,11 @@
 #include "ModernUnit.h"
-ModernUnit::ModernUnit(char name[256], double power, double viability, bool fortificationTarget, Cycling cycling,
+ModernUnit::ModernUnit(std::string name, double power, double viability, bool fortificationTarget, Cycling cycling,
 	ModernPowerCoef powerCoef):Unit(name,power,viability) {
 	this->cycling = cycling;
 	this->powerCoef = powerCoef;
 	this->fortificationTarget = fortificationTarget;
 }
-ModernUnit::ModernUnit(char name[256], double power, double viability, bool fortificationTarget, std::vector<Item>& items,
+ModernUnit::ModernUnit(std::string name, double power, double viability, bool fortificationTarget, std::vector<Item>& items,
 	Cycling cycling, ModernPowerCoef powerCoef) :Unit(name, power, viability, items) {
 	this->cycling = cycling;
 	this->powerCoef = powerCoef;
@@ -34,6 +34,26 @@ void ModernUnit::updateCycle() {
 		if (cycling.currentCycle >= cycling.cyclesToActivation) {
 			cycling.currentCycle = 0;
 			cycling.isActive = true;
+		}
+	}
+}
+ModernPowerCoef ModernUnit::getTypesPower() const {
+	return ModernPowerCoef(power * powerCoef.aviationDamagekoef, power * powerCoef.infantryDamagekoef,
+		power * powerCoef.vehickleDamagekoef, power * powerCoef.artileryDamagekoef);
+}
+/// At first add all don`t applied items base parameters changes tp unit. Then multiply item`s powerCoef on unit`s.
+void ModernUnit::applyItems() {
+	for (int i = 0; i < items.size(); i++) {
+		if (!items[i].isApply()) {
+			power += items[i].getBasePowerChanges();
+			viability += items[i].getViabilityChanges();
+		}
+	}
+	for (int i = 0; i < items.size(); i++) {
+		if (!items[i].isApply()) {
+			items[i].apply();
+			ModernPowerCoef itemsPower = items[i].getPowerChanges();
+			powerCoef = powerCoef * itemsPower;
 		}
 	}
 }

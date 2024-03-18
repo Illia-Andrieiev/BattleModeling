@@ -4,19 +4,23 @@ bool Unit::isAlive() const{
 	return alive;
 }
 /// Constructor
-Unit::Unit(char name[256], double power, double viability) {
+Unit::Unit(std::string name, double power, double viability) {
 	this->power = power;
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i<name.size() && i < 256; i++)
 		this->name[i] = name[i];
+	for (int i = name.size(); i < 256; i++)
+		this->name[i] = ' ';
 	this->viability = viability;
 	this->alive = true;
 	this->morality = 100;
 }
 /// Constructor
-Unit::Unit(char name[256], double power, double viability, std::vector<Item>& items) {
+Unit::Unit(std::string name, double power, double viability, std::vector<Item>& items) {
 	this->power = power;
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i < name.size()&& i < 256; i++)
 		this->name[i] = name[i];
+	for(int i = name.size(); i<256;i++)
+		this->name[i] = ' ';
 	this->viability = viability;
 	this->alive = true;
 	this->items = items;
@@ -28,7 +32,7 @@ void Unit::takeDamage(double damage) {
 	if (viability <= 0)
 		alive = false;
 }
-double Unit::getPower() const {
+double Unit::getBasePower() const {
 	return power;
 }
 std::string Unit::getName() const{
@@ -39,6 +43,16 @@ double Unit::getViability() const {
 }
 std::vector<Item> Unit::getItems() const {
 	return items;
+}
+/// Add to unit`s viability and power appropriated parameters from item
+void Unit::applyItems() {
+	for (int i = 0; i < items.size();i++) {
+		if (!items[i].isApply()) {
+			items[i].apply();
+			power += items[i].getBasePowerChanges();
+			viability += items[i].getViabilityChanges();
+		}
+	}
 }
 void Unit::setMorality(double newMorality) {
 	if (newMorality > 100) {
@@ -52,5 +66,5 @@ void Unit::setMorality(double newMorality) {
 		morality = newMorality;
 }
 double Unit::getMorality() const {
-
+	return morality;
 }
