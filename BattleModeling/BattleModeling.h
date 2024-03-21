@@ -10,5 +10,8 @@ private:
 	ModernArmy army2;
 	std::vector<Circumstance> circumstances;
 public:
+	BattleModeling(ModernArmy& army1, ModernArmy& army2);
+	void battleLap();
+	void operator()();
 };
 

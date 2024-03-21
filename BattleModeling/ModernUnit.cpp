@@ -95,7 +95,7 @@ int ModernUnit::chooseTargetNomer(std::vector<ModernUnit>& units, int firstAlive
 		return -1;
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distr(firstAlive, units.size()-1);
+	std::uniform_int_distribution<> distr(firstAlive, (int)units.size()-1);
 	return distr(gen);
 }
 void ModernUnit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<ModernUnit>& units) {
@@ -121,15 +121,15 @@ void ModernUnit::attackArmy(ModernArmy& army) {
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[0], army.aviation);
 	}
 	if (type == modernUnitTypes::artilery) {
-		double damage = power * powerCoef.aviationDamagekoef;
+		double damage = power * powerCoef.artileryDamagekoef;
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[3], army.artilery);
 	}
 	if (type == modernUnitTypes::infantry) {
-		double damage = power * powerCoef.aviationDamagekoef;
+		double damage = power * powerCoef.infantryDamagekoef;
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[2], army.infantry);
 	}
 	if (type == modernUnitTypes::armoredVehickle) {
-		double damage = power * powerCoef.aviationDamagekoef;
+		double damage = power * powerCoef.vehickleDamagekoef;
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[1], army.vehickles);
 	}
 }

@@ -8,6 +8,10 @@
 class Circumstance
 {
 	char name[256]; /// Circumstance name
-	ModernPowerCoef powerChanges; /// multiply to unit`s power. Parameters cannot be < 0
+	double powerChanges; /// multiply to unit`s power. Parameters cannot be < 0
+public:
+	Circumstance(double powerChanges, std::string name);
+	std::string getName() const;
+	double getPowerChanges() const;
 };
 

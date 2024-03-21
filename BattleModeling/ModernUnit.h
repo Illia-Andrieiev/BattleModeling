@@ -2,6 +2,7 @@
 #include"Unit.h"
 #include"ModernArmy.h"
 #include"UnitHelpers.h"
+class ModernArmy;
 class ModernUnit:public Unit, public Clonable<typename ModernUnit>
 {
 	friend ModernArmy;
@@ -24,6 +25,5 @@ public:
 	void updateCycle();
 	void applyItems() override;
 	void attackArmy(ModernArmy& army);
-	
 };
 

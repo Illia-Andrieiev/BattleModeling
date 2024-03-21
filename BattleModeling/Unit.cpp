@@ -8,7 +8,7 @@ Unit::Unit(std::string name, double power, double viability) {
 	this->power = power;
 	for (int i = 0; i<name.size() && i < 256; i++)
 		this->name[i] = name[i];
-	for (int i = name.size(); i < 256; i++)
+	for (int i = (int)name.size(); i < 256; i++)
 		this->name[i] = ' ';
 	this->viability = viability;
 	this->alive = true;
@@ -19,7 +19,7 @@ Unit::Unit(std::string name, double power, double viability, std::vector<Item>& 
 	this->power = power;
 	for (int i = 0; i < name.size()&& i < 256; i++)
 		this->name[i] = name[i];
-	for(int i = name.size(); i<256;i++)
+	for(int i = (int)name.size(); i<256;i++)
 		this->name[i] = ' ';
 	this->viability = viability;
 	this->alive = true;
@@ -32,6 +32,7 @@ void Unit::takeDamage(double& damage) {
 	if (viability <= 0) {
 		alive = false;
 		damage = -viability;
+		viability = 0;
 	}
 	else
 		damage = 0;
@@ -71,4 +72,10 @@ void Unit::setMorality(double newMorality) {
 }
 double Unit::getMorality() const {
 	return morality;
+}
+std::string Unit::boolToStr(bool flag) {
+	return flag ? "true": "false";
+}
+std::string Unit::toString() {
+	return std::string("Name: " + std::string(name) + " viability: " + std::to_string(viability) + " alive: " + boolToStr(alive));
 }

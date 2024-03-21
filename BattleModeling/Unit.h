@@ -12,6 +12,7 @@ protected:
 	double viability; /// Display unit`s chance to survive 
 	std::vector<Item> items; /// All unit`s items
 	double morality;
+	std::string boolToStr(bool flag);
 public:
 	Unit(std::string name, double power, double viability);
 	Unit(std::string name, double power, double viability, std::vector<Item>& items);
@@ -24,5 +25,6 @@ public:
 	std::vector<Item> getItems() const;
 	void setMorality(double newMorality);
 	double getMorality() const;
+	virtual std::string toString();
 };
 
