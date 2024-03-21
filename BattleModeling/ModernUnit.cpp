@@ -114,7 +114,11 @@ void ModernUnit::attackUnitType(Unit& fortification, double& damage, int& posFir
 		}
 	}
 }
-void ModernUnit::attackArmy(ModernArmy& army) {
+void ModernUnit::attackArmy(ModernArmy& army, double& supplies) {
+	if (supplies <= 0)
+		return;
+	supplies -= power * 0.1;
+	supplies = supplies < 0 ? 0 : supplies;
 	modernUnitTypes type = chooseTarget(army);
 	if (type == modernUnitTypes::aviation) {
 		double damage = power * powerCoef.aviationDamagekoef;

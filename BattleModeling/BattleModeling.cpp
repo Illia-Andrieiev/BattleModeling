@@ -4,6 +4,12 @@ BattleModeling::BattleModeling(ModernArmy& army1, ModernArmy& army2) {
 	this->army1 = army1;
 	this->army2 = army2;
 }
+void BattleModeling::setLapSupplies(Supply& supply) {
+	this->lapSupplies = supply;
+}
+Supply BattleModeling::getLapSupplies() {
+	return lapSupplies;
+}
 void BattleModeling::battleLap() {
 	std::thread army1Thread([&]() {army1.attackArmy(army2);});
 	army2.attackArmy(army1);
@@ -12,6 +18,8 @@ void BattleModeling::battleLap() {
 	std::cout << "army2: viability: " << army2.countViability() << std::endl << army2.toString();
 }
 void BattleModeling::operator()() {
+	army1.applyItems();
+	army2.applyItems();
 	army1.countViability();
 	army2.countViability();
 	while (army1.getViability() > 0 && army2.getViability() > 0) {

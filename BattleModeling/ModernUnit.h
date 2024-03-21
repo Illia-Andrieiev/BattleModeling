@@ -24,6 +24,6 @@ public:
 	ModernPowerCoef getTypesPower()const;
 	void updateCycle();
 	void applyItems() override;
-	void attackArmy(ModernArmy& army);
+	void attackArmy(ModernArmy& army, double& supplies);
 };
 
