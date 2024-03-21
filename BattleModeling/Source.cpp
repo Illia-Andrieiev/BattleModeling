@@ -6,6 +6,8 @@ using namespace std;
 int main() {
 	ModernArmy army1;
 	ModernArmy army2;
+	army1.changeSupplies(9999999);
+	army2.changeSupplies(9999999);
 	string namesol("Snake");
 	Cycling soliderCycle(10, 2, true);
 	ModernPowerCoef soliderModernPowerCoef(0.05, 1, 0.15, 0.1);

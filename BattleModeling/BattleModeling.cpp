@@ -7,7 +7,7 @@ BattleModeling::BattleModeling(ModernArmy& army1, ModernArmy& army2) {
 void BattleModeling::setLapSupplies(Supply& supply) {
 	this->lapSupplies = supply;
 }
-Supply BattleModeling::getLapSupplies() {
+Supply BattleModeling::getLapSupplies() const{
 	return lapSupplies;
 }
 void BattleModeling::battleLap() {

@@ -22,7 +22,7 @@ private:
 public:
 	BattleModeling(ModernArmy& army1, ModernArmy& army2);
 	void setLapSupplies(Supply& supply);
-	Supply getLapSupplies();
+	Supply getLapSupplies() const;
 	void operator()();
 };
 

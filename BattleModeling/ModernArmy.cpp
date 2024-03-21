@@ -57,13 +57,13 @@ void ModernArmy::addUnit(ModernUnit& unit, modernUnitTypes type) {
 	}
 }
 void ModernArmy::attackType(ModernArmy& army,std::vector<ModernUnit>& type, int posFirstAlive) {
-	mt.lock();
 	if (posFirstAlive != -1) {
 		for (int i = posFirstAlive; i < type.size(); i++) {
+			mt.lock();
 			type[i].attackArmy(army, supplies);
+			mt.unlock();
 		}
 	}
-	mt.unlock();
 }
 void ModernArmy::attackArmy(ModernArmy& army) {
 	std::thread avi([&]() {attackType(army, aviation, positionOfFirstAlive[0]); });
@@ -123,6 +123,7 @@ ModernArmy& ModernArmy::operator =(const ModernArmy& army) {
 	positionOfFirstAlive[1] = army.positionOfFirstAlive[1];
 	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
 	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
+	supplies = army.supplies;
 	return *this;
 }
 double ModernArmy::getSupplies() const{
