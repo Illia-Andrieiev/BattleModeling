@@ -48,21 +48,23 @@ void ModernArmy::addUnit(ModernUnit& unit, modernUnitTypes type) {
 			positionOfFirstAlive[1] = (int)vehickles.size() - 1;
 	}
 }
-std::mutex mut;
 void ModernArmy::attackType(ModernArmy& army,std::vector<ModernUnit>& type, int posFirstAlive) {
-	mut.lock();
+	mt.lock();
 	if (posFirstAlive != -1) {
 		for (int i = posFirstAlive; i < type.size(); i++) {
 			type[i].attackArmy(army);
 		}
 	}
-	mut.unlock();
+	mt.unlock();
 }
 void ModernArmy::attackArmy(ModernArmy& army) {
-	attackType(army, aviation, positionOfFirstAlive[0]);  
-	attackType(army, vehickles, positionOfFirstAlive[1]); 
-	attackType(army, infantry, positionOfFirstAlive[2]); 
+	std::thread avi([&]() {attackType(army, aviation, positionOfFirstAlive[0]); });
+	std::thread veh([&]() {attackType(army, vehickles, positionOfFirstAlive[1]); });
+	std::thread inf([&]() {attackType(army, infantry, positionOfFirstAlive[2]); });
 	attackType(army, artilery, positionOfFirstAlive[3]);
+	avi.join();
+	veh.join();
+	inf.join();
 }
 std::string ModernArmy::toString() {
 	std::string res = "";
@@ -98,4 +100,20 @@ double ModernArmy::countViability() {
 		viability += unit.getViability();
 	}
 	return viability;
+}
+ModernArmy& ModernArmy::operator =(const ModernArmy& army) {
+	if (this == &army)
+		return *this;
+	artilery = army.artilery;
+	aviation = army.aviation;
+	fortification = army.fortification;
+	vehickles = army.vehickles;
+	infantry = army.infantry;
+	viability = army.viability;
+	power = army.power;
+	positionOfFirstAlive[0] = army.positionOfFirstAlive[0];
+	positionOfFirstAlive[1] = army.positionOfFirstAlive[1];
+	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
+	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
+	return *this;
 }
