@@ -18,9 +18,11 @@ private:
 	ModernArmy army2Reinforcements;
 	Supply lapSupplies;
 	void battleLap();
-	std::vector<Circumstance> circumstances;
+	std::vector<ModernCircumstance> circumstances;
+	ModernCircumstance getSummCircumstance();
 public:
 	BattleModeling(ModernArmy& army1, ModernArmy& army2);
+	void addCircumstance(ModernCircumstance& circ);
 	void setLapSupplies(Supply& supply);
 	Supply getLapSupplies() const;
 	void operator()();

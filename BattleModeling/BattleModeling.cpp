@@ -18,6 +18,14 @@ void BattleModeling::battleLap() {
 	std::cout << "army2: viability: " << army2.countViability() << std::endl << army2.toString();
 }
 void BattleModeling::operator()() {
+	ModernArmy army1, army2, reinF1,reinF2;
+	army1 = this->army1;
+	army2 = this->army2;
+	reinF1 = this->army1Reinforcements;
+	reinF2 = this->army2Reinforcements;
+	ModernCircumstance summaryCirc = getSummCircumstance();
+	army1.applyCircumstance(summaryCirc);
+	army2.applyCircumstance(summaryCirc);
 	army1.applyItems();
 	army2.applyItems();
 	army1.countViability();
@@ -26,4 +34,15 @@ void BattleModeling::operator()() {
 		battleLap();
 		system("pause");
 	}
+}
+ModernCircumstance BattleModeling::getSummCircumstance() {
+	modern::ModernPowerCoef coef;
+	ModernCircumstance summary(coef, std::string("Summary"));
+	for (ModernCircumstance circ : circumstances) {
+		summary.setPowerChanges(summary.getPowerChanges() * circ.getPowerChanges());
+	}
+	return summary;
+}
+void BattleModeling::addCircumstance(ModernCircumstance& circ) {
+	circumstances.push_back(circ);
 }

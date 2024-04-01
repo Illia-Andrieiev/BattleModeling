@@ -1,8 +1,5 @@
 #include "Circumstance.h"
-Circumstance::Circumstance(double powerChanges, std::string name) {
-	if (powerChanges <= 0)
-		powerChanges = 1;
-	this->powerChanges = powerChanges;
+Circumstance::Circumstance(std::string name) {
 	for (int i = 0; i < name.size() && i < 256; i++)
 		this->name[i] = name[i];
 	for (int i = name.size(); i < 256; i++)
@@ -11,6 +8,15 @@ Circumstance::Circumstance(double powerChanges, std::string name) {
 std::string Circumstance::getName() const {
 	return std::string(name);
 }
-double Circumstance::getPowerChanges() const {
+modern::ModernPowerCoef ModernCircumstance::getPowerChanges() const {
 	return powerChanges;
+}
+ModernCircumstance::ModernCircumstance(modern::ModernPowerCoef& powerChanges, std::string name):Circumstance(name)  {
+	this->powerChanges = powerChanges;
+}
+void ModernCircumstance::setPowerChanges(modern::ModernPowerCoef& powerChanges) {
+	this->powerChanges = powerChanges;
+}
+void ModernCircumstance::setPowerChanges(modern::ModernPowerCoef powerChanges) {
+	this->powerChanges = powerChanges;
 }

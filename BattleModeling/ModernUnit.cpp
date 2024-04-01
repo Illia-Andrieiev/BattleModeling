@@ -1,13 +1,13 @@
 #include "ModernUnit.h"
 #include<random>
-ModernUnit::ModernUnit(std::string name, double power, double viability, bool fortificationTarget, Cycling cycling,
-	ModernPowerCoef powerCoef):Unit(name,power,viability) {
+ModernUnit::ModernUnit(std::string name, double power, double viability, bool fortificationTarget, modern::Cycling cycling,
+	modern::ModernPowerCoef powerCoef):Unit(name,power,viability) {
 	this->cycling = cycling;
 	this->powerCoef = powerCoef;
 	this->fortificationTarget = fortificationTarget;
 }
 ModernUnit::ModernUnit(std::string name, double power, double viability, bool fortificationTarget, std::vector<Item>& items,
-	Cycling cycling, ModernPowerCoef powerCoef) :Unit(name, power, viability, items) {
+	modern::Cycling cycling, modern::ModernPowerCoef powerCoef) :Unit(name, power, viability, items) {
 	this->cycling = cycling;
 	this->powerCoef = powerCoef;
 	this->fortificationTarget = fortificationTarget;
@@ -18,7 +18,7 @@ ModernUnit ModernUnit::clone(){
 bool ModernUnit::getIsActive() const{
 	return this->cycling.isActive;
 }
-ModernPowerCoef ModernUnit::getPowerCoef() const{
+modern::ModernPowerCoef ModernUnit::getPowerCoef() const{
 	return this->powerCoef;
 }
 /// Add 1 to current cycle. Manage isActive atribute
@@ -38,8 +38,8 @@ void ModernUnit::updateCycle() {
 		}
 	}
 }
-ModernPowerCoef ModernUnit::getTypesPower() const {
-	return ModernPowerCoef(power * powerCoef.aviationDamagekoef, power * powerCoef.infantryDamagekoef,
+modern::ModernPowerCoef ModernUnit::getTypesPower() const {
+	return modern::ModernPowerCoef(power * powerCoef.aviationDamagekoef, power * powerCoef.infantryDamagekoef,
 		power * powerCoef.vehickleDamagekoef, power * powerCoef.artileryDamagekoef);
 }
 /// At first add all don`t applied items base parameters changes tp unit. Then multiply item`s powerCoef on unit`s.
@@ -53,7 +53,7 @@ void ModernUnit::applyItems() {
 	for (int i = 0; i < items.size(); i++) {
 		if (!items[i].isApply()) {
 			items[i].apply();
-			ModernPowerCoef itemsPower = items[i].getPowerChanges();
+			modern::ModernPowerCoef itemsPower = items[i].getPowerChanges();
 			powerCoef = powerCoef * itemsPower;
 		}
 	}
@@ -62,7 +62,7 @@ void ModernUnit::applyItems() {
 /*!
 * Use uniform_real_distribution. Weight of types to attack defines as power*unit`sTypeCoef 
 */
-modernUnitTypes ModernUnit::chooseTarget(ModernArmy& army) const{
+modern::modernUnitTypes ModernUnit::chooseTarget(ModernArmy& army) const{
 	double aviationParam = power * powerCoef.aviationDamagekoef;
 	double artileryParam = aviationParam + power * powerCoef.artileryDamagekoef;
 	double infantryParam = artileryParam + power * powerCoef.infantryDamagekoef;
@@ -73,15 +73,15 @@ modernUnitTypes ModernUnit::chooseTarget(ModernArmy& army) const{
 	for (int i = 0; i < 100;i++) {
 		double param = distr(gen);
 		if (param <= aviationParam && army.positionOfFirstAlive[0] != -1)
-			return modernUnitTypes::aviation;
+			return modern::modernUnitTypes::aviation;
 		if (param <= artileryParam && army.positionOfFirstAlive[3] != -1)
-			return modernUnitTypes::artilery;
+			return modern::modernUnitTypes::artilery;
 		if (param <= infantryParam && army.positionOfFirstAlive[2] != -1)
-			return modernUnitTypes::infantry;
+			return modern::modernUnitTypes::infantry;
 		if(param <= summPower && army.positionOfFirstAlive[1] != -1)
-			return modernUnitTypes::armoredVehickle;
+			return modern::modernUnitTypes::armoredVehickle;
 	}
-	return modernUnitTypes::infantry;
+	return modern::modernUnitTypes::infantry;
 }
 void ModernUnit::attackFortification(Unit& fortification, double& damage) {
 	if (fortification.isAlive()) {
@@ -119,20 +119,20 @@ void ModernUnit::attackArmy(ModernArmy& army, double& supplies) {
 		return;
 	supplies -= power * 0.1;
 	supplies = supplies < 0 ? 0 : supplies;
-	modernUnitTypes type = chooseTarget(army);
-	if (type == modernUnitTypes::aviation) {
+	modern::modernUnitTypes type = chooseTarget(army);
+	if (type == modern::modernUnitTypes::aviation) {
 		double damage = power * powerCoef.aviationDamagekoef;
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[0], army.aviation);
 	}
-	if (type == modernUnitTypes::artilery) {
+	if (type == modern::modernUnitTypes::artilery) {
 		double damage = power * powerCoef.artileryDamagekoef;
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[3], army.artilery);
 	}
-	if (type == modernUnitTypes::infantry) {
+	if (type == modern::modernUnitTypes::infantry) {
 		double damage = power * powerCoef.infantryDamagekoef;
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[2], army.infantry);
 	}
-	if (type == modernUnitTypes::armoredVehickle) {
+	if (type == modern::modernUnitTypes::armoredVehickle) {
 		double damage = power * powerCoef.vehickleDamagekoef;
 		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[1], army.vehickles);
 	}

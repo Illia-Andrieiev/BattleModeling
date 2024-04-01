@@ -23,6 +23,7 @@ public:
 	void takeDamage(double& damage);
 	std::string getName() const;
 	std::vector<Item> getItems() const;
+	void multiplyPower(double koef);
 	void setMorality(double newMorality);
 	double getMorality() const;
 	virtual std::string toString();

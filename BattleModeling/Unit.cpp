@@ -79,3 +79,8 @@ std::string Unit::boolToStr(bool flag) {
 std::string Unit::toString() {
 	return std::string("Name: " + std::string(name) + " viability: " + std::to_string(viability) + " alive: " + boolToStr(alive));
 }
+void Unit::multiplyPower(double koef) {
+	if (koef < 0)
+		return;
+	this->power *= koef;
+}
