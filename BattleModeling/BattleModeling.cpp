@@ -46,3 +46,13 @@ ModernCircumstance BattleModeling::getSummCircumstance() {
 void BattleModeling::addCircumstance(ModernCircumstance& circ) {
 	circumstances.push_back(circ);
 }
+void BattleModeling::setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements) {
+	this->army1Reinforcements = army1Reinforcements;
+	this->army2Reinforcements = army2Reinforcements;
+}
+void BattleModeling::setSupplies(Supply& lapSupplies) {
+	this->lapSupplies = lapSupplies;
+}
+void BattleModeling::setSupplies(Supply lapSupplies) {
+	this->lapSupplies = lapSupplies;
+}

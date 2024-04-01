@@ -53,8 +53,7 @@ void ModernUnit::applyItems() {
 	for (int i = 0; i < items.size(); i++) {
 		if (!items[i].isApply()) {
 			items[i].apply();
-			modern::ModernPowerCoef itemsPower = items[i].getPowerChanges();
-			powerCoef = powerCoef * itemsPower;
+			powerCoef = powerCoef * items[i].getPowerChanges();
 		}
 	}
 }

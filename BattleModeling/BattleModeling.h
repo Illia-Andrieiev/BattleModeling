@@ -25,6 +25,9 @@ public:
 	void addCircumstance(ModernCircumstance& circ);
 	void setLapSupplies(Supply& supply);
 	Supply getLapSupplies() const;
+	void setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements);
+	void setSupplies(Supply& lapSupplies);
+	void setSupplies(Supply lapSupplies);
 	void operator()();
 };
 
