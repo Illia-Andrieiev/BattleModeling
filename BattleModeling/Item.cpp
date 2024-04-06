@@ -1,5 +1,5 @@
 #include "Item.h"
-Item::Item(ModernPowerCoef& powerChanges, char name[256], double changeViability, double changeBasePower) {
+Item::Item(modern::ModernPowerCoef& powerChanges, char name[256], double changeViability, double changeBasePower) {
 	if (powerChanges.artileryDamagekoef < 0)
 		powerChanges.artileryDamagekoef = 0;
 	if (powerChanges.aviationDamagekoef < 0)
@@ -16,7 +16,7 @@ Item::Item(ModernPowerCoef& powerChanges, char name[256], double changeViability
 	isApplied = false;
 }
 /// Return power changes for unit
-ModernPowerCoef Item::getPowerChanges() const{
+modern::ModernPowerCoef Item::getPowerChanges() const{
 	return powerCoefChanges;
 }
 void Item::apply() {

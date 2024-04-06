@@ -2,7 +2,7 @@
 Circumstance::Circumstance(std::string name) {
 	for (int i = 0; i < name.size() && i < 256; i++)
 		this->name[i] = name[i];
-	for (int i = name.size(); i < 256; i++)
+	for (int i = (int)name.size(); i < 256; i++)
 		this->name[i] = ' ';
 }
 std::string Circumstance::getName() const {

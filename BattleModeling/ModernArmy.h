@@ -4,7 +4,7 @@
 #include"Circumstance.h"
 #include<mutex>
 class ModernUnit;
-class ModernArmy
+class ModernArmy: public Clonable<typename ModernArmy>
 {
 	friend ModernUnit;
 	std::vector<ModernUnit> aviation;/// All aviation units
@@ -21,6 +21,8 @@ class ModernArmy
 public:
 	ModernArmy();
 	ModernArmy(Unit& fortification);
+	ModernArmy(const ModernArmy& army);
+	ModernArmy clone() override;
 	void countPower();
 	double getSupplies() const;
 	void changeSupplies(double supply);

@@ -14,6 +14,37 @@ ModernArmy::ModernArmy(Unit& fortification):fortification(fortification){
 	viability = countViability();
 	supplies = 0;
 }
+ModernArmy::ModernArmy(const ModernArmy& army) :fortification(Unit(std::string("fortification"), 0, 0)) {
+	artilery = army.artilery;
+	aviation = army.aviation;
+	fortification = army.fortification;
+	vehickles = army.vehickles;
+	infantry = army.infantry;
+	viability = army.viability;
+	power = army.power;
+	positionOfFirstAlive[0] = army.positionOfFirstAlive[0];
+	positionOfFirstAlive[1] = army.positionOfFirstAlive[1];
+	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
+	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
+	supplies = army.supplies;
+}
+ModernArmy& ModernArmy::operator =(const ModernArmy& army) {
+	if (this == &army)
+		return *this;
+	artilery = army.artilery;
+	aviation = army.aviation;
+	fortification = army.fortification;
+	vehickles = army.vehickles;
+	infantry = army.infantry;
+	viability = army.viability;
+	power = army.power;
+	positionOfFirstAlive[0] = army.positionOfFirstAlive[0];
+	positionOfFirstAlive[1] = army.positionOfFirstAlive[1];
+	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
+	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
+	supplies = army.supplies;
+	return *this;
+}
 void ModernArmy::countPower() {
 	power = modern::ModernPowerCoef(0, 0, 0, 0);
 	for (ModernUnit unit : aviation) {
@@ -109,23 +140,7 @@ double ModernArmy::countViability() {
 	}
 	return viability;
 }
-ModernArmy& ModernArmy::operator =(const ModernArmy& army) {
-	if (this == &army)
-		return *this;
-	artilery = army.artilery;
-	aviation = army.aviation;
-	fortification = army.fortification;
-	vehickles = army.vehickles;
-	infantry = army.infantry;
-	viability = army.viability;
-	power = army.power;
-	positionOfFirstAlive[0] = army.positionOfFirstAlive[0];
-	positionOfFirstAlive[1] = army.positionOfFirstAlive[1];
-	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
-	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
-	supplies = army.supplies;
-	return *this;
-}
+
 double ModernArmy::getSupplies() const{
 	return supplies;
 }
@@ -161,4 +176,20 @@ void ModernArmy::applyCircumstance(ModernCircumstance& circ) {
 	for (int i = 0; i < artilery.size(); i++) {
 		artilery[i].multiplyPower(circ.getPowerChanges().artileryDamagekoef);
 	}
+}
+ModernArmy ModernArmy::clone() {
+	ModernArmy army;
+	army.artilery = artilery;
+	army.aviation = aviation;
+	army.fortification = fortification;
+	army.vehickles = vehickles;
+	army.infantry = infantry;
+	army.viability = viability;
+	power = army.power;
+	army.positionOfFirstAlive[0] = positionOfFirstAlive[0];
+	army.positionOfFirstAlive[1] = positionOfFirstAlive[1];
+	army.positionOfFirstAlive[2] = positionOfFirstAlive[2];
+	army.positionOfFirstAlive[3] = positionOfFirstAlive[3];
+	army.supplies = supplies;
+	return army;
 }

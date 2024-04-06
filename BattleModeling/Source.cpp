@@ -57,8 +57,13 @@ int main() {
 	for (int i = 0; i < 8; i++) {
 		army2.addUnit(patr, modern::modernUnitTypes::artilery);
 	}
-	BattleModeling battle(army1, army2);
-	cout << army1.countViability() << "  " << army2.countViability();
-	//battle();
+	
+	BattleModeling* battle; 
+	{
+		BattleBuilder builder;
+		battle = builder.setArmy(army1, army2)->getResult();
+	}
+	//cout << army1.countViability() << "  " << army2.countViability();
+	(*battle)();
 	return 0;
 }

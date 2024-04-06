@@ -1,13 +1,7 @@
 #include "BattleModeling.h"
 #include <thread>
-BattleModeling::BattleModeling(ModernArmy& army1, ModernArmy& army2) {
-	this->army1 = army1;
-	this->army2 = army2;
-}
-void BattleModeling::setLapSupplies(Supply& supply) {
-	this->lapSupplies = supply;
-}
-Supply BattleModeling::getLapSupplies() const{
+BattleModeling::BattleModeling() {}
+Supply BattleModeling::getSupplies() const{
 	return lapSupplies;
 }
 void BattleModeling::battleLap() {
@@ -38,8 +32,8 @@ void BattleModeling::operator()() {
 ModernCircumstance BattleModeling::getSummCircumstance() {
 	modern::ModernPowerCoef coef;
 	ModernCircumstance summary(coef, std::string("Summary"));
-	for (ModernCircumstance circ : circumstances) {
-		summary.setPowerChanges(summary.getPowerChanges() * circ.getPowerChanges());
+	for (int i = 0; i < circumstances.size();i++) {
+		summary.setPowerChanges(summary.getPowerChanges() * circumstances[i].getPowerChanges());
 	}
 	return summary;
 }
@@ -53,6 +47,38 @@ void BattleModeling::setReinforcements(ModernArmy& army1Reinforcements, ModernAr
 void BattleModeling::setSupplies(Supply& lapSupplies) {
 	this->lapSupplies = lapSupplies;
 }
-void BattleModeling::setSupplies(Supply lapSupplies) {
-	this->lapSupplies = lapSupplies;
+BattleModeling* BattleModeling::getBattleModeling() {
+	std::mutex mt;
+	std::lock_guard<std::mutex> lock(mt);
+	static BattleModeling battle;
+	return &battle;
+}
+void BattleModeling::setArmy(ModernArmy& army1, ModernArmy& army2) {
+	this->army1 = army1;
+	this->army2 = army2;
+}
+
+
+
+BattleBuilder::BattleBuilder() {
+	reset();
+}
+void BattleBuilder::reset() {
+	battle = BattleModeling::getBattleModeling();
+}
+BattleModeling* BattleBuilder::getResult() {
+	return battle;
+}
+Builder* BattleBuilder::setSupplies(Supply& lapSupplies){
+	battle->setSupplies(lapSupplies);
+	return this;
+}
+
+Builder* BattleBuilder::setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements) {
+	battle->setReinforcements(army1Reinforcements, army2Reinforcements);
+	return this;
+}
+Builder* BattleBuilder::setArmy(ModernArmy& army1, ModernArmy& army2) {
+	battle->setArmy(army1, army2);
+	return this;
 }
