@@ -26,9 +26,6 @@ private:
 	void battleLap();
 	std::vector<ModernCircumstance> circumstances;
 	ModernCircumstance getSummCircumstance();
-	void setArmy(ModernArmy& army1, ModernArmy& army2);
-	void setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements);
-	void setSupplies(Supply& lapSupplies);
 public:
 	static BattleModeling* getBattleModeling();
 	void addCircumstance(ModernCircumstance& circ);

@@ -141,7 +141,6 @@
     <ClCompile Include="ModernArmy.cpp" />
     <ClCompile Include="ModernUnit.cpp" />
     <ClCompile Include="BattleModeling.cpp" />
-    <ClCompile Include="Clonable.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Circumstance.cpp" />
     <ClCompile Include="Source.cpp" />

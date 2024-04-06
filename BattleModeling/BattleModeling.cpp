@@ -40,23 +40,13 @@ ModernCircumstance BattleModeling::getSummCircumstance() {
 void BattleModeling::addCircumstance(ModernCircumstance& circ) {
 	circumstances.push_back(circ);
 }
-void BattleModeling::setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements) {
-	this->army1Reinforcements = army1Reinforcements;
-	this->army2Reinforcements = army2Reinforcements;
-}
-void BattleModeling::setSupplies(Supply& lapSupplies) {
-	this->lapSupplies = lapSupplies;
-}
 BattleModeling* BattleModeling::getBattleModeling() {
 	std::mutex mt;
 	std::lock_guard<std::mutex> lock(mt);
 	static BattleModeling battle;
 	return &battle;
 }
-void BattleModeling::setArmy(ModernArmy& army1, ModernArmy& army2) {
-	this->army1 = army1;
-	this->army2 = army2;
-}
+
 
 
 
@@ -70,15 +60,16 @@ BattleModeling* BattleBuilder::getResult() {
 	return battle;
 }
 Builder* BattleBuilder::setSupplies(Supply& lapSupplies){
-	battle->setSupplies(lapSupplies);
+	battle->lapSupplies = lapSupplies;
 	return this;
 }
-
 Builder* BattleBuilder::setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements) {
-	battle->setReinforcements(army1Reinforcements, army2Reinforcements);
+	battle->army1Reinforcements = army1Reinforcements;
+	battle->army2Reinforcements = army2Reinforcements;
 	return this;
 }
 Builder* BattleBuilder::setArmy(ModernArmy& army1, ModernArmy& army2) {
-	battle->setArmy(army1, army2);
+	battle->army1 = army1;
+	battle->army2 = army2;
 	return this;
 }
