@@ -27,6 +27,8 @@ ModernArmy::ModernArmy(const ModernArmy& army) :fortification(Unit(std::string("
 	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
 	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
 	supplies = army.supplies;
+	std::vector<ModernUnit> u;
+	u.push_back(artilery[0].clone());
 }
 ModernArmy& ModernArmy::operator =(const ModernArmy& army) {
 	if (this == &army)
@@ -65,7 +67,7 @@ void ModernArmy::countPower() {
 		power = power + unitPower;
 	}
 }
-void ModernArmy::addUnit(ModernUnit& unit, modern::modernUnitTypes type) {
+void ModernArmy::addUnit(const ModernUnit& unit, modern::modernUnitTypes type) {
 	if (type == modern::modernUnitTypes::infantry) {
 		infantry.push_back(unit);
 		if (positionOfFirstAlive[2] == -1)
@@ -163,7 +165,7 @@ void ModernArmy::applyItems() {
 		unit.applyItems();
 	}
 }
-void ModernArmy::applyCircumstance(ModernCircumstance& circ) {
+void ModernArmy::applyCircumstance(const ModernCircumstance& circ) {
 	for (int i = 0; i < infantry.size(); i++) {
 		infantry[i].multiplyPower(circ.getPowerChanges().infantryDamagekoef);
 	}

@@ -27,9 +27,8 @@ private:
 	std::vector<ModernCircumstance> circumstances;
 	ModernCircumstance getSummCircumstance();
 public:
-	static BattleModeling* getBattleModeling();
-	void addCircumstance(ModernCircumstance& circ);
-	
+	static BattleModeling& getBattleModeling();
+	void addCircumstance(const ModernCircumstance& circ);
 	Supply getSupplies() const;
 
 	void operator()();
@@ -39,18 +38,18 @@ public:
 class Builder {
 public:
 	virtual void reset()=0;
-	virtual BattleModeling* getResult()=0;
-	virtual Builder* setSupplies(Supply& lapSupplies)=0;
-	virtual Builder* setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements) = 0;
-	virtual Builder* setArmy(ModernArmy& army1, ModernArmy& army2) = 0;
+	virtual BattleModeling& getResult()=0;
+	virtual Builder* setSupplies(const Supply& lapSupplies)=0;
+	virtual Builder* setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements) = 0;
+	virtual Builder* setArmy(const ModernArmy& army1, const ModernArmy& army2) = 0;
 };
 class BattleBuilder:public Builder {
-	BattleModeling* battle;
+	BattleModeling battle;
 public:
 	BattleBuilder();
 	void reset() override;
-	BattleModeling* getResult() override;
-	Builder* setSupplies(Supply& lapSupplies) override;
-	Builder* setReinforcements(ModernArmy& army1Reinforcements, ModernArmy& army2Reinforcements)override;
-	Builder* setArmy(ModernArmy& army1, ModernArmy& army2) override;
+	BattleModeling& getResult() override;
+	Builder* setSupplies(const Supply& lapSupplies) override;
+	Builder* setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements)override;
+	Builder* setArmy(const ModernArmy& army1, const ModernArmy& army2) override;
 };

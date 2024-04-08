@@ -26,4 +26,3 @@ public:
 	void applyItems() override;
 	void attackArmy(ModernArmy& army, double& supplies);
 };
-

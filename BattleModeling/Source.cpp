@@ -16,11 +16,11 @@ int main() {
 	modern::Cycling aviCycle(8, 2, true);
 	modern::ModernPowerCoef aviModernPowerCoef(1, 0.2, 0.8, 0.8);
 	ModernUnit avi(nameavi, 300, 800, false, aviCycle, aviModernPowerCoef);
-	string nametank("T-72");
+	string nametank("T-64 Bulat");
 	modern::Cycling tankCycle(12, 1, true);
 	modern::ModernPowerCoef tankModernPowerCoef(0.01, 1.3, 1.5, 0.5);
 	ModernUnit tank(nametank, 200, 600, false, tankCycle, tankModernPowerCoef);
-	string nameart("Pion");
+	string nameart("Caesar");
 	string namepatr("Patriot");
 	modern::Cycling artCycle(10, 0, true);
 	modern::ModernPowerCoef artModernPowerCoef(0, 1.5, 1, 0.8);
@@ -45,25 +45,22 @@ int main() {
 	for (int i = 0; i < 15; i++) {
 		army2.addUnit(tank, modern::modernUnitTypes::armoredVehickle);
 	}
-	for (int i = 0; i < 25; i++) {
+	for (int i = 0; i < 15; i++) {
 		army1.addUnit(art, modern::modernUnitTypes::artilery);
 	}
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < 10; i++) {
 		army2.addUnit(art, modern::modernUnitTypes::artilery);
 	}
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 8; i++) {
 		army1.addUnit(patr, modern::modernUnitTypes::artilery);
 	}
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 6; i++) {
 		army2.addUnit(patr, modern::modernUnitTypes::artilery);
 	}
 	
-	BattleModeling* battle; 
-	{
-		BattleBuilder builder;
-		battle = builder.setArmy(army1, army2)->getResult();
-	}
+	BattleBuilder builder;
+	BattleModeling battle = builder.setArmy(army1, army2)->getResult();
 	//cout << army1.countViability() << "  " << army2.countViability();
-	(*battle)();
+	battle();
 	return 0;
 }

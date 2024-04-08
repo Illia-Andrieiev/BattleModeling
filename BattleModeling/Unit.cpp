@@ -15,7 +15,7 @@ Unit::Unit(std::string name, double power, double viability) {
 	this->morality = 100;
 }
 /// Constructor
-Unit::Unit(std::string name, double power, double viability, std::vector<Item>& items) {
+Unit::Unit(std::string name, double power, double viability, const std::vector<Item>& items) {
 	this->power = power;
 	for (int i = 0; i < name.size()&& i < 256; i++)
 		this->name[i] = name[i];

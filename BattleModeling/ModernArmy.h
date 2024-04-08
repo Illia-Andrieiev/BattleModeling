@@ -28,11 +28,11 @@ public:
 	void changeSupplies(double supply);
 	double getViability() const;
 	double countViability();
-	void addUnit(ModernUnit& unit, modern::modernUnitTypes type);
+	void addUnit(const ModernUnit& unit, modern::modernUnitTypes type);
 	void attackArmy(ModernArmy& army);
 	std::string toString();
 	ModernArmy& operator =(const ModernArmy& army);
 	void applyItems();
-	void applyCircumstance(ModernCircumstance& circ);
+	void applyCircumstance(const ModernCircumstance& circ);
 };
 

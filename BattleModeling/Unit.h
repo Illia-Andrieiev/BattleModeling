@@ -15,7 +15,7 @@ protected:
 	std::string boolToStr(bool flag);
 public:
 	Unit(std::string name, double power, double viability);
-	Unit(std::string name, double power, double viability, std::vector<Item>& items);
+	Unit(std::string name, double power, double viability,const std::vector<Item>& items);
 	bool isAlive() const;
 	virtual void applyItems();
 	double getBasePower() const;
