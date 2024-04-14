@@ -9,14 +9,14 @@ class Item
 {
 private:
 	char name[256]; /// Item name
-	modern::ModernPowerCoef powerCoefChanges; /// Multiply unit`s powerCoef. Parameters cannot be < 0
+	unitHelpers::ModernPowerCoef powerCoefChanges; /// Multiply unit`s powerCoef. Parameters cannot be < 0
 	double changeViability; /// Add to unit`s viability. Can be < 0
 	double changeBasePower; /// Add to unit`s base power. Can be < 0
 	bool isApplied;
 public:
 	void apply();
-	Item(modern::ModernPowerCoef& powerChanges, char name[256], double changeViability, double changeBasePower);
-	modern::ModernPowerCoef getPowerChanges() const;
+	Item(unitHelpers::ModernPowerCoef& powerChanges, char name[256], double changeViability, double changeBasePower);
+	unitHelpers::ModernPowerCoef getPowerChanges() const;
 	double getBasePowerChanges() const;
 	double getViabilityChanges() const;
 	bool isApply() const;

@@ -30,7 +30,7 @@ void BattleModeling::operator()() {
 	}
 }
 ModernCircumstance BattleModeling::getSummCircumstance() {
-	modern::ModernPowerCoef coef;
+	unitHelpers::ModernPowerCoef coef;
 	ModernCircumstance summary(coef, std::string("Summary"));
 	for (int i = 0; i < circumstances.size();i++) {
 		summary.setPowerChanges(summary.getPowerChanges() * circumstances[i].getPowerChanges());
@@ -57,16 +57,16 @@ void BattleBuilder::reset() {
 BattleModeling& BattleBuilder::getResult() {
 	return battle;
 }
-Builder* BattleBuilder::setSupplies(const Supply& lapSupplies){
+BattleBuilder* BattleBuilder::setSupplies(const Supply& lapSupplies){
 	battle.lapSupplies = lapSupplies;
 	return this;
 }
-Builder* BattleBuilder::setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements) {
+BattleBuilder* BattleBuilder::setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements) {
 	battle.army1Reinforcements = army1Reinforcements;
 	battle.army2Reinforcements = army2Reinforcements;
 	return this;
 }
-Builder* BattleBuilder::setArmy(const ModernArmy& army1, const ModernArmy& army2) {
+BattleBuilder* BattleBuilder::setArmy(const ModernArmy& army1, const ModernArmy& army2) {
 	battle.army1 = army1;
 	battle.army2 = army2;
 	return this;

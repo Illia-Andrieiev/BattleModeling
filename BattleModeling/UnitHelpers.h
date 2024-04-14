@@ -1,6 +1,6 @@
 #pragma once
 /// Represent how much unit influent on foe`s army
-namespace modern {
+namespace unitHelpers {
 	struct ModernPowerCoef {
 		double aviationDamagekoef; /// Multiply default damage to aviation 
 		double infantryDamagekoef; /// Multiply default damage to infantry 
@@ -58,7 +58,7 @@ namespace modern {
 			this->isActive = true;
 		}
 	};
-	enum modernUnitTypes {
+	enum unitTypes {
 		artilery,
 		aviation,
 		armoredVehickle,

@@ -15,11 +15,11 @@ public:
 
 class ModernCircumstance : public Circumstance
 {
-	modern::ModernPowerCoef powerChanges;/// multiply to unit`s power. Parameters cannot be < 0
+	unitHelpers::ModernPowerCoef powerChanges;/// multiply to unit`s power. Parameters cannot be < 0
 public:
-	ModernCircumstance(modern::ModernPowerCoef& powerChanges, std::string name);
-	modern::ModernPowerCoef getPowerChanges() const;
-	void setPowerChanges(modern::ModernPowerCoef& powerChanges);
-	void setPowerChanges(modern::ModernPowerCoef powerChanges);
+	ModernCircumstance(unitHelpers::ModernPowerCoef& powerChanges, std::string name);
+	unitHelpers::ModernPowerCoef getPowerChanges() const;
+	void setPowerChanges(unitHelpers::ModernPowerCoef& powerChanges);
+	void setPowerChanges(unitHelpers::ModernPowerCoef powerChanges);
 };
 

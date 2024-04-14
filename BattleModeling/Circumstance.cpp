@@ -8,15 +8,15 @@ Circumstance::Circumstance(std::string name) {
 std::string Circumstance::getName() const {
 	return std::string(name);
 }
-modern::ModernPowerCoef ModernCircumstance::getPowerChanges() const {
+unitHelpers::ModernPowerCoef ModernCircumstance::getPowerChanges() const {
 	return powerChanges;
 }
-ModernCircumstance::ModernCircumstance(modern::ModernPowerCoef& powerChanges, std::string name):Circumstance(name)  {
+ModernCircumstance::ModernCircumstance(unitHelpers::ModernPowerCoef& powerChanges, std::string name):Circumstance(name)  {
 	this->powerChanges = powerChanges;
 }
-void ModernCircumstance::setPowerChanges(modern::ModernPowerCoef& powerChanges) {
+void ModernCircumstance::setPowerChanges(unitHelpers::ModernPowerCoef& powerChanges) {
 	this->powerChanges = powerChanges;
 }
-void ModernCircumstance::setPowerChanges(modern::ModernPowerCoef powerChanges) {
+void ModernCircumstance::setPowerChanges(unitHelpers::ModernPowerCoef powerChanges) {
 	this->powerChanges = powerChanges;
 }

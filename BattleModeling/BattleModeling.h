@@ -34,22 +34,13 @@ public:
 	void operator()();
 };
 
-
-class Builder {
-public:
-	virtual void reset()=0;
-	virtual BattleModeling& getResult()=0;
-	virtual Builder* setSupplies(const Supply& lapSupplies)=0;
-	virtual Builder* setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements) = 0;
-	virtual Builder* setArmy(const ModernArmy& army1, const ModernArmy& army2) = 0;
-};
-class BattleBuilder:public Builder {
+class BattleBuilder {
 	BattleModeling battle;
 public:
 	BattleBuilder();
-	void reset() override;
-	BattleModeling& getResult() override;
-	Builder* setSupplies(const Supply& lapSupplies) override;
-	Builder* setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements)override;
-	Builder* setArmy(const ModernArmy& army1, const ModernArmy& army2) override;
+	void reset() ;
+	BattleModeling& getResult();
+	BattleBuilder* setSupplies(const Supply& lapSupplies) ;
+	BattleBuilder* setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements);
+	BattleBuilder* setArmy(const ModernArmy& army1, const ModernArmy& army2);
 };

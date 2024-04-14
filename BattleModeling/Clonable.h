@@ -1,6 +1,6 @@
 #pragma once
 template<typename T>
-class Clonable
+class Cloneable
 {
 public:
 	virtual T clone() = 0;

@@ -3,14 +3,14 @@
 ModernArmy::ModernArmy():fortification(Unit(std::string("fortification"), 0, 0)) {
 	for (int i = 0; i < 4; i++)
 		positionOfFirstAlive[i] = -1;
-	power = modern::ModernPowerCoef(0, 0, 0, 0);
+	power = unitHelpers::ModernPowerCoef(0, 0, 0, 0);
 	viability = countViability();
 	supplies = 0;
 }
 ModernArmy::ModernArmy(Unit& fortification):fortification(fortification){
 	for (int i = 0; i < 4; i++)
 		positionOfFirstAlive[i] = -1;
-	power = modern::ModernPowerCoef(0, 0, 0, 0);
+	power = unitHelpers::ModernPowerCoef(0, 0, 0, 0);
 	viability = countViability();
 	supplies = 0;
 }
@@ -48,42 +48,42 @@ ModernArmy& ModernArmy::operator =(const ModernArmy& army) {
 	return *this;
 }
 void ModernArmy::countPower() {
-	power = modern::ModernPowerCoef(0, 0, 0, 0);
+	power = unitHelpers::ModernPowerCoef(0, 0, 0, 0);
 	for (ModernUnit unit : aviation) {
-		modern::ModernPowerCoef unitPower = unit.getTypesPower();
+		unitHelpers::ModernPowerCoef unitPower = unit.getTypesPower();
 		power = power + unitPower;
 	}
 	for (ModernUnit unit : artilery) {
-		modern::ModernPowerCoef unitPower = unit.getTypesPower();
+		unitHelpers::ModernPowerCoef unitPower = unit.getTypesPower();
 		power = power + unitPower;
 
 	}
 	for (ModernUnit unit : infantry) {
-		modern::ModernPowerCoef unitPower = unit.getTypesPower();
+		unitHelpers::ModernPowerCoef unitPower = unit.getTypesPower();
 		power = power + unitPower;
 	}
 	for (ModernUnit unit : vehickles) {
-		modern::ModernPowerCoef unitPower = unit.getTypesPower();
+		unitHelpers::ModernPowerCoef unitPower = unit.getTypesPower();
 		power = power + unitPower;
 	}
 }
-void ModernArmy::addUnit(const ModernUnit& unit, modern::modernUnitTypes type) {
-	if (type == modern::modernUnitTypes::infantry) {
+void ModernArmy::addUnit(const ModernUnit& unit, unitHelpers::unitTypes type) {
+	if (type == unitHelpers::unitTypes::infantry) {
 		infantry.push_back(unit);
 		if (positionOfFirstAlive[2] == -1)
 			positionOfFirstAlive[2] = (int)infantry.size() - 1;
 	}
-	if (type == modern::modernUnitTypes::artilery) {
+	if (type == unitHelpers::unitTypes::artilery) {
 		artilery.push_back(unit);
 		if (positionOfFirstAlive[3] == -1)
 			positionOfFirstAlive[3] = (int)artilery.size() - 1;
 	}
-	if (type == modern::modernUnitTypes::aviation) {
+	if (type == unitHelpers::unitTypes::aviation) {
 		aviation.push_back(unit);
 		if (positionOfFirstAlive[0] == -1)
 			positionOfFirstAlive[0] = (int)aviation.size() - 1;
 	}
-	if (type == modern::modernUnitTypes::armoredVehickle) {
+	if (type == unitHelpers::unitTypes::armoredVehickle) {
 		vehickles.push_back(unit);
 		if (positionOfFirstAlive[1] == -1)
 			positionOfFirstAlive[1] = (int)vehickles.size() - 1;
@@ -194,4 +194,11 @@ ModernArmy ModernArmy::clone() {
 	army.positionOfFirstAlive[3] = positionOfFirstAlive[3];
 	army.supplies = supplies;
 	return army;
+}
+ModernArmy::~ModernArmy() {
+	for (int i = 0; i < units.size(); i++) {
+		for (int j = 0; j < units[i].size(); j++) {
+			delete units[i][j];
+		}
+	}
 }
