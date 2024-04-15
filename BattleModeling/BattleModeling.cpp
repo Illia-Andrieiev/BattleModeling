@@ -12,7 +12,7 @@ void BattleModeling::battleLap() {
 	std::cout << "army2: viability: " << army2.countViability() << std::endl << army2.toString();
 }
 void BattleModeling::operator()() {
-	ModernArmy army1, army2, reinF1,reinF2;
+	Army army1, army2, reinF1,reinF2;
 	army1 = this->army1;
 	army2 = this->army2;
 	reinF1 = this->army1Reinforcements;
@@ -61,12 +61,12 @@ BattleBuilder* BattleBuilder::setSupplies(const Supply& lapSupplies){
 	battle.lapSupplies = lapSupplies;
 	return this;
 }
-BattleBuilder* BattleBuilder::setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements) {
+BattleBuilder* BattleBuilder::setReinforcements(const Army& army1Reinforcements, const Army& army2Reinforcements) {
 	battle.army1Reinforcements = army1Reinforcements;
 	battle.army2Reinforcements = army2Reinforcements;
 	return this;
 }
-BattleBuilder* BattleBuilder::setArmy(const ModernArmy& army1, const ModernArmy& army2) {
+BattleBuilder* BattleBuilder::setArmy(const Army& army1, const Army& army2) {
 	battle.army1 = army1;
 	battle.army2 = army2;
 	return this;

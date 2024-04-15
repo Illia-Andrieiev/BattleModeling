@@ -119,26 +119,16 @@ void Unit::applyItems() {
 /*!
 * Use uniform_real_distribution. Weight of types to attack defines as power*unit`sTypeCoef
 */
-unitHelpers::unitTypes Unit::chooseTarget(ModernArmy& army) const {
-	double aviationParam = power * powerCoef.aviationDamagekoef;
-	double artileryParam = aviationParam + power * powerCoef.artileryDamagekoef;
-	double infantryParam = artileryParam + power * powerCoef.infantryDamagekoef;
-	double summPower = infantryParam + power * powerCoef.vehickleDamagekoef;
+unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<> distr(0, summPower);
+	std::uniform_int_distribution<> distr(0, army.units.size()-1);
 	for (int i = 0; i < 100; i++) {
-		double param = distr(gen);
-		if (param <= aviationParam && army.positionOfFirstAlive[0] != -1)
-			return unitHelpers::unitTypes::aviation;
-		if (param <= artileryParam && army.positionOfFirstAlive[3] != -1)
-			return unitHelpers::unitTypes::artilery;
-		if (param <= infantryParam && army.positionOfFirstAlive[2] != -1)
-			return unitHelpers::unitTypes::infantry;
-		if (param <= summPower && army.positionOfFirstAlive[1] != -1)
-			return unitHelpers::unitTypes::armoredVehickle;
+		int param = distr(gen);
+		if (army.positionOfFirstAlive[param] != -1)
+			return static_cast<unitHelpers::unitTypes>(param);
 	}
-	return unitHelpers::unitTypes::infantry;
+	return static_cast<unitHelpers::unitTypes>(0);
 }
 void Unit::attackFortification(Unit& fortification, double& damage) {
 	if (fortification.isAlive()) {
@@ -147,22 +137,29 @@ void Unit::attackFortification(Unit& fortification, double& damage) {
 		damage = damage / 2 + dam;
 	}
 }
-int Unit::chooseTargetNomer(std::vector<ModernUnit>& units, int firstAlive) {
+int Unit::chooseTargetNomer(std::vector<Unit*>& units, int firstAlive) {
 	if (firstAlive == -1)
 		return -1;
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distr(firstAlive, (int)units.size() - 1);
-	return distr(gen);
+	for (int i = 0; i < 120; i++) {
+		int pos = distr(gen);
+		if (units[pos]->cycling.isActive)
+			return pos;
+	}
+	return -1;
 }
-void Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<ModernUnit>& units) {
+void Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
+	attackFortification(fortification, damage);
 	if (posFirstAlive == -1 || units.size() == 0)
 		return;
-	attackFortification(fortification, damage);
 	while (damage > 0 && posFirstAlive != -1) {
 		int pos = chooseTargetNomer(units, posFirstAlive);
-		units[pos].takeDamage(damage);
-		if (!units[pos].isAlive()) {
+		if (pos == -1)
+			return;
+		units[pos]->takeDamage(damage);
+		if (!units[pos]->isAlive()) {
 			std::swap(units[pos], units[posFirstAlive]);
 			posFirstAlive++;
 			if (posFirstAlive == units.size()) {
@@ -171,32 +168,29 @@ void Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAliv
 		}
 	}
 }
-void Unit::attackArmy(ModernArmy& army, double& supplies) {
+void Unit::attackArmy(Army& army, double& supplies) {
 	if (supplies <= 0)
 		return;
 	supplies -= power * 0.1;
 	supplies = supplies < 0 ? 0 : supplies;
-	unitHelpers::unitTypes type = chooseTarget(army);
+	int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]];
+	unitHelpers::unitTypes type = priorityTarget;
+	if(posAlivePriorityTarget == -1)
+		type = chooseTarget(army);
 	if (type == unitHelpers::unitTypes::aviation) {
-		double damage = power * powerCoef.aviationDamagekoef;
-		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[0], army.aviation);
+		double damage = power * powerCoef[type];
+		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[0], army.units[army.unitTypesPositions[type]]);
 	}
-	if (type == unitHelpers::unitTypes::artilery) {
-		double damage = power * powerCoef.artileryDamagekoef;
-		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[3], army.artilery);
-	}
-	if (type == unitHelpers::unitTypes::infantry) {
-		double damage = power * powerCoef.infantryDamagekoef;
-		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[2], army.infantry);
-	}
-	if (type == unitHelpers::unitTypes::armoredVehickle) {
-		double damage = power * powerCoef.vehickleDamagekoef;
-		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[1], army.vehickles);
-	}
+	
 }
-
+Unit* Unit::clone() {
+	UnitBuilder build;
+	build.setCycling(this->cycling)->setFortificationTarget(fortificationTarget)->setName(std::string(name))
+		->setPowerAndViability(power, viability)->setPowerCoef(powerCoef)->setTypes(type, priorityTarget);
+	return &build.getResult();
+}
 /*
-
+	Builder
 */
 UnitBuilder::UnitBuilder() {
 	reset();

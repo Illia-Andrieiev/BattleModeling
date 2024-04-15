@@ -1,53 +1,36 @@
-#include "ModernArmy.h"
+#include "Army.h"
 #include<thread>
-ModernArmy::ModernArmy():fortification(Unit(std::string("fortification"), 0, 0)) {
-	for (int i = 0; i < 4; i++)
-		positionOfFirstAlive[i] = -1;
+Army::Army(){
 	power = unitHelpers::ModernPowerCoef(0, 0, 0, 0);
 	viability = countViability();
 	supplies = 0;
 }
-ModernArmy::ModernArmy(Unit& fortification):fortification(fortification){
-	for (int i = 0; i < 4; i++)
-		positionOfFirstAlive[i] = -1;
+Army::Army(const Unit& fortification){
+	this->fortification = fortification;
 	power = unitHelpers::ModernPowerCoef(0, 0, 0, 0);
 	viability = countViability();
 	supplies = 0;
 }
-ModernArmy::ModernArmy(const ModernArmy& army) :fortification(Unit(std::string("fortification"), 0, 0)) {
-	artilery = army.artilery;
-	aviation = army.aviation;
+Army::Army(const Army& army){
+	units = army.units;
 	fortification = army.fortification;
-	vehickles = army.vehickles;
-	infantry = army.infantry;
 	viability = army.viability;
 	power = army.power;
-	positionOfFirstAlive[0] = army.positionOfFirstAlive[0];
-	positionOfFirstAlive[1] = army.positionOfFirstAlive[1];
-	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
-	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
+	positionOfFirstAlive = army.positionOfFirstAlive;
 	supplies = army.supplies;
-	std::vector<ModernUnit> u;
-	u.push_back(artilery[0].clone());
 }
-ModernArmy& ModernArmy::operator =(const ModernArmy& army) {
+Army& Army::operator =(const Army& army) {
 	if (this == &army)
 		return *this;
-	artilery = army.artilery;
-	aviation = army.aviation;
+	units = army.units;
 	fortification = army.fortification;
-	vehickles = army.vehickles;
-	infantry = army.infantry;
 	viability = army.viability;
 	power = army.power;
-	positionOfFirstAlive[0] = army.positionOfFirstAlive[0];
-	positionOfFirstAlive[1] = army.positionOfFirstAlive[1];
-	positionOfFirstAlive[2] = army.positionOfFirstAlive[2];
-	positionOfFirstAlive[3] = army.positionOfFirstAlive[3];
+	positionOfFirstAlive = army.positionOfFirstAlive;
 	supplies = army.supplies;
 	return *this;
 }
-void ModernArmy::countPower() {
+void Army::countPower() {
 	power = unitHelpers::ModernPowerCoef(0, 0, 0, 0);
 	for (ModernUnit unit : aviation) {
 		unitHelpers::ModernPowerCoef unitPower = unit.getTypesPower();
@@ -67,7 +50,7 @@ void ModernArmy::countPower() {
 		power = power + unitPower;
 	}
 }
-void ModernArmy::addUnit(const ModernUnit& unit, unitHelpers::unitTypes type) {
+void Army::addUnit(const ModernUnit& unit, unitHelpers::unitTypes type) {
 	if (type == unitHelpers::unitTypes::infantry) {
 		infantry.push_back(unit);
 		if (positionOfFirstAlive[2] == -1)
@@ -89,7 +72,7 @@ void ModernArmy::addUnit(const ModernUnit& unit, unitHelpers::unitTypes type) {
 			positionOfFirstAlive[1] = (int)vehickles.size() - 1;
 	}
 }
-void ModernArmy::attackType(ModernArmy& army,std::vector<ModernUnit>& type, int posFirstAlive) {
+void Army::attackType(Army& army,std::vector<ModernUnit>& type, int posFirstAlive) {
 	if (posFirstAlive != -1) {
 		for (int i = posFirstAlive; i < type.size(); i++) {
 			mt.lock();
@@ -98,7 +81,7 @@ void ModernArmy::attackType(ModernArmy& army,std::vector<ModernUnit>& type, int 
 		}
 	}
 }
-void ModernArmy::attackArmy(ModernArmy& army) {
+void Army::attackArmy(Army& army) {
 	std::thread avi([&]() {attackType(army, aviation, positionOfFirstAlive[0]); });
 	std::thread veh([&]() {attackType(army, vehickles, positionOfFirstAlive[1]); });
 	std::thread inf([&]() {attackType(army, infantry, positionOfFirstAlive[2]); });
@@ -107,7 +90,7 @@ void ModernArmy::attackArmy(ModernArmy& army) {
 	veh.join();
 	inf.join();
 }
-std::string ModernArmy::toString() {
+std::string Army::toString() {
 	std::string res = "";
 	for (int i = 0; i < aviation.size(); i++) {
 		res += (aviation[i].toString() + " " + std::to_string(i) + "\n");
@@ -123,10 +106,10 @@ std::string ModernArmy::toString() {
 	}
 	return res;
 }
-double ModernArmy::getViability() const{
+double Army::getViability() const{
 	return viability;
 }
-double ModernArmy::countViability() {
+double Army::countViability() {
 	viability = 0;
 	for (ModernUnit unit : aviation) {
 		viability += unit.getViability();
@@ -143,15 +126,15 @@ double ModernArmy::countViability() {
 	return viability;
 }
 
-double ModernArmy::getSupplies() const{
+double Army::getSupplies() const{
 	return supplies;
 }
-void ModernArmy::changeSupplies(double supply) {
+void Army::changeSupplies(double supply) {
 	supplies += supply;
 	if (supplies < 0)
 		supplies = 0;
 }
-void ModernArmy::applyItems() {
+void Army::applyItems() {
 	for (ModernUnit unit : aviation) {
 		unit.applyItems();
 	}
@@ -165,7 +148,7 @@ void ModernArmy::applyItems() {
 		unit.applyItems();
 	}
 }
-void ModernArmy::applyCircumstance(const ModernCircumstance& circ) {
+void Army::applyCircumstance(const ModernCircumstance& circ) {
 	for (int i = 0; i < infantry.size(); i++) {
 		infantry[i].multiplyPower(circ.getPowerChanges().infantryDamagekoef);
 	}
@@ -179,8 +162,8 @@ void ModernArmy::applyCircumstance(const ModernCircumstance& circ) {
 		artilery[i].multiplyPower(circ.getPowerChanges().artileryDamagekoef);
 	}
 }
-ModernArmy ModernArmy::clone() {
-	ModernArmy army;
+Army Army::clone() {
+	Army army;
 	army.artilery = artilery;
 	army.aviation = aviation;
 	army.fortification = fortification;
@@ -195,7 +178,7 @@ ModernArmy ModernArmy::clone() {
 	army.supplies = supplies;
 	return army;
 }
-ModernArmy::~ModernArmy() {
+Army::~Army() {
 	for (int i = 0; i < units.size(); i++) {
 		for (int j = 0; j < units[i].size(); j++) {
 			delete units[i][j];

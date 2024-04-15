@@ -2,7 +2,7 @@
 #include<vector>
 #include"Circumstance.h"
 #include"Unit.h"
-#include"ModernArmy.h"
+#include"Army.h"
 #include<memory>
 struct Supply {
 	double army1LapSupplies = 0;
@@ -17,10 +17,10 @@ class BattleModeling
 protected:
 	
 private:
-	ModernArmy army1;
-	ModernArmy army2;
-	ModernArmy army1Reinforcements;
-	ModernArmy army2Reinforcements;
+	Army army1;
+	Army army2;
+	Army army1Reinforcements;
+	Army army2Reinforcements;
 	Supply lapSupplies;
 	BattleModeling();
 	void battleLap();
@@ -41,6 +41,6 @@ public:
 	void reset() ;
 	BattleModeling& getResult();
 	BattleBuilder* setSupplies(const Supply& lapSupplies) ;
-	BattleBuilder* setReinforcements(const ModernArmy& army1Reinforcements, const ModernArmy& army2Reinforcements);
-	BattleBuilder* setArmy(const ModernArmy& army1, const ModernArmy& army2);
+	BattleBuilder* setReinforcements(const Army& army1Reinforcements, const Army& army2Reinforcements);
+	BattleBuilder* setArmy(const Army& army1, const Army& army2);
 };

@@ -4,8 +4,8 @@
 
 using namespace std;
 int main() {
-	ModernArmy army1;
-	ModernArmy army2;
+	Army army1;
+	Army army2;
 	army1.changeSupplies(9999999);
 	army2.changeSupplies(9999999);
 	string namesol("Snake");

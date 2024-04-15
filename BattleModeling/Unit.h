@@ -4,11 +4,12 @@
 #include<map>
 #include"Clonable.h"
 #include<iostream>
-class ModernArmy;
+#include"Army.h"
+class Army;
 class UnitBuilder;
 class Unit:public Cloneable<typename Unit*>
 {
-	friend class ModernArmy;
+	friend class Army;
 	friend class UnitBuilder;
 protected:
 	char name[256]; /// Unit`s name
@@ -22,10 +23,10 @@ protected:
 	std::map<unitHelpers::unitTypes, double> powerCoef; /// Multiply on default damage to another unit`s types 
 	unitHelpers::unitTypes type; /// Unit`s type
 	unitHelpers::unitTypes priorityTarget; /// Preferable Units type to attack 
-	unitHelpers::unitTypes chooseTarget(ModernArmy& army) const;
-	int chooseTargetNomer(std::vector<Unit>& units, int firstAlive);
+	unitHelpers::unitTypes chooseTarget(Army& army) const;
+	int chooseTargetNomer(std::vector<Unit*>& units, int firstAlive);
 	void attackFortification(Unit& fortification, double& damage);
-	void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit>& units);
+	void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	std::string boolToStr(bool flag);
 public:
 	Unit();
@@ -44,7 +45,7 @@ public:
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
 	unitHelpers::ModernPowerCoef getTypesPower()const;
 	void updateCycle();
-	void attackArmy(ModernArmy& army, double& supplies);
+	void attackArmy(Army& army, double& supplies);
 	Unit* clone();
 };
 class UnitBuilder {
