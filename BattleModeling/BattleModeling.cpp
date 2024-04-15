@@ -17,7 +17,7 @@ void BattleModeling::operator()() {
 	army2 = this->army2;
 	reinF1 = this->army1Reinforcements;
 	reinF2 = this->army2Reinforcements;
-	ModernCircumstance summaryCirc = getSummCircumstance();
+	Circumstance summaryCirc = getSummCircumstance();
 	army1.applyCircumstance(summaryCirc);
 	army2.applyCircumstance(summaryCirc);
 	army1.applyItems();
@@ -29,15 +29,16 @@ void BattleModeling::operator()() {
 		system("pause");
 	}
 }
-ModernCircumstance BattleModeling::getSummCircumstance() {
-	unitHelpers::ModernPowerCoef coef;
-	ModernCircumstance summary(coef, std::string("Summary"));
-	for (int i = 0; i < circumstances.size();i++) {
-		summary.setPowerChanges(summary.getPowerChanges() * circumstances[i].getPowerChanges());
+Circumstance BattleModeling::getSummCircumstance() {
+	std::map<unitHelpers::unitTypes, double> coef;
+	for (int i = 0; i < circumstances.size(); i++) {
+		for (auto& param : circumstances[i].getPowerChanges()) {
+			coef[param.first] *= param.second;
+		}
 	}
-	return summary;
+	return Circumstance(coef, std::string("Summary"));
 }
-void BattleModeling::addCircumstance(const ModernCircumstance& circ) {
+void BattleModeling::addCircumstance(const Circumstance& circ) {
 	circumstances.push_back(circ);
 }
 BattleModeling& BattleModeling::getBattleModeling() {

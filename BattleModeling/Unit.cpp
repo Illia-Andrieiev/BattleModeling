@@ -6,6 +6,8 @@ bool Unit::isAlive() const{
 }
 /// Constructor
 Unit::Unit() {
+	type = static_cast<unitHelpers::unitTypes>(0);
+	priorityTarget = static_cast<unitHelpers::unitTypes>(0);
 	this->power = 0;
 	std::string name = "default";
 	for (int i = 0; i<name.size() && i < 256; i++)
@@ -13,6 +15,7 @@ Unit::Unit() {
 	this->viability = 0;
 	this->alive = true;
 	this->morality = 100;
+	fortificationTarget = false;
 }
 
 /// Decrease viability on damage. If viability <= 0 set alive = false. Decrease damage on viability points
@@ -38,16 +41,7 @@ double Unit::getViability() const {
 std::vector<Item> Unit::getItems() const {
 	return items;
 }
-/// Add to unit`s viability and power appropriated parameters from item
-void Unit::applyItems() {
-	for (int i = 0; i < items.size();i++) {
-		if (!items[i].isApply()) {
-			items[i].apply();
-			power += items[i].getBasePowerChanges();
-			viability += items[i].getViabilityChanges();
-		}
-	}
-}
+
 void Unit::setMorality(double newMorality) {
 	if (newMorality > 100) {
 		morality = 100;
@@ -96,10 +90,7 @@ void Unit::updateCycle() {
 		}
 	}
 }
-unitHelpers::ModernPowerCoef Unit::getTypesPower() const {
-	return unitHelpers::ModernPowerCoef(power * powerCoef.aviationDamagekoef, power * powerCoef.infantryDamagekoef,
-		power * powerCoef.vehickleDamagekoef, power * powerCoef.artileryDamagekoef);
-}
+
 /// At first add all don`t applied items base parameters changes tp unit. Then multiply item`s powerCoef on unit`s.
 void Unit::applyItems() {
 	for (int i = 0; i < items.size(); i++) {
@@ -111,7 +102,9 @@ void Unit::applyItems() {
 	for (int i = 0; i < items.size(); i++) {
 		if (!items[i].isApply()) {
 			items[i].apply();
-			powerCoef = powerCoef * items[i].getPowerChanges();
+			for (auto& param : items[i].getPowerChanges()) {
+				powerCoef[param.first] *= param.second;
+			}
 		}
 	}
 }
@@ -122,7 +115,7 @@ void Unit::applyItems() {
 unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distr(0, army.units.size()-1);
+	std::uniform_int_distribution<> distr(0, (int)army.units.size()-1);
 	for (int i = 0; i < 100; i++) {
 		int param = distr(gen);
 		if (army.positionOfFirstAlive[param] != -1)
@@ -179,15 +172,21 @@ void Unit::attackArmy(Army& army, double& supplies) {
 		type = chooseTarget(army);
 	if (type == unitHelpers::unitTypes::aviation) {
 		double damage = power * powerCoef[type];
-		attackUnitType(army.fortification, damage, army.positionOfFirstAlive[0], army.units[army.unitTypesPositions[type]]);
+		attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);
 	}
-	
 }
 Unit* Unit::clone() {
-	UnitBuilder build;
-	build.setCycling(this->cycling)->setFortificationTarget(fortificationTarget)->setName(std::string(name))
-		->setPowerAndViability(power, viability)->setPowerCoef(powerCoef)->setTypes(type, priorityTarget);
-	return &build.getResult();
+	Unit* newUnit = new Unit();
+	newUnit->cycling = this->cycling;
+	newUnit->fortificationTarget = this->fortificationTarget;
+	for (int i = 0; i < 256; i++)
+		newUnit->name[i] = this->name[i];
+	newUnit->power = this->power;
+	newUnit->viability = this->viability;
+	newUnit->powerCoef = this->powerCoef;
+	newUnit->type = this->type;
+	newUnit->priorityTarget = this->priorityTarget;
+	return newUnit;
 }
 /*
 	Builder

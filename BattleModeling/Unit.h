@@ -1,11 +1,11 @@
 #pragma once
 #include<vector>
-#include"Item.h"
 #include<map>
-#include"Clonable.h"
 #include<iostream>
+#include"Item.h"
+#include"Clonable.h"
 #include"Army.h"
-class Army;
+
 class UnitBuilder;
 class Unit:public Cloneable<typename Unit*>
 {
@@ -43,7 +43,6 @@ public:
 	virtual std::string toString();
 	bool getIsActive() const;
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
-	unitHelpers::ModernPowerCoef getTypesPower()const;
 	void updateCycle();
 	void attackArmy(Army& army, double& supplies);
 	Unit* clone();

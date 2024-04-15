@@ -24,11 +24,11 @@ private:
 	Supply lapSupplies;
 	BattleModeling();
 	void battleLap();
-	std::vector<ModernCircumstance> circumstances;
-	ModernCircumstance getSummCircumstance();
+	std::vector<Circumstance> circumstances;
+	Circumstance getSummCircumstance();
 public:
 	static BattleModeling& getBattleModeling();
-	void addCircumstance(const ModernCircumstance& circ);
+	void addCircumstance(const Circumstance& circ);
 	Supply getSupplies() const;
 
 	void operator()();
