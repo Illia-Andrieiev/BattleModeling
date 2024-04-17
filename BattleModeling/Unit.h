@@ -44,7 +44,7 @@ public:
 	bool getIsActive() const;
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
 	void updateCycle();
-	void attackArmy(Army& army, double& supplies);
+	virtual void attackArmy(Army& army, double& supplies);
 	Unit* clone();
 };
 class UnitBuilder {

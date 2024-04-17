@@ -22,12 +22,14 @@ void BattleModeling::operator()() {
 	army2.applyCircumstance(summaryCirc);
 	army1.applyItems();
 	army2.applyItems();
-	army1.countViability();
-	army2.countViability();
-	while (army1.getViability() > 0 && army2.getViability() > 0) {
+	this->army1.countViability();
+	this->army2.countViability();
+	while (this->army1.getViability() > 0 && this->army2.getViability() > 0) {
 		battleLap();
-		system("pause");
+//		system("pause");
 	}
+	this->army1 = army1;
+	this->army2 = army2;
 }
 Circumstance BattleModeling::getSummCircumstance() {
 	std::map<unitHelpers::unitTypes, double> coef;

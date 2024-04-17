@@ -1,5 +1,6 @@
 #include "Army.h"
 #include<thread>
+#include <omp.h>
 Army::Army(){
 	viability = countViability();
 	supplies = 0;
@@ -16,7 +17,7 @@ Army::Army(const Army& army){
 			addUnit(*army.units[i][j]->clone(),1);
 		}
 	}
-	fortification = army.fortification;
+	fortification = army.fortification->clone();
 	viability = army.viability;
 	power = army.power;
 	positionOfFirstAlive = army.positionOfFirstAlive;
@@ -60,6 +61,7 @@ void Army::addUnit(Unit& unit, int amount) {
 		}
 	}
 	units.push_back(std::vector<Unit*>());
+	unitTypesPositions[unit.type] = (int)units.size() - 1;
 	positionOfFirstAlive.push_back(0);
 	while (amount > 0) {
 		units[units.size() - 1].push_back(unit.clone());
@@ -76,22 +78,22 @@ void Army::attackType(Army& army, std::vector<Unit*>& type, int posFirstAlive) {
 	}
 }
 void Army::attackArmy(Army& army) {
-	for (int i = 0; i < units.size(); i++) {
-		attackType(army, units[i], positionOfFirstAlive[i]);
+	std::vector<std::thread> threads;
+	for (int i = 0; i < units.size(); ++i)
+	{
+		threads.push_back(std::thread([&,i]()
+			{ attackType(army, units[i], positionOfFirstAlive[i]); }));
 	}
-	//std::thread avi([&]() {attackType(army, aviation, positionOfFirstAlive[0]); });
-	//std::thread veh([&]() {attackType(army, vehickles, positionOfFirstAlive[1]); });
-	//std::thread inf([&]() {attackType(army, infantry, positionOfFirstAlive[2]); });
-	//attackType(army, artilery, positionOfFirstAlive[3]);
-	//avi.join();
-	//veh.join();
-	//inf.join();
+	for (auto& thread : threads)
+	{
+		thread.join();
+	}
 }
 std::string Army::toString() {
 	std::string res = "";
 	for (int i = 0; i < units.size(); i++) {
 		for (int j = 0; j < units[i].size(); j++) {
-			res += (units[i][j]->toString() + " " + std::to_string(i) + "\n");
+			res += (units[i][j]->toString() + " " + std::to_string(j) + "\n");
 		}
 	}
 	return res;
@@ -106,6 +108,7 @@ double Army::countViability() {
 			viability += units[i][j]->viability;
 		}
 	}
+	this->viability = viability;
 	return viability;
 }
 

@@ -118,7 +118,7 @@ unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
 	std::uniform_int_distribution<> distr(0, (int)army.units.size()-1);
 	for (int i = 0; i < 100; i++) {
 		int param = distr(gen);
-		if (army.positionOfFirstAlive[param] != -1)
+		if (army.positionOfFirstAlive[army.unitTypesPositions[static_cast<unitHelpers::unitTypes>(param)]] != -1)
 			return static_cast<unitHelpers::unitTypes>(param);
 	}
 	return static_cast<unitHelpers::unitTypes>(0);
@@ -162,6 +162,11 @@ void Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAliv
 	}
 }
 void Unit::attackArmy(Army& army, double& supplies) {
+	if (!cycling.isActive) {
+		updateCycle();
+		return;
+	}
+	updateCycle();
 	if (supplies <= 0)
 		return;
 	supplies -= power * 0.1;
@@ -170,10 +175,8 @@ void Unit::attackArmy(Army& army, double& supplies) {
 	unitHelpers::unitTypes type = priorityTarget;
 	if(posAlivePriorityTarget == -1)
 		type = chooseTarget(army);
-	if (type == unitHelpers::unitTypes::aviation) {
-		double damage = power * powerCoef[type];
-		attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);
-	}
+	double damage = power * powerCoef[type];
+	attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);
 }
 Unit* Unit::clone() {
 	Unit* newUnit = new Unit();
@@ -201,8 +204,13 @@ Unit& UnitBuilder::getResult() {
 	return unit;
 }
 UnitBuilder* UnitBuilder::setName(const std::string& name) {
-	for (int i = 0; i < name.size() && i < 256; i++)
+	int i;
+	for (i = 0; i < name.size() && i < 256; i++) {
 		unit.name[i] = name[i];
+	}
+	for (; i < 256; i++) {
+		unit.name[i] = '\0';
+	}
 	return this;
 }
 UnitBuilder* UnitBuilder::addItem(const Item& item) {
