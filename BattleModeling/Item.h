@@ -8,6 +8,7 @@
 */
 class Item
 {
+	friend class FileManager;
 private:
 	char name[256]; /// Item name
 	std::map<unitHelpers::unitTypes, double> powerCoefChanges; /// Multiply unit`s powerCoef. Parameters cannot be < 0
@@ -16,10 +17,11 @@ private:
 	bool isApplied;
 public:
 	void apply();
-	Item(std::map<unitHelpers::unitTypes, double>& powerChanges, char name[256], double changeViability, double changeBasePower);
+	Item(std::map<unitHelpers::unitTypes, double>& powerChanges, const std::string& name, double changeViability, double changeBasePower);
 	std::map<unitHelpers::unitTypes, double> getPowerChanges() const;
 	double getBasePowerChanges() const;
 	double getViabilityChanges() const;
 	bool isApply() const;
+	std::string toString();
 };
 

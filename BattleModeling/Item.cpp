@@ -1,12 +1,12 @@
 #include "Item.h"
-Item::Item(std::map<unitHelpers::unitTypes, double>& powerChanges, char name[256], double changeViability, double changeBasePower) {
+Item::Item(std::map<unitHelpers::unitTypes, double>& powerChanges, const std::string& name, double changeViability, double changeBasePower) {
 	for (auto& param : powerChanges) {
 		if (param.second < 0)
 			powerChanges[param.first] = 0;
 	}
 	this->powerCoefChanges = powerChanges;
 	this->changeBasePower = changeBasePower;
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i < 256 && i<name.size(); i++)
 		this->name[i] = name[i];
 	this->changeViability = changeViability;
 	isApplied = false;
@@ -26,4 +26,14 @@ double Item::getViabilityChanges() const {
 }
 bool Item::isApply() const {
 	return isApplied;
+}
+std::string Item::toString() {
+	std::string res = "";
+	for (auto& param : powerCoefChanges) {
+		res = res + "{" + std::to_string(param.first) + ", " +std::to_string(param.second) + "}; ";
+	}
+	res += std::string(name);
+	res = res + " viability: " + std::to_string(changeViability) + " power: " + std::to_string(changeBasePower)
+		+ " is applied: " + std::to_string(isApplied);
+	return res;
 }

@@ -2,7 +2,8 @@
 #include"BattleModeling.h"
 #include"MoralUnit.h"
 #include<omp.h>
-
+#include<fstream>
+#include"FileManager.h"
 using namespace std;
 void pr(int num) {
 	for (int i = 0; i < 100; i++) {
@@ -42,8 +43,18 @@ int main() {
 	////******************************
 	//string namesol("Snake");
 	//unitHelpers::Cycling soliderCycle(10, 2, true);
-	//std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
-	//{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1}};
+	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
+	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1}};
+	std::fstream stream;
+	std::map<unitHelpers::unitTypes, double> res;
+	Item item(soliderPowerCoef, "name", 313, 31);
+	Item p(res, "s", 0, 0);
+	stream.open("test.bin", std::ios::binary | std::ios::out | std::ios::in | std::ios::app);
+	FileManager f;
+	f.writeItem(item, "test.bin");
+	p = f.readItem(stream);
+	cout << item.toString() << endl;
+	cout << p.toString();
 	//build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(50, 100)->setPowerCoef(soliderPowerCoef)
 	//	->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry);
 	//Unit solider = build.getResult();
@@ -97,9 +108,9 @@ int main() {
 	//BattleModeling battle = builder.setArmy(army1, army2)->getResult();
 	//cout << army1.countViability() << "  " << army2.countViability();
 	//battle();
-	Unit un;
-	MoralUnit morun;
-	cout << "Unit type_id: " << un.TYPE_ID<<endl;
-	cout << "MoralUnit type_id: " << morun.TYPE_ID << endl;
+	//Unit un;
+	//MoralUnit morun;
+	//cout << "Unit type_id: " << un.TYPE_ID<<endl;
+	//cout << "MoralUnit type_id: " << morun.TYPE_ID << endl;
 	return 0;
 }

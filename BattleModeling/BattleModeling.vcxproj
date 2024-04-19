@@ -131,6 +131,7 @@
     <ClInclude Include="Army.h" />
     <ClInclude Include="BattleModeling.h" />
     <ClInclude Include="Clonable.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Circumstance.h" />
     <ClInclude Include="MoralUnit.h" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="BattleModeling.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Circumstance.cpp" />
     <ClCompile Include="MoralUnit.cpp" />
