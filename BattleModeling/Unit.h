@@ -14,7 +14,8 @@ class Unit:public Cloneable<typename Unit*>
 protected:
 	char name[256]; /// Unit`s name
 	bool alive; /// Is unit can influence on battle
-	double power; /// Default unit damage
+	double minPower; /// Default unit damage
+	double maxPower; /// Default unit damage
 	double viability; /// Display unit`s chance to survive 
 	std::vector<Item> items; /// All unit`s items
 	double morality;
@@ -32,7 +33,8 @@ public:
 	Unit();
 	bool isAlive() const;
 	void applyItems();
-	double getBasePower() const;
+	double getmaxBasePower() const;
+	double getminBasePower() const;
 	double getViability() const;
 	void takeDamage(double& damage);
 	std::string getName() const;
@@ -46,6 +48,7 @@ public:
 	void updateCycle();
 	virtual void attackArmy(Army& army, double& supplies);
 	Unit* clone();
+	double determinePower(double minPower, double maxPower);
 };
 class UnitBuilder {
 private:
@@ -56,7 +59,7 @@ public:
 	Unit& getResult();
 	UnitBuilder* setName(const std::string& name);
 	UnitBuilder* addItem(const Item& item);
-	UnitBuilder* setPowerAndViability(double power, double viability);
+	UnitBuilder* setPowerAndViability(double minPower,double maxPower, double viability);
 	UnitBuilder* setFortificationTarget(bool fortificationTarget);
 	UnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget);
 	UnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef);

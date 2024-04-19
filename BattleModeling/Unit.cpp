@@ -8,7 +8,8 @@ bool Unit::isAlive() const{
 Unit::Unit() {
 	type = static_cast<unitHelpers::unitTypes>(0);
 	priorityTarget = static_cast<unitHelpers::unitTypes>(0);
-	this->power = 0;
+	this->minPower = 0;
+	this->maxPower = 0;
 	std::string name = "default";
 	for (int i = 0; i<name.size() && i < 256; i++)
 		this->name[i] = name[i];
@@ -29,8 +30,11 @@ void Unit::takeDamage(double& damage) {
 	else
 		damage = 0;
 }
-double Unit::getBasePower() const {
-	return power;
+double Unit::getminBasePower() const {
+	return minPower;
+}
+double Unit::getmaxBasePower() const {
+	return maxPower;
 }
 std::string Unit::getName() const{
 	return std::string(name);
@@ -65,7 +69,8 @@ std::string Unit::toString() {
 void Unit::multiplyPower(double koef) {
 	if (koef < 0)
 		return;
-	this->power *= koef;
+	this->minPower *= koef;
+	this->maxPower *= koef;
 }
 bool Unit::getIsActive() const {
 	return this->cycling.isActive;
@@ -95,7 +100,8 @@ void Unit::updateCycle() {
 void Unit::applyItems() {
 	for (int i = 0; i < items.size(); i++) {
 		if (!items[i].isApply()) {
-			power += items[i].getBasePowerChanges();
+			minPower += items[i].getBasePowerChanges();
+			maxPower += items[i].getBasePowerChanges();
 			viability += items[i].getViabilityChanges();
 		}
 	}
@@ -161,6 +167,12 @@ void Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAliv
 		}
 	}
 }
+double  Unit::determinePower(double minPower, double maxPower) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::normal_distribution<> distr(minPower, maxPower);
+	return distr(gen);
+}
 void Unit::attackArmy(Army& army, double& supplies) {
 	if (!cycling.isActive) {
 		updateCycle();
@@ -169,6 +181,7 @@ void Unit::attackArmy(Army& army, double& supplies) {
 	updateCycle();
 	if (supplies <= 0)
 		return;
+	double power = determinePower(minPower, maxPower);
 	supplies -= power * 0.1;
 	supplies = supplies < 0 ? 0 : supplies;
 	int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]];
@@ -184,7 +197,8 @@ Unit* Unit::clone() {
 	newUnit->fortificationTarget = this->fortificationTarget;
 	for (int i = 0; i < 256; i++)
 		newUnit->name[i] = this->name[i];
-	newUnit->power = this->power;
+	newUnit->minPower = this->minPower;
+	newUnit->maxPower = this->maxPower;
 	newUnit->viability = this->viability;
 	newUnit->powerCoef = this->powerCoef;
 	newUnit->type = this->type;
@@ -217,12 +231,11 @@ UnitBuilder* UnitBuilder::addItem(const Item& item) {
 	unit.items.push_back(item);
 	return this;
 }
-UnitBuilder* UnitBuilder::setPowerAndViability(double power, double viability) {
-	if (power <= 0)
+UnitBuilder* UnitBuilder::setPowerAndViability(double minPower, double maxPower, double viability) {
+	if (minPower < 0 || maxPower <= 0 || viability <= 0)
 		return this;
-	if (viability <= 0)
-		return this;
-	unit.power = power;
+	unit.minPower = minPower; 
+	unit.maxPower = maxPower;
 	unit.viability = viability;
 	return this;
 }
