@@ -15,11 +15,10 @@ Unit::Unit() {
 		this->name[i] = name[i];
 	this->viability = 0;
 	this->alive = true;
-	this->morality = 100;
 	fortificationTarget = false;
 }
 
-/// Decrease viability on damage. If viability <= 0 set alive = false. Decrease damage on viability points
+/// Decrease viability on damage points. If viability <= 0 set alive = false. Decrease damage on viability points
 void Unit::takeDamage(double& damage) {
 	this->viability -= damage;
 	if (viability <= 0) {
@@ -30,10 +29,10 @@ void Unit::takeDamage(double& damage) {
 	else
 		damage = 0;
 }
-double Unit::getminBasePower() const {
+double Unit::getMinBasePower() const {
 	return minPower;
 }
-double Unit::getmaxBasePower() const {
+double Unit::getMaxBasePower() const {
 	return maxPower;
 }
 std::string Unit::getName() const{
@@ -46,20 +45,7 @@ std::vector<Item> Unit::getItems() const {
 	return items;
 }
 
-void Unit::setMorality(double newMorality) {
-	if (newMorality > 100) {
-		morality = 100;
-		return;
-	}
-	if (newMorality < 0) {
-		morality = 0;
-	}
-	else
-		morality = newMorality;
-}
-double Unit::getMorality() const {
-	return morality;
-}
+
 std::string Unit::boolToStr(bool flag) {
 	return flag ? "true": "false";
 }

@@ -44,7 +44,7 @@ void Army::countPower() {
 		if (units[i].size() > 0)
 			power[units[i][0]->type] = 0;
 		for (int j = 0; j < units[i].size(); j++) {
-			power[units[i][0]->type] += units[i][j]->power;
+			power[units[i][0]->type] += (units[i][j]->maxPower + units[i][j]->minPower)/2;
 		}
 	}
 }

@@ -133,6 +133,7 @@
     <ClInclude Include="Clonable.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Circumstance.h" />
+    <ClInclude Include="MoralUnit.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitHelpers.h" />
   </ItemGroup>
@@ -141,6 +142,7 @@
     <ClCompile Include="BattleModeling.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Circumstance.cpp" />
+    <ClCompile Include="MoralUnit.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>

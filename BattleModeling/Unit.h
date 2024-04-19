@@ -18,7 +18,6 @@ protected:
 	double maxPower; /// Default unit damage
 	double viability; /// Display unit`s chance to survive 
 	std::vector<Item> items; /// All unit`s items
-	double morality;
 	bool fortificationTarget; /// Always attack fortifications first
 	unitHelpers::Cycling cycling; /// Cycling unit on battlefield
 	std::map<unitHelpers::unitTypes, double> powerCoef; /// Multiply on default damage to another unit`s types 
@@ -27,41 +26,51 @@ protected:
 	unitHelpers::unitTypes chooseTarget(Army& army) const;
 	int chooseTargetNomer(std::vector<Unit*>& units, int firstAlive);
 	void attackFortification(Unit& fortification, double& damage);
-	void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
+	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	std::string boolToStr(bool flag);
 public:
+	static const int TYPE_ID = 0;
 	Unit();
 	bool isAlive() const;
 	void applyItems();
-	double getmaxBasePower() const;
-	double getminBasePower() const;
+	double getMaxBasePower() const;
+	double getMinBasePower() const;
 	double getViability() const;
-	void takeDamage(double& damage);
+	virtual void takeDamage(double& damage);
 	std::string getName() const;
 	std::vector<Item> getItems() const;
 	void multiplyPower(double koef);
-	void setMorality(double newMorality);
-	double getMorality() const;
 	virtual std::string toString();
 	bool getIsActive() const;
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
-	void updateCycle();
+	virtual void updateCycle();
 	virtual void attackArmy(Army& army, double& supplies);
 	Unit* clone();
-	double determinePower(double minPower, double maxPower);
+	virtual double determinePower(double minPower, double maxPower);
 };
-class UnitBuilder {
+class BaseUnitBuilder {
+public:
+	virtual BaseUnitBuilder* setName(const std::string& name)=0;
+	virtual BaseUnitBuilder* addItem(const Item& item) =0;
+	virtual BaseUnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability)=0;
+	virtual BaseUnitBuilder* setFortificationTarget(bool fortificationTarget)=0;
+	virtual BaseUnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget)=0;
+	virtual BaseUnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef)=0;
+	virtual BaseUnitBuilder* setCycling(const unitHelpers::Cycling& cycling)=0;
+};
+
+class UnitBuilder: BaseUnitBuilder{
 private:
 	Unit unit;
 public:
 	UnitBuilder();
-	void reset();
-	Unit& getResult();
-	UnitBuilder* setName(const std::string& name);
-	UnitBuilder* addItem(const Item& item);
-	UnitBuilder* setPowerAndViability(double minPower,double maxPower, double viability);
-	UnitBuilder* setFortificationTarget(bool fortificationTarget);
-	UnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget);
-	UnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef);
-	UnitBuilder* setCycling(const unitHelpers::Cycling& cycling);
+	virtual void reset();
+	virtual Unit& getResult();
+	virtual UnitBuilder* setName(const std::string& name) override;
+	virtual UnitBuilder* addItem(const Item& item) override;
+	virtual UnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability) override;
+	virtual UnitBuilder* setFortificationTarget(bool fortificationTarget) override;
+	virtual UnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget) override;
+	virtual UnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef) override;
+	virtual UnitBuilder* setCycling(const unitHelpers::Cycling& cycling) override;
 };

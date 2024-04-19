@@ -1,5 +1,6 @@
 #include<iostream>
 #include"BattleModeling.h"
+#include"MoralUnit.h"
 #include<omp.h>
 
 using namespace std;
@@ -16,6 +17,22 @@ void sum(const vector<int>& arr, int start, int end)
 		cout << i<<" ";
 	}
 }
+class A {
+public:
+	virtual void pr() {
+		cout << "CLass A" << endl;
+	}
+	void pr1() {
+		pr();
+	}
+};
+class B :public A {
+	int b = 13;
+	void pr() override {
+		cout << "CLass B " << b << endl;
+	}
+};
+
 int main() {
 	//UnitBuilder build;
 	//Army army1;
@@ -80,15 +97,9 @@ int main() {
 	//BattleModeling battle = builder.setArmy(army1, army2)->getResult();
 	//cout << army1.countViability() << "  " << army2.countViability();
 	//battle();
-	std::vector<std::thread> threads;
-	for (int i = 0; i < 4; ++i)
-	{
-		threads.push_back(std::thread([&, i]()
-			{ pr(i); }));
-	}
-	for (auto& thread : threads)
-	{
-		thread.join();
-	}
+	Unit un;
+	MoralUnit morun;
+	cout << "Unit type_id: " << un.TYPE_ID<<endl;
+	cout << "MoralUnit type_id: " << morun.TYPE_ID << endl;
 	return 0;
 }
