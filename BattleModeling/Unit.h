@@ -7,15 +7,19 @@
 #include"Army.h"
 
 class UnitBuilder;
-class Unit:public Cloneable<typename Unit*>
+class Unit:public Cloneable<typename Unit*>, public Prototype<typename Unit&>
 {
 	friend class Army;
 	friend class UnitBuilder;
+	friend class FileManager;
+private:
+	const int TYPE_ID = 0;
 protected:
 	char name[256]; /// Unit`s name
 	bool alive; /// Is unit can influence on battle
 	double minPower; /// Default unit damage
 	double maxPower; /// Default unit damage
+
 	double viability; /// Display unit`s chance to survive 
 	std::vector<Item> items; /// All unit`s items
 	bool fortificationTarget; /// Always attack fortifications first
@@ -29,8 +33,9 @@ protected:
 	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	std::string boolToStr(bool flag);
 public:
-	static const int TYPE_ID = 0;
+	virtual int getTypeID();
 	Unit();
+	Unit& operator = (const Unit& unit);
 	bool isAlive() const;
 	void applyItems();
 	double getMaxBasePower() const;
@@ -45,7 +50,8 @@ public:
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
 	virtual void updateCycle();
 	virtual void attackArmy(Army& army, double& supplies);
-	Unit* clone();
+	Unit* clone() override;
+	Unit& create() override;
 	virtual double determinePower(double minPower, double maxPower);
 };
 class BaseUnitBuilder {

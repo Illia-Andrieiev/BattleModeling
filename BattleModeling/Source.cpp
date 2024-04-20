@@ -28,6 +28,7 @@ public:
 	}
 };
 class B :public A {
+public:
 	int b = 13;
 	void pr() override {
 		cout << "CLass B " << b << endl;
@@ -35,30 +36,34 @@ class B :public A {
 };
 
 int main() {
-	//UnitBuilder build;
+	MoralUnitBuilder build;
 	//Army army1;
 	//Army army2;
 	//army1.changeSupplies(9999999);
 	//army2.changeSupplies(9999999);
 	////******************************
-	//string namesol("Snake");
-	//unitHelpers::Cycling soliderCycle(10, 2, true);
+	string namesol("Snake");
+	unitHelpers::Cycling soliderCycle(10, 2, true);
 	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
 	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1}};
 	std::fstream stream;
-	std::map<unitHelpers::unitTypes, double> res;
 	Item item(soliderPowerCoef, "name", 313, 31);
-	Item p(res, "s", 0, 0);
-	stream.open("test.bin", std::ios::binary | std::ios::out | std::ios::in | std::ios::app);
+	//stream.open("test", std::ios::binary | std::ios::out | std::ios::in | std::ios::app);
 	FileManager f;
-	//f.writeItem(item, "test.bin");
-	p = f.readItem(stream);
-	cout << item.toString() << endl;
-	cout << p.toString();
-	//build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(50, 100)->setPowerCoef(soliderPowerCoef)
-	//	->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry);
-	//Unit solider = build.getResult();
-	//build.reset();
+	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25,50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(75.4);
+	MoralUnit solider = build.getResult();
+	Unit* u;
+	build.reset();
+	f.writeUnit(&solider, 1, "test");
+	int amount;
+	u = f.readUnit("test",amount);
+	cout << solider.toString()<<endl;
+	cout << u->toString();
+	delete u;
+	MoralUnit mu2 = solider.create();
+	cout << endl << endl << endl;
+	cout << mu2.toString();
 	////******************************
 	//string nameavi("F-16");
 	//unitHelpers::Cycling aviCycle(8, 2, true);
@@ -112,5 +117,6 @@ int main() {
 	//MoralUnit morun;
 	//cout << "Unit type_id: " << un.TYPE_ID<<endl;
 	//cout << "MoralUnit type_id: " << morun.TYPE_ID << endl;
+
 	return 0;
 }

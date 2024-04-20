@@ -28,11 +28,11 @@ bool Item::isApply() const {
 	return isApplied;
 }
 std::string Item::toString() {
-	std::string res = "";
+	std::string res = "powerCoefChanges: ";
 	for (auto& param : powerCoefChanges) {
 		res = res + "{" + std::to_string(param.first) + ", " +std::to_string(param.second) + "}; ";
 	}
-	res += std::string(name);
+	res = res + " name: " + std::string(name);
 	res = res + " viability changes: " + std::to_string(changeViability) + " power changes: " + std::to_string(changeBasePower)
 		+ " is applied: " + std::to_string(isApplied);
 	return res;

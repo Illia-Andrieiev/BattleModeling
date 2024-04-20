@@ -17,7 +17,23 @@ Unit::Unit() {
 	this->alive = true;
 	fortificationTarget = false;
 }
-
+Unit& Unit::operator = (const Unit& unit) {
+	this->cycling = unit.cycling;
+	this->fortificationTarget = unit.fortificationTarget;
+	for (int i = 0; i < 256; i++)
+		this->name[i] = unit.name[i];
+	this->minPower = unit.minPower;
+	this->maxPower = unit.maxPower;
+	this->viability = unit.viability;
+	this->powerCoef = unit.powerCoef;
+	this->type = unit.type;
+	this->items = unit.items;
+	this->priorityTarget = unit.priorityTarget;
+	return *this;
+}
+int Unit::getTypeID() {
+	return TYPE_ID;
+}
 /// Decrease viability on damage points. If viability <= 0 set alive = false. Decrease damage on viability points
 void Unit::takeDamage(double& damage) {
 	this->viability -= damage;
@@ -50,7 +66,11 @@ std::string Unit::boolToStr(bool flag) {
 	return flag ? "true": "false";
 }
 std::string Unit::toString() {
-	return std::string("Name: " + std::string(name) + " viability: " + std::to_string(viability) + " alive: " + boolToStr(alive));
+	std::string res("Name: " + std::string(name) + " viability: " + std::to_string(viability) + " alive: " + boolToStr(alive));
+	for (int i = 0; i < items.size();i++) {
+		res = res + "; item " + std::to_string(i + 1) + ": " + items[i].toString();
+	}
+	return res;
 }
 void Unit::multiplyPower(double koef) {
 	if (koef < 0)
@@ -188,8 +208,15 @@ Unit* Unit::clone() {
 	newUnit->viability = this->viability;
 	newUnit->powerCoef = this->powerCoef;
 	newUnit->type = this->type;
+	newUnit->items = this->items;
 	newUnit->priorityTarget = this->priorityTarget;
 	return newUnit;
+}
+Unit& Unit::create() {
+	Unit* res = new Unit();
+	res->type = this->type;
+	res->priorityTarget = this->priorityTarget;
+	return *res;
 }
 /*
 	Builder

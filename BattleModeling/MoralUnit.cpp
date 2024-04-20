@@ -3,9 +3,28 @@
 MoralUnit::MoralUnit() {
 	this->morality = 100;
 }
+int MoralUnit::getTypeID() {
+	return TYPE_ID;
+}
 double MoralUnit::getMorality() const {
 	return morality;
 }
+MoralUnit& MoralUnit::operator = (const MoralUnit& unit) {
+	this->cycling = unit.cycling;
+	this->fortificationTarget = unit.fortificationTarget;
+	for (int i = 0; i < 256; i++)
+		this->name[i] = unit.name[i];
+	this->minPower = unit.minPower;
+	this->maxPower = unit.maxPower;
+	this->morality = unit.morality;
+	this->viability = unit.viability;
+	this->powerCoef = unit.powerCoef;
+	this->type = unit.type;
+	this->items = unit.items;
+	this->priorityTarget = unit.priorityTarget;
+	return *this;
+}
+
 void MoralUnit::setMorality(double morality) {
 	if (morality < 0)
 		morality = 0;
@@ -99,6 +118,29 @@ void MoralUnit::attackUnitType(Unit& fortification, double& damage, int& posFirs
 std::string MoralUnit::toString() {
 	return Unit::toString() + " morality: " + std::to_string(morality);
 }
+MoralUnit* MoralUnit::clone() {
+	MoralUnit* newUnit = new MoralUnit();
+	newUnit->cycling = this->cycling;
+	newUnit->fortificationTarget = this->fortificationTarget;
+	for (int i = 0; i < 256; i++)
+		newUnit->name[i] = this->name[i];
+	newUnit->minPower = this->minPower;
+	newUnit->maxPower = this->maxPower;
+	newUnit->morality = this->morality;
+	newUnit->viability = this->viability;
+	newUnit->powerCoef = this->powerCoef;
+	newUnit->type = this->type;
+	newUnit->items = this->items;
+	newUnit->priorityTarget = this->priorityTarget;
+	return newUnit;
+}
+MoralUnit& MoralUnit::create() {
+	MoralUnit* res = new MoralUnit();
+	res->type = this->type;
+	res->priorityTarget = this->priorityTarget;
+	return *res;
+}
+
 /*
 	Builder
 */
