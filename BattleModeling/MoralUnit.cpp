@@ -96,6 +96,9 @@ void MoralUnit::attackUnitType(Unit& fortification, double& damage, int& posFirs
 		}
 	}
 }
+std::string MoralUnit::toString() {
+	return Unit::toString() + " morality: " + std::to_string(morality);
+}
 /*
 	Builder
 */

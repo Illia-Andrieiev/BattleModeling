@@ -33,7 +33,7 @@ std::string Item::toString() {
 		res = res + "{" + std::to_string(param.first) + ", " +std::to_string(param.second) + "}; ";
 	}
 	res += std::string(name);
-	res = res + " viability: " + std::to_string(changeViability) + " power: " + std::to_string(changeBasePower)
+	res = res + " viability changes: " + std::to_string(changeViability) + " power changes: " + std::to_string(changeBasePower)
 		+ " is applied: " + std::to_string(isApplied);
 	return res;
 }

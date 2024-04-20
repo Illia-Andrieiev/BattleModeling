@@ -51,7 +51,7 @@ int main() {
 	Item p(res, "s", 0, 0);
 	stream.open("test.bin", std::ios::binary | std::ios::out | std::ios::in | std::ios::app);
 	FileManager f;
-	f.writeItem(item, "test.bin");
+	//f.writeItem(item, "test.bin");
 	p = f.readItem(stream);
 	cout << item.toString() << endl;
 	cout << p.toString();

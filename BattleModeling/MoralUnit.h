@@ -13,6 +13,7 @@ public:
 	double getMorality() const;
 	void takeDamage(double& damage) override;
 	void updateCycle() override;
+	std::string toString() override;
 };
 
 class MoralUnitBuilder :public BaseUnitBuilder {
