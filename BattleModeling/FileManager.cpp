@@ -38,9 +38,7 @@ Item FileManager::readItem(std::fstream& stream) {
 	stream.read((char*)&item.isApplied, sizeof(bool));
 	return item;
 }
-void FileManager::writeBaseUnit(const Unit& unit, int amount, const std::string& fileName) {
-	std::fstream stream;
-	stream.open(fileName, std::ios::binary | std::ios::out | std::ios::in|std::ios::app);
+void FileManager::writeBaseUnit(const Unit& unit, int amount, std::fstream& stream) {
 	if (!stream.is_open())
 		std::cerr << "File do not open!";
 	stream.write((char*)&amount, sizeof(int));
@@ -81,9 +79,7 @@ Unit FileManager::readBaseUnit(std::fstream& stream) {
 	}
 	return unit;
 }
-void FileManager::writeMoralUnit(const MoralUnit& unit, int amount, const std::string& fileName) {
-	std::fstream stream;
-	stream.open(fileName, std::ios::binary | std::ios::out | std::ios::in | std::ios::app);
+void FileManager::writeMoralUnit(const MoralUnit& unit, int amount, std::fstream& stream) {
 	if (!stream.is_open())
 		std::cerr << "File do not open!";
 	stream.write((char*)&amount, sizeof(int));
@@ -126,9 +122,7 @@ MoralUnit FileManager::readMoralUnit(std::fstream& stream) {
 	}
 	return unit;
 }
-Unit* FileManager::readUnit(const std::string& fileName, int& amount) {
-	std::fstream stream;
-	stream.open(fileName, std::ios::binary | std::ios::out | std::ios::in);
+Unit* FileManager::readUnit(std::fstream& stream, int& amount) {
 	if (!stream.is_open())
 		std::cerr << "File do not open!";
 	int type = 0;
@@ -144,14 +138,56 @@ Unit* FileManager::readUnit(const std::string& fileName, int& amount) {
 		break;
 	}
 }
-void FileManager::writeUnit(Unit* unit, int amount, const std::string& fileName) {
+void FileManager::writeUnit(Unit* unit, int amount, std::fstream& stream) {
 	switch (unit->getTypeID())
 	{
 	case 0:
-		return  writeBaseUnit(*unit, amount, fileName);
+		return  writeBaseUnit(*unit, amount, stream);
 		break;
 	case 1:
-		return  writeMoralUnit(*((MoralUnit*)unit), amount, fileName);
+		return  writeMoralUnit(*((MoralUnit*)unit), amount, stream);
 		break;
 	}
+}
+void FileManager::writeArmy(Army& army, const std::string& fileName) {
+	std::fstream stream;
+	stream.open(fileName, std::ios::binary | std::ios::out |std::ios::app);
+	if (!stream.is_open())
+		std::cerr << "File do not open!";
+	stream.write((char*)&army.viability, sizeof(double));
+	stream.write((char*)&army.supplies, sizeof(double));
+	writeMap(army.power, stream);
+	writeUnit(army.fortification, 1, stream);
+	int size = 0;
+	for (int i = 0; i < army.units.size(); i++) {
+		size += (int)army.units[i].size();
+	}
+	stream.write((char*)&size, sizeof(int));
+	for (int i = 0; i < army.units.size(); i++) {
+		for (int j = 0; j < army.units[i].size(); j++) {
+			writeUnit(army.units[i][j], 1, stream);
+		}
+	}
+	stream.close();
+}
+Army FileManager::readArmy(const std::string& fileName) {
+	Army army;
+	std::fstream stream;
+	stream.open(fileName, std::ios::binary | std::ios::in );
+	if (!stream.is_open())
+		std::cerr << "File do not open!";
+	stream.read((char*)&army.viability, sizeof(double));
+	stream.read((char*)&army.supplies, sizeof(double));
+	army.power = readMap(stream);
+	int amount = 1;
+	army.fortification = readUnit(stream,amount);
+	int size = 0;
+	stream.read((char*)&size, sizeof(int));
+	while (size>0)
+	{
+		army.addUnit(*readUnit(stream, amount), amount);
+		--size;
+	}
+	stream.close();
+	return army;
 }

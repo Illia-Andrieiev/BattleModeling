@@ -41,14 +41,20 @@ Army& Army::operator =(const Army& army) {
 void Army::countPower() {
 	power.clear();
 	for (int i = 0; i < units.size(); i++) {
-		if (units[i].size() > 0)
-			power[units[i][0]->type] = 0;
+		power[units[i][0]->type] = 0;
+	}
+	for (int i = 0; i < units.size(); i++) {
 		for (int j = 0; j < units[i].size(); j++) {
-			power[units[i][0]->type] += (units[i][j]->maxPower + units[i][j]->minPower)/2;
+			for (int k = 0; k < units.size(); k++) {
+				power[units[k][0]->type] += (units[i][j]->maxPower + units[i][j]->minPower) / 2 * units[i][j]->powerCoef[units[k][0]->type];
+			}
 		}
 	}
 }
 void Army::addUnit(Unit& unit, int amount) {
+	if (!unit.isAlive()) {
+		return;
+	}
 	for (int i = 0; i < units.size(); i++) {
 		if (units[i].size() > 0 && units[i][0]->type == unit.type) {
 			while (amount > 0) {
@@ -96,6 +102,12 @@ std::string Army::toString() {
 			res += (units[i][j]->toString() + " " + std::to_string(j) + "\n");
 		}
 	}
+	res += " power: ";
+	for (auto& param : power) {
+		res = res + "{" + std::to_string(param.first) + ", " + std::to_string(param.second) + "}; ";
+	}
+	res += "viability: " + std::to_string(viability);
+	res += " fortification: " +fortification->toString();
 	return res;
 }
 double Army::getViability() const{
