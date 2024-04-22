@@ -16,6 +16,7 @@ class Army
 	double viability; /// General army viability
 	std::vector<int> positionOfFirstAlive; /// Positions of first alive unit in appropriate vectors.
 	void attackType(Army& army, std::vector<Unit*>& type, int posFirstAlive);
+	void sortType(std::vector<Unit*>& units);
 public:
 	Army();
 	Army(Unit& fortification);
@@ -32,5 +33,6 @@ public:
 	Army& operator =(const Army& army);
 	void applyItems();
 	void applyCircumstance(const Circumstance& circ);
+	void sort();
 };
 

@@ -37,3 +37,22 @@ std::string Item::toString() {
 		+ " is applied: " + std::to_string(isApplied);
 	return res;
 }
+bool Item::isEqual(const Item& other) const{
+	return this->changeBasePower == other.changeBasePower && this->changeViability == other.changeViability &&
+		this->isApplied == other.isApplied && std::string(this->name) == std::string(other.name) &&
+		isMapsEqual(this->powerCoefChanges, other.powerCoefChanges);
+}
+bool Item::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2) const{
+	bool res = true;
+	for (auto& pair : map1) {
+		res = map1.at(pair.first) == map2.at(pair.first);
+		if (!res)
+			return false;
+	}
+	for (auto& pair : map2) {
+		res = map1.at(pair.first) == map2.at(pair.first);
+		if (!res)
+			return false;
+	}
+	return true;
+}

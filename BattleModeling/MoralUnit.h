@@ -12,6 +12,7 @@ class MoralUnit :public Unit
 public:
 	virtual int getTypeID() override;
 	MoralUnit();
+	bool isEqual(Unit* unit) override;
 	MoralUnit& operator = (const MoralUnit& unit);
 	void setMorality(double morality);
 	double getMorality() const;
@@ -19,7 +20,7 @@ public:
 	void updateCycle() override;
 	std::string toString() override;
 	MoralUnit* clone() override;
-	MoralUnit& create() override;
+	MoralUnit* create() override;
 };
 
 class MoralUnitBuilder :public BaseUnitBuilder {

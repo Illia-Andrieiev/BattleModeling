@@ -62,26 +62,26 @@ void FileManager::writeBaseUnit(const Unit& unit, int amount, std::fstream& stre
 		writeItem(unit.items[i], stream);
 	}
 }
-Unit FileManager::readBaseUnit(std::fstream& stream) {
+Unit* FileManager::readBaseUnit(std::fstream& stream) {
 	std::map<unitHelpers::unitTypes, double> map;
-	Unit unit;
-	stream.read((char*)&unit.minPower, sizeof(double));
-	stream.read((char*)&unit.maxPower, sizeof(double));
-	stream.read((char*)&unit.maxArmor, sizeof(double));
-	stream.read((char*)&unit.currentArmor, sizeof(double));
-	stream.read((char*)&unit.isRenovateArmor, sizeof(bool));
-	stream.read((char*)&unit.viability, sizeof(double));
-	stream.read((char*)&unit.alive, sizeof(bool));
-	stream.read((char*)&unit.fortificationTarget, sizeof(bool));
-	stream.read((char*)&unit.name[0], sizeof(unit.name));
-	stream.read((char*)&unit.cycling, sizeof(unit.cycling));
-	stream.read((char*)&unit.type, sizeof(unit.type));
-	stream.read((char*)&unit.priorityTarget, sizeof(unit.priorityTarget));
-	unit.powerCoef = readMap(stream);
+	Unit* unit = new Unit();
+	stream.read((char*)&unit->minPower, sizeof(double));
+	stream.read((char*)&unit->maxPower, sizeof(double));
+	stream.read((char*)&unit->maxArmor, sizeof(double));
+	stream.read((char*)&unit->currentArmor, sizeof(double));
+	stream.read((char*)&unit->isRenovateArmor, sizeof(bool));
+	stream.read((char*)&unit->viability, sizeof(double));
+	stream.read((char*)&unit->alive, sizeof(bool));
+	stream.read((char*)&unit->fortificationTarget, sizeof(bool));
+	stream.read((char*)&unit->name[0], sizeof(unit->name));
+	stream.read((char*)&unit->cycling, sizeof(unit->cycling));
+	stream.read((char*)&unit->type, sizeof(unit->type));
+	stream.read((char*)&unit->priorityTarget, sizeof(unit->priorityTarget));
+	unit->powerCoef = readMap(stream);
 	int size=0;
 	stream.read((char*)&size, sizeof(int));
 	for (int i = 0; i < size; i++) {
-		unit.items.push_back(readItem(stream));
+		unit->items.push_back(readItem(stream));
 	}
 	return unit;
 }
@@ -110,27 +110,27 @@ void FileManager::writeMoralUnit(const MoralUnit& unit, int amount, std::fstream
 		writeItem(unit.items[i], stream);
 	}
 }
-MoralUnit FileManager::readMoralUnit(std::fstream& stream) {
+MoralUnit* FileManager::readMoralUnit(std::fstream& stream) {
 	std::map<unitHelpers::unitTypes, double> map;
-	MoralUnit unit;
-	stream.read((char*)&unit.morality, sizeof(double));
-	stream.read((char*)&unit.minPower, sizeof(double));
-	stream.read((char*)&unit.maxPower, sizeof(double));
-	stream.read((char*)&unit.maxArmor, sizeof(double));
-	stream.read((char*)&unit.currentArmor, sizeof(double));
-	stream.read((char*)&unit.isRenovateArmor, sizeof(bool));
-	stream.read((char*)&unit.viability, sizeof(double));
-	stream.read((char*)&unit.alive, sizeof(bool));
-	stream.read((char*)&unit.fortificationTarget, sizeof(bool));
-	stream.read((char*)&unit.name[0], sizeof(unit.name));
-	stream.read((char*)&unit.cycling, sizeof(unit.cycling));
-	stream.read((char*)&unit.type, sizeof(unit.type));
-	stream.read((char*)&unit.priorityTarget, sizeof(unit.priorityTarget));
-	unit.powerCoef = readMap(stream);
+	MoralUnit* unit = new MoralUnit();
+	stream.read((char*)&unit->morality, sizeof(double));
+	stream.read((char*)&unit->minPower, sizeof(double));
+	stream.read((char*)&unit->maxPower, sizeof(double));
+	stream.read((char*)&unit->maxArmor, sizeof(double));
+	stream.read((char*)&unit->currentArmor, sizeof(double));
+	stream.read((char*)&unit->isRenovateArmor, sizeof(bool));
+	stream.read((char*)&unit->viability, sizeof(double));
+	stream.read((char*)&unit->alive, sizeof(bool));
+	stream.read((char*)&unit->fortificationTarget, sizeof(bool));
+	stream.read((char*)&unit->name[0], sizeof(unit->name));
+	stream.read((char*)&unit->cycling, sizeof(unit->cycling));
+	stream.read((char*)&unit->type, sizeof(unit->type));
+	stream.read((char*)&unit->priorityTarget, sizeof(unit->priorityTarget));
+	unit->powerCoef = readMap(stream);
 	int size = 0;
 	stream.read((char*)&size, sizeof(int));
 	for (int i = 0; i < size; i++) {
-		unit.items.push_back(readItem(stream));
+		unit->items.push_back(readItem(stream));
 	}
 	return unit;
 }
@@ -143,10 +143,10 @@ Unit* FileManager::readUnit(std::fstream& stream, int& amount) {
 	switch (type)
 	{
 	case 0:
-		return  readBaseUnit(stream).clone();
+		return  readBaseUnit(stream);
 		break;
 	case 1:
-		return  readMoralUnit(stream).clone();
+		return  readMoralUnit(stream);
 		break;
 	}
 }
@@ -166,18 +166,32 @@ void FileManager::writeArmy(Army& army, const std::string& fileName) {
 	stream.open(fileName, std::ios::binary | std::ios::out |std::ios::app);
 	if (!stream.is_open())
 		std::cerr << "File do not open!";
+	army.sort();
 	stream.write((char*)&army.viability, sizeof(double));
 	stream.write((char*)&army.supplies, sizeof(double));
 	writeMap(army.power, stream);
 	writeUnit(army.fortification, 1, stream);
 	int size = 0;
 	for (int i = 0; i < army.units.size(); i++) {
-		size += (int)army.units[i].size();
+		for (int j = 0; j < army.units[i].size(); j++) {
+			while (j + 1 < army.units[i].size() && army.units[i][j]->isEqual(army.units[i][j+1])) {
+				++j;
+			}
+			++size;
+		}
 	}
 	stream.write((char*)&size, sizeof(int));
 	for (int i = 0; i < army.units.size(); i++) {
+		int amount = 1;
 		for (int j = 0; j < army.units[i].size(); j++) {
-			writeUnit(army.units[i][j], 1, stream);
+			int k = j;
+			while (k + 1 < army.units[i].size() && army.units[i][k]->isEqual(army.units[i][k + 1])) {
+				amount++;
+				k++;
+				j++;
+			}
+			writeUnit(army.units[i][j], amount, stream);
+			amount = 1;
 		}
 	}
 	stream.close();
@@ -197,8 +211,10 @@ Army FileManager::readArmy(const std::string& fileName) {
 	stream.read((char*)&size, sizeof(int));
 	while (size>0)
 	{
-		army.addUnit(*readUnit(stream, amount), amount);
+		Unit* u = readUnit(stream, amount);
+		army.addUnit(*u, amount);
 		--size;
+		delete u;
 	}
 	stream.close();
 	return army;

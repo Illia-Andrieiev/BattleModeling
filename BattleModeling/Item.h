@@ -15,8 +15,10 @@ private:
 	double changeViability; /// Add to unit`s viability. Can be < 0
 	double changeBasePower; /// Add to unit`s base power. Can be < 0
 	bool isApplied;
+	bool isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2) const;
 public:
 	void apply();
+	bool isEqual(const Item& other) const;
 	Item(std::map<unitHelpers::unitTypes, double>& powerChanges, const std::string& name, double changeViability, double changeBasePower);
 	std::map<unitHelpers::unitTypes, double> getPowerChanges() const;
 	double getBasePowerChanges() const;

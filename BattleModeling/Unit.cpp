@@ -21,6 +21,8 @@ Unit::Unit() {
 	fortificationTarget = false;
 }
 Unit& Unit::operator = (const Unit& unit) {
+	if (this == &unit)
+		return *this;
 	this->cycling = unit.cycling;
 	this->fortificationTarget = unit.fortificationTarget;
 	for (int i = 0; i < 256; i++)
@@ -39,6 +41,20 @@ Unit& Unit::operator = (const Unit& unit) {
 }
 int Unit::getTypeID() {
 	return TYPE_ID;
+}
+bool Unit::isEqual(Unit* unit) {
+	if (this->TYPE_ID != unit->TYPE_ID || items.size() != unit->items.size())
+		return false;
+	bool res1 = true;
+	for (int i = 0; i < items.size();i++) {
+		if (!res1)
+			return false;
+	}
+	return this->alive == unit->alive && this->currentArmor == unit->currentArmor && this->cycling.isEqual( unit->cycling) &&
+		this->fortificationTarget == unit->fortificationTarget && this->isRenovateArmor == unit->isRenovateArmor &&
+		this->maxArmor == unit->maxArmor && this->maxPower == unit->maxPower && this->minPower == unit->minPower &&
+		this->type == unit->type && this->viability == unit->viability && this->priorityTarget == unit->priorityTarget
+		&& isMapsEqual(this->powerCoef,unit->powerCoef);
 }
 /// Decrease viability on damage points. If viability <= 0 set alive = false. Decrease damage on viability points
 void Unit::takeDamage(double& damage) {
@@ -243,11 +259,25 @@ Unit* Unit::clone() {
 	newUnit->currentArmor = this->currentArmor;
 	return newUnit;
 }
-Unit& Unit::create() {
+Unit* Unit::create() {
 	Unit* res = new Unit();
 	res->type = this->type;
 	res->priorityTarget = this->priorityTarget;
-	return *res;
+	return res;
+}
+bool Unit::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2) {
+	bool res = true;
+	for (auto& pair : map1) {
+		res = map1.at(pair.first) == map2.at(pair.first);
+		if (!res)
+			return false;
+	}
+	for (auto& pair : map2) {
+		res = map1.at(pair.first) == map2.at(pair.first);
+		if (!res)
+			return false;
+	}
+	return true;
 }
 /*
 	Builder
@@ -306,4 +336,5 @@ UnitBuilder* UnitBuilder::setArmor(double armor, bool isRenovate) {
 	unit.currentArmor = armor;
 	unit.maxArmor = armor;
 	unit.isRenovateArmor = isRenovate;
+	return this;
 }

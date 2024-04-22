@@ -7,7 +7,7 @@
 #include"Army.h"
 
 class UnitBuilder;
-class Unit:public Cloneable<typename Unit*>, public Prototype<typename Unit&>
+class Unit:public Cloneable<typename Unit*>, public Prototype<typename Unit*>
 {
 	friend class Army;
 	friend class UnitBuilder;
@@ -35,10 +35,13 @@ protected:
 	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	std::string boolToStr(bool flag);
 	virtual void renovateArmor(double& supplies);
+	virtual double determinePower(double minPower, double maxPower);
+	bool isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2);
 public:
 	virtual int getTypeID();
 	Unit();
 	Unit& operator = (const Unit& unit);
+	virtual bool isEqual(Unit* unit);
 	bool isAlive() const;
 	void applyItems();
 	double getMaxBasePower() const;
@@ -54,8 +57,8 @@ public:
 	virtual void updateCycle();
 	virtual void attackArmy(Army& army, double& supplies);
 	Unit* clone() override;
-	Unit& create() override;
-	virtual double determinePower(double minPower, double maxPower);
+	Unit* create() override;
+
 };
 class BaseUnitBuilder {
 public:

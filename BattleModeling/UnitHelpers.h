@@ -1,6 +1,13 @@
 #pragma once
+#include<map>
 /// Represent how much unit influent on foe`s army
 namespace unitHelpers {
+	enum unitTypes {
+		artilery,
+		aviation,
+		armoredVehickle,
+		infantry
+	};
 	struct Cycling {
 		int cyclesToReplenishment; /// Cycles of modeling, in which unit active
 		int cyclesToActivation; /// Cycles of modeling, in which unit active
@@ -18,11 +25,10 @@ namespace unitHelpers {
 			this->cyclesToReplenishment = 10;
 			this->isActive = true;
 		}
+		bool isEqual (const Cycling& other) const{
+			return this->currentCycle == other.currentCycle && this->cyclesToActivation == other.cyclesToActivation &&
+				this->cyclesToReplenishment == other.cyclesToReplenishment && this->isActive == other.isActive;
+		}
 	};
-	enum unitTypes {
-		artilery,
-		aviation,
-		armoredVehickle,
-		infantry
-	};
+
 }

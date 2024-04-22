@@ -11,6 +11,8 @@ double MoralUnit::getMorality() const {
 	return morality;
 }
 MoralUnit& MoralUnit::operator = (const MoralUnit& unit) {
+	if (this == &unit)
+		return *this;
 	this->cycling = unit.cycling;
 	this->fortificationTarget = unit.fortificationTarget;
 	for (int i = 0; i < 256; i++)
@@ -142,13 +144,28 @@ MoralUnit* MoralUnit::clone() {
 	newUnit->currentArmor = this->currentArmor;
 	return newUnit;
 }
-MoralUnit& MoralUnit::create() {
+MoralUnit* MoralUnit::create() {
 	MoralUnit* res = new MoralUnit();
 	res->type = this->type;
 	res->priorityTarget = this->priorityTarget;
-	return *res;
+	return res;
 }
-
+bool MoralUnit::isEqual(Unit* unit) {
+	MoralUnit* unit1 = dynamic_cast<MoralUnit*>(unit);
+	if (unit1 == nullptr || items.size() != unit1->items.size() || unit1->getTypeID() != TYPE_ID) {
+		return false;
+	}
+	for (int i = 0; i < items.size(); i++) {
+		if (!(items[i].isEqual(unit1->items[i])))
+			return false;
+	}
+	return this->alive == unit1->alive && this->currentArmor == unit1->currentArmor && this->cycling.isEqual(unit1->cycling) &&
+		this->morality == unit1->morality && this->rateOfMoralityChanges == unit1->rateOfMoralityChanges &&
+		this->fortificationTarget == unit1->fortificationTarget && this->isRenovateArmor == unit1->isRenovateArmor &&
+		this->maxArmor == unit1->maxArmor && this->maxPower == unit1->maxPower && this->minPower == unit1->minPower &&
+		this->type == unit1->type && this->viability == unit1->viability && this->priorityTarget == unit1->priorityTarget
+		&& isMapsEqual(this->powerCoef, unit1->powerCoef);
+}
 /*
 	Builder
 */
@@ -213,4 +230,5 @@ MoralUnitBuilder* MoralUnitBuilder::setArmor(double armor, bool isRenovate) {
 	unit.currentArmor = armor;
 	unit.maxArmor = armor;
 	unit.isRenovateArmor = isRenovate;
+	return this;
 }

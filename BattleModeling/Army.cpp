@@ -149,6 +149,28 @@ void Army::applyCircumstance(const Circumstance& circ) {
 		}
 	}
 }
+void Army::sortType(std::vector<Unit*>& units) {
+	for (int i = 0; i < units.size() - 1; i++) {
+		int cur = i+1;
+		int j = i+1;
+		while (j < units.size() && units[i]->isEqual(units[j])) {
+			++i;
+			++j;
+			++cur;
+		}
+		for (; j < units.size(); j++) {
+			if (units[i]->isEqual(units[j])) {		
+				std::swap(units[cur], units[j]);
+				++cur;
+			}
+		}
+	}
+}
+void Army::sort() {
+	for (int i = 0; i < units.size(); i++) {
+		sortType(units[i]);
+	}
+}
 Army::~Army() {
 	for (int i = 0; i < units.size(); i++) {
 		for (int j = 0; j < units[i].size(); j++) {
