@@ -8,6 +8,17 @@ void FileManager::writeMap(const std::map<unitHelpers::unitTypes, double>& map, 
 		stream.write((char*)&pair.second, sizeof(pair.second));
 	}
 }
+void FileManager::writeCircumstance(const Circumstance& circ, std::fstream& stream) {
+	writeMap(circ.powerChanges, stream);
+	stream.write((char*)&circ.name[0], sizeof(circ.name));
+}
+Circumstance FileManager::readCircumstance(std::fstream& stream) {
+	std::map<unitHelpers::unitTypes, double> map;
+	Circumstance circ(map, "default");
+	circ.powerChanges = readMap(stream);
+	stream.read((char*)&circ.name[0], sizeof(circ.name));
+	return circ;
+}
 std::map<unitHelpers::unitTypes, double> FileManager::readMap(std::fstream& stream) {
 	std::map<unitHelpers::unitTypes, double> map;
 	int size = 0;
@@ -149,6 +160,7 @@ Unit* FileManager::readUnit(std::fstream& stream, int& amount) {
 		return  readMoralUnit(stream);
 		break;
 	}
+	return new Unit();
 }
 void FileManager::writeUnit(Unit* unit, int amount, std::fstream& stream) {
 	switch (unit->getTypeID())
@@ -174,7 +186,7 @@ void FileManager::writeArmy(Army& army, const std::string& fileName) {
 	int size = 0;
 	for (int i = 0; i < army.units.size(); i++) {
 		for (int j = 0; j < army.units[i].size(); j++) {
-			while (j + 1 < army.units[i].size() && army.units[i][j]->isEqual(army.units[i][j+1])) {
+			while (j + 1 < (int)army.units[i].size() && army.units[i][j]->isEqual(army.units[i][j+1])) {
 				++j;
 			}
 			++size;
@@ -183,9 +195,9 @@ void FileManager::writeArmy(Army& army, const std::string& fileName) {
 	stream.write((char*)&size, sizeof(int));
 	for (int i = 0; i < army.units.size(); i++) {
 		int amount = 1;
-		for (int j = 0; j < army.units[i].size(); j++) {
+		for (int j = 0; j < (int)army.units[i].size(); j++) {
 			int k = j;
-			while (k + 1 < army.units[i].size() && army.units[i][k]->isEqual(army.units[i][k + 1])) {
+			while (k + 1 < (int)army.units[i].size() && army.units[i][k]->isEqual(army.units[i][k + 1])) {
 				amount++;
 				k++;
 				j++;

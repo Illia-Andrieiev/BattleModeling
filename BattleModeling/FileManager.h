@@ -17,5 +17,7 @@ public:
 	Unit* readUnit(std::fstream& stream, int& amount);
 	void writeArmy(Army& army, const std::string& fileName);
 	Army readArmy(const std::string& fileName);
+	void writeCircumstance(const Circumstance& circ, std::fstream& stream);
+	Circumstance readCircumstance(std::fstream& stream);
 };
 
