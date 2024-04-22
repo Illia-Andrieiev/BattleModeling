@@ -2,6 +2,7 @@
 #include <random>
 MoralUnit::MoralUnit() {
 	this->morality = 100;
+	this->rateOfMoralityChanges = 1;
 }
 int MoralUnit::getTypeID() {
 	return TYPE_ID;
@@ -21,6 +22,9 @@ MoralUnit& MoralUnit::operator = (const MoralUnit& unit) {
 	this->powerCoef = unit.powerCoef;
 	this->type = unit.type;
 	this->items = unit.items;
+	this->isRenovateArmor = unit.isRenovateArmor;
+	this->maxArmor = unit.maxArmor;
+	this->currentArmor = unit.currentArmor;
 	this->priorityTarget = unit.priorityTarget;
 	return *this;
 }
@@ -65,7 +69,7 @@ void MoralUnit::updateCycle() {
 			setMorality(this->morality + 3.5);
 			return;
 		}
-		setMorality(this->morality - 0.5);
+		setMorality(this->morality - 0.5*rateOfMoralityChanges);
 	}
 	else {
 		cycling.currentCycle++;
@@ -74,7 +78,7 @@ void MoralUnit::updateCycle() {
 			cycling.isActive = true;
 			return;
 		}
-		setMorality(this->morality += 2);
+		setMorality(this->morality + 2);
 	}
 }
 /// Determine how much damage unit will cause on battle field. Use normal_distribution.
@@ -127,11 +131,15 @@ MoralUnit* MoralUnit::clone() {
 	newUnit->minPower = this->minPower;
 	newUnit->maxPower = this->maxPower;
 	newUnit->morality = this->morality;
+	newUnit->rateOfMoralityChanges = this->rateOfMoralityChanges;
 	newUnit->viability = this->viability;
 	newUnit->powerCoef = this->powerCoef;
 	newUnit->type = this->type;
 	newUnit->items = this->items;
 	newUnit->priorityTarget = this->priorityTarget;
+	newUnit->isRenovateArmor = this->isRenovateArmor;
+	newUnit->maxArmor = this->maxArmor;
+	newUnit->currentArmor = this->currentArmor;
 	return newUnit;
 }
 MoralUnit& MoralUnit::create() {
@@ -192,7 +200,17 @@ MoralUnitBuilder* MoralUnitBuilder::setCycling(const unitHelpers::Cycling& cycli
 	unit.cycling = cycling;
 	return this;
 }
-MoralUnitBuilder* MoralUnitBuilder::setMorality(double morality) {
+MoralUnitBuilder* MoralUnitBuilder::setMorality(double morality, double rateOfMoralityChanges = 1) {
 	unit.setMorality(morality);
+	if (rateOfMoralityChanges <= 0)
+		rateOfMoralityChanges = 1;
+	unit.rateOfMoralityChanges = rateOfMoralityChanges;
 	return this;
+}
+MoralUnitBuilder* MoralUnitBuilder::setArmor(double armor, bool isRenovate) {
+	if (armor < 0)
+		armor = 0;
+	unit.currentArmor = armor;
+	unit.maxArmor = armor;
+	unit.isRenovateArmor = isRenovate;
 }

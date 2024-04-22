@@ -45,6 +45,9 @@ void FileManager::writeBaseUnit(const Unit& unit, int amount, std::fstream& stre
 	stream.write((char*)&unit.TYPE_ID, sizeof(int));
 	stream.write((char*)&unit.minPower, sizeof(double));
 	stream.write((char*)&unit.maxPower, sizeof(double));
+	stream.write((char*)&unit.maxArmor, sizeof(double));
+	stream.write((char*)&unit.currentArmor, sizeof(double));
+	stream.write((char*)&unit.isRenovateArmor, sizeof(bool));
 	stream.write((char*)&unit.viability, sizeof(double));
 	stream.write((char*)&unit.alive, sizeof(bool));
 	stream.write((char*)&unit.fortificationTarget, sizeof(bool));
@@ -64,6 +67,9 @@ Unit FileManager::readBaseUnit(std::fstream& stream) {
 	Unit unit;
 	stream.read((char*)&unit.minPower, sizeof(double));
 	stream.read((char*)&unit.maxPower, sizeof(double));
+	stream.read((char*)&unit.maxArmor, sizeof(double));
+	stream.read((char*)&unit.currentArmor, sizeof(double));
+	stream.read((char*)&unit.isRenovateArmor, sizeof(bool));
 	stream.read((char*)&unit.viability, sizeof(double));
 	stream.read((char*)&unit.alive, sizeof(bool));
 	stream.read((char*)&unit.fortificationTarget, sizeof(bool));
@@ -87,6 +93,9 @@ void FileManager::writeMoralUnit(const MoralUnit& unit, int amount, std::fstream
 	stream.write((char*)&unit.morality, sizeof(double));
 	stream.write((char*)&unit.minPower, sizeof(double));
 	stream.write((char*)&unit.maxPower, sizeof(double));
+	stream.write((char*)&unit.maxArmor, sizeof(double));
+	stream.write((char*)&unit.currentArmor, sizeof(double));
+	stream.write((char*)&unit.isRenovateArmor, sizeof(bool));
 	stream.write((char*)&unit.viability, sizeof(double));
 	stream.write((char*)&unit.alive, sizeof(bool));
 	stream.write((char*)&unit.fortificationTarget, sizeof(bool));
@@ -107,6 +116,9 @@ MoralUnit FileManager::readMoralUnit(std::fstream& stream) {
 	stream.read((char*)&unit.morality, sizeof(double));
 	stream.read((char*)&unit.minPower, sizeof(double));
 	stream.read((char*)&unit.maxPower, sizeof(double));
+	stream.read((char*)&unit.maxArmor, sizeof(double));
+	stream.read((char*)&unit.currentArmor, sizeof(double));
+	stream.read((char*)&unit.isRenovateArmor, sizeof(bool));
 	stream.read((char*)&unit.viability, sizeof(double));
 	stream.read((char*)&unit.alive, sizeof(bool));
 	stream.read((char*)&unit.fortificationTarget, sizeof(bool));

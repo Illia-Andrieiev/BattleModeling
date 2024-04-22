@@ -5,6 +5,7 @@ class MoralUnit :public Unit
 	friend class MoralUnitBuilder;
 	friend class FileManager;
 	double morality;
+	double rateOfMoralityChanges;
 	const int TYPE_ID = 1;
 	void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) override;
 	double determinePower(double minPower, double maxPower) override;
@@ -35,5 +36,6 @@ public:
 	virtual MoralUnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget) override;
 	virtual MoralUnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef) override;
 	virtual MoralUnitBuilder* setCycling(const unitHelpers::Cycling& cycling) override;
-	virtual MoralUnitBuilder* setMorality(double morality);
+	virtual MoralUnitBuilder* setMorality(double morality, double rateOfMoralityChanges);
+	virtual MoralUnitBuilder* setArmor(double armor, bool isRenovate) override;
 };

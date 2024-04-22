@@ -19,7 +19,9 @@ protected:
 	bool alive; /// Is unit can influence on battle
 	double minPower; /// Default unit damage
 	double maxPower; /// Default unit damage
-
+	double maxArmor; /// Default and maximum armor, that unit can have
+	double currentArmor; /// Current armor value
+	bool isRenovateArmor; /// Is renovate armor from supplies
 	double viability; /// Display unit`s chance to survive 
 	std::vector<Item> items; /// All unit`s items
 	bool fortificationTarget; /// Always attack fortifications first
@@ -32,6 +34,7 @@ protected:
 	void attackFortification(Unit& fortification, double& damage);
 	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	std::string boolToStr(bool flag);
+	virtual void renovateArmor(double& supplies);
 public:
 	virtual int getTypeID();
 	Unit();
@@ -63,6 +66,7 @@ public:
 	virtual BaseUnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget)=0;
 	virtual BaseUnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef)=0;
 	virtual BaseUnitBuilder* setCycling(const unitHelpers::Cycling& cycling)=0;
+	virtual BaseUnitBuilder* setArmor(double armor,bool isRenovate) = 0;
 };
 
 class UnitBuilder: BaseUnitBuilder{
@@ -79,4 +83,5 @@ public:
 	virtual UnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget) override;
 	virtual UnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef) override;
 	virtual UnitBuilder* setCycling(const unitHelpers::Cycling& cycling) override;
+	virtual UnitBuilder* setArmor(double armor, bool isRenovate) override;
 };

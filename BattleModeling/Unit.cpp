@@ -15,6 +15,9 @@ Unit::Unit() {
 		this->name[i] = name[i];
 	this->viability = 0;
 	this->alive = true;
+	this->isRenovateArmor = false;
+	this->maxArmor = 0;
+	this->currentArmor = 0;
 	fortificationTarget = false;
 }
 Unit& Unit::operator = (const Unit& unit) {
@@ -27,6 +30,9 @@ Unit& Unit::operator = (const Unit& unit) {
 	this->viability = unit.viability;
 	this->powerCoef = unit.powerCoef;
 	this->type = unit.type;
+	this->isRenovateArmor = unit.isRenovateArmor;
+	this->maxArmor = unit.maxArmor;
+	this->currentArmor = unit.currentArmor;
 	this->items = unit.items;
 	this->priorityTarget = unit.priorityTarget;
 	return *this;
@@ -36,6 +42,18 @@ int Unit::getTypeID() {
 }
 /// Decrease viability on damage points. If viability <= 0 set alive = false. Decrease damage on viability points
 void Unit::takeDamage(double& damage) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(0, 9);
+	if (distr(gen) != 9) {
+		this->currentArmor -= damage;
+		if (currentArmor <= 0) {
+			damage = -currentArmor;
+			currentArmor = 0;
+		}
+		else
+			damage = 0;
+	}
 	this->viability -= damage;
 	if (viability <= 0) {
 		alive = false;
@@ -44,6 +62,15 @@ void Unit::takeDamage(double& damage) {
 	}
 	else
 		damage = 0;
+}
+void Unit::renovateArmor(double& supplies) {
+	if (isRenovateArmor) {
+		if (currentArmor < maxArmor) {
+			supplies -= (maxArmor - currentArmor);
+			supplies = supplies < 0 ? 0 : supplies;
+			currentArmor = maxArmor;
+		}
+	}
 }
 double Unit::getMinBasePower() const {
 	return minPower;
@@ -190,6 +217,7 @@ void Unit::attackArmy(Army& army, double& supplies) {
 	double power = determinePower(minPower, maxPower);
 	supplies -= power * 0.1;
 	supplies = supplies < 0 ? 0 : supplies;
+	renovateArmor(supplies);
 	int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]];
 	unitHelpers::unitTypes type = priorityTarget;
 	if(posAlivePriorityTarget == -1)
@@ -210,6 +238,9 @@ Unit* Unit::clone() {
 	newUnit->type = this->type;
 	newUnit->items = this->items;
 	newUnit->priorityTarget = this->priorityTarget;
+	newUnit->isRenovateArmor = this->isRenovateArmor;
+	newUnit->maxArmor = this->maxArmor;
+	newUnit->currentArmor = this->currentArmor;
 	return newUnit;
 }
 Unit& Unit::create() {
@@ -268,4 +299,11 @@ UnitBuilder* UnitBuilder::setPowerCoef(const std::map<unitHelpers::unitTypes, do
 UnitBuilder* UnitBuilder::setCycling(const unitHelpers::Cycling& cycling) {
 	unit.cycling = cycling;
 	return this;
+}
+UnitBuilder* UnitBuilder::setArmor(double armor, bool isRenovate) {
+	if (armor < 0)
+		armor = 0;
+	unit.currentArmor = armor;
+	unit.maxArmor = armor;
+	unit.isRenovateArmor = isRenovate;
 }
