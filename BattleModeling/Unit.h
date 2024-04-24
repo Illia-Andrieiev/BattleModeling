@@ -58,6 +58,7 @@ public:
 	virtual void attackArmy(Army& army, double& supplies);
 	Unit* clone() override;
 	Unit* create() override;
+	unitHelpers::unitTypes getType() const;
 
 };
 class BaseUnitBuilder {

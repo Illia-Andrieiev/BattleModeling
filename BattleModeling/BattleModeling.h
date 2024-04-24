@@ -13,19 +13,21 @@ struct Supply {
 
 class BattleModeling
 {
-	friend class BattleBuilder;
-protected:
-	
+	friend class BattleBuilder;	
 private:
 	Army army1;
 	Army army2;
 	Army army1Reinforcements;
 	Army army2Reinforcements;
-	Supply lapSupplies;
+	double army1RoundReinforcement;
+	double army2RoundReinforcement;
+	Supply roundSupplies;
 	BattleModeling();
-	void battleLap();
+	void battleRound();
 	std::vector<Circumstance> circumstances;
 	Circumstance getSummCircumstance();
+	void addReinforcement();
+	Unit* chooseRandomUnit(Army& army, unitHelpers::unitTypes type);
 public:
 	static BattleModeling& getBattleModeling();
 	void addCircumstance(const Circumstance& circ);
@@ -41,6 +43,7 @@ public:
 	void reset() ;
 	BattleModeling& getResult();
 	BattleBuilder* setSupplies(const Supply& lapSupplies) ;
-	BattleBuilder* setReinforcements(const Army& army1Reinforcements, const Army& army2Reinforcements);
+	BattleBuilder* setReinforcements(const Army& army1Reinforcements, const Army& army2Reinforcements,
+		double  army1RoundReinforcement, double army2RoundReinforcement);
 	BattleBuilder* setArmy(const Army& army1, const Army& army2);
 };

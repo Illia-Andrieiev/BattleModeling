@@ -1,0 +1,915 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    message: |
+      The system is: Windows - 10.0.22631 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+      ‘Ў®аЄ  ­ з в  23.04.2024 19:43:55.
+      
+      Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\3.29.2\\CompilerIdC\\CompilerIdC.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+      PrepareForBuild:
+        ‘®§¤ ­ЁҐ Є в «®Ј  "Debug\\".
+        ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+        ‘®§¤ ­ЁҐ Є в «®Ј  "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        ‘®§¤ ­ЁҐ "Debug\\CompilerIdC.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+        ЋЎа йҐ­ЁҐ Є "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\3.29.2\\CompilerIdC\\CompilerIdC.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        ” ©« "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+        ЋЎа йҐ­ЁҐ Є "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\3.29.2\\CompilerIdC\\CompilerIdC.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+      
+      ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+          ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+          ЋиЁЎ®Є: 0
+      
+      Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.54
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/3.29.2/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+      ‘Ў®аЄ  ­ з в  23.04.2024 19:43:55.
+      
+      Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\3.29.2\\CompilerIdCXX\\CompilerIdCXX.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+      PrepareForBuild:
+        ‘®§¤ ­ЁҐ Є в «®Ј  "Debug\\".
+        ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+        ‘®§¤ ­ЁҐ Є в «®Ј  "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        ‘®§¤ ­ЁҐ "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+        ЋЎа йҐ­ЁҐ Є "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\3.29.2\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        ” ©« "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+        ЋЎа йҐ­ЁҐ Є "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\3.29.2\\CompilerIdCXX\\CompilerIdCXX.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+      
+      ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+          ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+          ЋиЁЎ®Є: 0
+      
+      Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.54
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/3.29.2/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:64 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-slz19z"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-slz19z"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-slz19z'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_87857.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:43:56.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-slz19z\\cmTC_87857.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_87857.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-slz19z\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_87857.dir\\Debug\\cmTC_87857.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_87857.dir\\Debug\\cmTC_87857.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_87857.dir\\Debug\\cmTC_87857.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_87857.dir\\Debug\\\\" /Fd"cmTC_87857.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_87857.dir\\Debug\\\\" /Fd"cmTC_87857.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+          CMakeCCompilerABI.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-slz19z\\Debug\\cmTC_87857.exe" /INCREMENTAL /ILK:"cmTC_87857.dir\\Debug\\cmTC_87857.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-slz19z/Debug/cmTC_87857.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-slz19z/Debug/cmTC_87857.lib" /MACHINE:X64  /machine:x64 cmTC_87857.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_87857.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-slz19z\\Debug\\cmTC_87857.exe
+        FinalizeBuildStatus:
+          ” ©« "cmTC_87857.dir\\Debug\\cmTC_87857.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+          ЋЎа йҐ­ЁҐ Є "cmTC_87857.dir\\Debug\\cmTC_87857.tlog\\cmTC_87857.lastbuildstate".
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-slz19z\\cmTC_87857.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        
+        ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 0
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.52
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:170 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:207 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    message: |
+      Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.38.33135.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:64 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6udp10"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6udp10"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6udp10'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9a105.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:43:57.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6udp10\\cmTC_9a105.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_9a105.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6udp10\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_9a105.dir\\Debug\\cmTC_9a105.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_9a105.dir\\Debug\\cmTC_9a105.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_9a105.dir\\Debug\\cmTC_9a105.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_9a105.dir\\Debug\\\\" /Fd"cmTC_9a105.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_9a105.dir\\Debug\\\\" /Fd"cmTC_9a105.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6udp10\\Debug\\cmTC_9a105.exe" /INCREMENTAL /ILK:"cmTC_9a105.dir\\Debug\\cmTC_9a105.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6udp10/Debug/cmTC_9a105.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6udp10/Debug/cmTC_9a105.lib" /MACHINE:X64  /machine:x64 cmTC_9a105.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_9a105.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6udp10\\Debug\\cmTC_9a105.exe
+        FinalizeBuildStatus:
+          ” ©« "cmTC_9a105.dir\\Debug\\cmTC_9a105.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+          ЋЎа йҐ­ЁҐ Є "cmTC_9a105.dir\\Debug\\cmTC_9a105.tlog\\cmTC_9a105.lastbuildstate".
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6udp10\\cmTC_9a105.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        
+        ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 0
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.53
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:170 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:207 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (PROJECT)"
+    message: |
+      Running the CXX compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.38.33135.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:356 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file sys/types.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-v5kdns"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-v5kdns"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-v5kdns'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_216ee.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:43:58.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-v5kdns\\cmTC_216ee.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_216ee.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-v5kdns\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_216ee.dir\\Debug\\cmTC_216ee.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_216ee.dir\\Debug\\cmTC_216ee.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_216ee.dir\\Debug\\cmTC_216ee.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_216ee.dir\\Debug\\\\" /Fd"cmTC_216ee.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-v5kdns\\HAVE_SYS_TYPES_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_216ee.dir\\Debug\\\\" /Fd"cmTC_216ee.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-v5kdns\\HAVE_SYS_TYPES_H.c"
+          HAVE_SYS_TYPES_H.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-v5kdns\\Debug\\cmTC_216ee.exe" /INCREMENTAL /ILK:"cmTC_216ee.dir\\Debug\\cmTC_216ee.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-v5kdns/Debug/cmTC_216ee.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-v5kdns/Debug/cmTC_216ee.lib" /MACHINE:X64  /machine:x64 cmTC_216ee.dir\\Debug\\HAVE_SYS_TYPES_H.obj
+          cmTC_216ee.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-v5kdns\\Debug\\cmTC_216ee.exe
+        FinalizeBuildStatus:
+          ” ©« "cmTC_216ee.dir\\Debug\\cmTC_216ee.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+          ЋЎа йҐ­ЁҐ Є "cmTC_216ee.dir\\Debug\\cmTC_216ee.tlog\\cmTC_216ee.lastbuildstate".
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-v5kdns\\cmTC_216ee.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        
+        ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 0
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.54
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:357 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file unistd.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-e4r822"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-e4r822"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_UNISTD_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-e4r822'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_94e77.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:43:59.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\cmTC_94e77.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_94e77.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_94e77.dir\\Debug\\cmTC_94e77.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_94e77.dir\\Debug\\cmTC_94e77.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_94e77.dir\\Debug\\cmTC_94e77.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_94e77.dir\\Debug\\\\" /Fd"cmTC_94e77.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\HAVE_UNISTD_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_94e77.dir\\Debug\\\\" /Fd"cmTC_94e77.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\HAVE_UNISTD_H.c"
+          HAVE_UNISTD_H.c
+        D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\HAVE_UNISTD_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: unistd.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\cmTC_94e77.vcxproj]
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\cmTC_94e77.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо) б ®иЁЎЄ®©.
+        
+        ЋиЁЎЄ  бЎ®аЄЁ.
+        
+        "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\cmTC_94e77.vcxproj" (жҐ«Ґў®© ®ЎкҐЄв Ї® г¬®«з ­Ёо) (1) ->
+        (–Ґ«Ґў®© ®ЎкҐЄв ClCompile) -> 
+          D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\HAVE_UNISTD_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: unistd.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-e4r822\\cmTC_94e77.vcxproj]
+        
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 1
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.40
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:358 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file sys/time.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-cslboa"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-cslboa"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_SYS_TIME_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-cslboa'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_261be.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:43:59.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\cmTC_261be.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_261be.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_261be.dir\\Debug\\cmTC_261be.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_261be.dir\\Debug\\cmTC_261be.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_261be.dir\\Debug\\cmTC_261be.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_261be.dir\\Debug\\\\" /Fd"cmTC_261be.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\HAVE_SYS_TIME_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_261be.dir\\Debug\\\\" /Fd"cmTC_261be.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\HAVE_SYS_TIME_H.c"
+          HAVE_SYS_TIME_H.c
+        D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\HAVE_SYS_TIME_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: sys/time.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\cmTC_261be.vcxproj]
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\cmTC_261be.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо) б ®иЁЎЄ®©.
+        
+        ЋиЁЎЄ  бЎ®аЄЁ.
+        
+        "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\cmTC_261be.vcxproj" (жҐ«Ґў®© ®ЎкҐЄв Ї® г¬®«з ­Ёо) (1) ->
+        (–Ґ«Ґў®© ®ЎкҐЄв ClCompile) -> 
+          D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\HAVE_SYS_TIME_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: sys/time.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-cslboa\\cmTC_261be.vcxproj]
+        
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 1
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.37
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:359 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file stdbool.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-3pe19z"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-3pe19z"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_STDBOOL_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-3pe19z'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0ea98.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:00.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-3pe19z\\cmTC_0ea98.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_0ea98.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-3pe19z\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_0ea98.dir\\Debug\\cmTC_0ea98.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_0ea98.dir\\Debug\\cmTC_0ea98.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_0ea98.dir\\Debug\\cmTC_0ea98.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_0ea98.dir\\Debug\\\\" /Fd"cmTC_0ea98.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-3pe19z\\HAVE_STDBOOL_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_0ea98.dir\\Debug\\\\" /Fd"cmTC_0ea98.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-3pe19z\\HAVE_STDBOOL_H.c"
+          HAVE_STDBOOL_H.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-3pe19z\\Debug\\cmTC_0ea98.exe" /INCREMENTAL /ILK:"cmTC_0ea98.dir\\Debug\\cmTC_0ea98.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-3pe19z/Debug/cmTC_0ea98.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-3pe19z/Debug/cmTC_0ea98.lib" /MACHINE:X64  /machine:x64 cmTC_0ea98.dir\\Debug\\HAVE_STDBOOL_H.obj
+          cmTC_0ea98.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-3pe19z\\Debug\\cmTC_0ea98.exe
+        FinalizeBuildStatus:
+          ” ©« "cmTC_0ea98.dir\\Debug\\cmTC_0ea98.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+          ЋЎа йҐ­ЁҐ Є "cmTC_0ea98.dir\\Debug\\cmTC_0ea98.tlog\\cmTC_0ea98.lastbuildstate".
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-3pe19z\\cmTC_0ea98.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        
+        ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 0
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.53
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:360 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file sys/param.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mhar0h"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mhar0h"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_SYS_PARAM_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mhar0h'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a48ca.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:01.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\cmTC_a48ca.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_a48ca.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_a48ca.dir\\Debug\\cmTC_a48ca.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_a48ca.dir\\Debug\\cmTC_a48ca.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_a48ca.dir\\Debug\\cmTC_a48ca.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a48ca.dir\\Debug\\\\" /Fd"cmTC_a48ca.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\HAVE_SYS_PARAM_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a48ca.dir\\Debug\\\\" /Fd"cmTC_a48ca.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\HAVE_SYS_PARAM_H.c"
+          HAVE_SYS_PARAM_H.c
+        D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\HAVE_SYS_PARAM_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: sys/param.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\cmTC_a48ca.vcxproj]
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\cmTC_a48ca.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо) б ®иЁЎЄ®©.
+        
+        ЋиЁЎЄ  бЎ®аЄЁ.
+        
+        "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\cmTC_a48ca.vcxproj" (жҐ«Ґў®© ®ЎкҐЄв Ї® г¬®«з ­Ёо) (1) ->
+        (–Ґ«Ґў®© ®ЎкҐЄв ClCompile) -> 
+          D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\HAVE_SYS_PARAM_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: sys/param.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mhar0h\\cmTC_a48ca.vcxproj]
+        
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 1
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.37
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:361 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file sys/ioctl.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-dzohde"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-dzohde"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_SYS_IOCTL_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-dzohde'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_46a96.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:01.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\cmTC_46a96.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_46a96.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_46a96.dir\\Debug\\cmTC_46a96.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_46a96.dir\\Debug\\cmTC_46a96.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_46a96.dir\\Debug\\cmTC_46a96.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_46a96.dir\\Debug\\\\" /Fd"cmTC_46a96.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\HAVE_SYS_IOCTL_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_46a96.dir\\Debug\\\\" /Fd"cmTC_46a96.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\HAVE_SYS_IOCTL_H.c"
+          HAVE_SYS_IOCTL_H.c
+        D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\HAVE_SYS_IOCTL_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: sys/ioctl.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\cmTC_46a96.vcxproj]
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\cmTC_46a96.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо) б ®иЁЎЄ®©.
+        
+        ЋиЁЎЄ  бЎ®аЄЁ.
+        
+        "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\cmTC_46a96.vcxproj" (жҐ«Ґў®© ®ЎкҐЄв Ї® г¬®«з ­Ёо) (1) ->
+        (–Ґ«Ґў®© ®ЎкҐЄв ClCompile) -> 
+          D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\HAVE_SYS_IOCTL_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: sys/ioctl.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-dzohde\\cmTC_46a96.vcxproj]
+        
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 1
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.38
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:362 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file fcntl.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mu3lzs"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mu3lzs"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_FCNTL_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mu3lzs'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_4ecef.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:02.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mu3lzs\\cmTC_4ecef.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_4ecef.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mu3lzs\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_4ecef.dir\\Debug\\cmTC_4ecef.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_4ecef.dir\\Debug\\cmTC_4ecef.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_4ecef.dir\\Debug\\cmTC_4ecef.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4ecef.dir\\Debug\\\\" /Fd"cmTC_4ecef.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mu3lzs\\HAVE_FCNTL_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4ecef.dir\\Debug\\\\" /Fd"cmTC_4ecef.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mu3lzs\\HAVE_FCNTL_H.c"
+          HAVE_FCNTL_H.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mu3lzs\\Debug\\cmTC_4ecef.exe" /INCREMENTAL /ILK:"cmTC_4ecef.dir\\Debug\\cmTC_4ecef.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mu3lzs/Debug/cmTC_4ecef.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-mu3lzs/Debug/cmTC_4ecef.lib" /MACHINE:X64  /machine:x64 cmTC_4ecef.dir\\Debug\\HAVE_FCNTL_H.obj
+          cmTC_4ecef.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mu3lzs\\Debug\\cmTC_4ecef.exe
+        FinalizeBuildStatus:
+          ” ©« "cmTC_4ecef.dir\\Debug\\cmTC_4ecef.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+          ЋЎа йҐ­ЁҐ Є "cmTC_4ecef.dir\\Debug\\cmTC_4ecef.tlog\\cmTC_4ecef.lastbuildstate".
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-mu3lzs\\cmTC_4ecef.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        
+        ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 0
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.53
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:363 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file usbhid.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6xk6se"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6xk6se"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_USBHID_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-6xk6se'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_fb07c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:02.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\cmTC_fb07c.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_fb07c.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_fb07c.dir\\Debug\\cmTC_fb07c.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_fb07c.dir\\Debug\\cmTC_fb07c.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_fb07c.dir\\Debug\\cmTC_fb07c.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fb07c.dir\\Debug\\\\" /Fd"cmTC_fb07c.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\HAVE_USBHID_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fb07c.dir\\Debug\\\\" /Fd"cmTC_fb07c.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\HAVE_USBHID_H.c"
+          HAVE_USBHID_H.c
+        D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\HAVE_USBHID_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: usbhid.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\cmTC_fb07c.vcxproj]
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\cmTC_fb07c.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо) б ®иЁЎЄ®©.
+        
+        ЋиЁЎЄ  бЎ®аЄЁ.
+        
+        "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\cmTC_fb07c.vcxproj" (жҐ«Ґў®© ®ЎкҐЄв Ї® г¬®«з ­Ёо) (1) ->
+        (–Ґ«Ґў®© ®ЎкҐЄв ClCompile) -> 
+          D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\HAVE_USBHID_H.c(2,10): error C1083: ЌҐ г¤ Ґвбп ®вЄалвм д ©« ўЄ«озҐ­ЁҐ: usbhid.h: No such file or directory, [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-6xk6se\\cmTC_fb07c.vcxproj]
+        
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 1
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.40
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:364 (CHECK_FUNCTION_EXISTS)"
+    checks:
+      - "Looking for gettimeofday"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-lr2p6e"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-lr2p6e"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_GETTIMEOFDAY"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-lr2p6e'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a8f7f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:03.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\cmTC_a8f7f.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_a8f7f.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_a8f7f.dir\\Debug\\cmTC_a8f7f.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_a8f7f.dir\\Debug\\cmTC_a8f7f.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_a8f7f.dir\\Debug\\cmTC_a8f7f.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=gettimeofday /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a8f7f.dir\\Debug\\\\" /Fd"cmTC_a8f7f.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\CheckFunctionExists.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=gettimeofday /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a8f7f.dir\\Debug\\\\" /Fd"cmTC_a8f7f.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\Debug\\cmTC_a8f7f.exe" /INCREMENTAL /ILK:"cmTC_a8f7f.dir\\Debug\\cmTC_a8f7f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-lr2p6e/Debug/cmTC_a8f7f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-lr2p6e/Debug/cmTC_a8f7f.lib" /MACHINE:X64  /machine:x64 cmTC_a8f7f.dir\\Debug\\CheckFunctionExists.obj
+        CheckFunctionExists.obj : error LNK2019: ббл«Є  ­  ­Ґа §аҐиҐ­­л© ў­Ґи­Ё© бЁ¬ў®« gettimeofday ў дг­ЄжЁЁ main. [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\cmTC_a8f7f.vcxproj]
+        D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\Debug\\cmTC_a8f7f.exe : fatal error LNK1120: ­Ґа §аҐиҐ­­ле ў­Ґи­Ёе н«Ґ¬Ґ­в®ў: 1 [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\cmTC_a8f7f.vcxproj]
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\cmTC_a8f7f.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо) б ®иЁЎЄ®©.
+        
+        ЋиЁЎЄ  бЎ®аЄЁ.
+        
+        "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\cmTC_a8f7f.vcxproj" (жҐ«Ґў®© ®ЎкҐЄв Ї® г¬®«з ­Ёо) (1) ->
+        (–Ґ«Ґў®© ®ЎкҐЄв Link) -> 
+          CheckFunctionExists.obj : error LNK2019: ббл«Є  ­  ­Ґа §аҐиҐ­­л© ў­Ґи­Ё© бЁ¬ў®« gettimeofday ў дг­ЄжЁЁ main. [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\cmTC_a8f7f.vcxproj]
+          D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\Debug\\cmTC_a8f7f.exe : fatal error LNK1120: ­Ґа §аҐиҐ­­ле ў­Ґи­Ёе н«Ґ¬Ґ­в®ў: 1 [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-lr2p6e\\cmTC_a8f7f.vcxproj]
+        
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 2
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.47
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:365 (CHECK_FUNCTION_EXISTS)"
+    checks:
+      - "Looking for XParseGeometry"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-61lm4d"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-61lm4d"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_XPARSEGEOMETRY"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-61lm4d'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e089a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:04.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\cmTC_e089a.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_e089a.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_e089a.dir\\Debug\\cmTC_e089a.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_e089a.dir\\Debug\\cmTC_e089a.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_e089a.dir\\Debug\\cmTC_e089a.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=XParseGeometry /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e089a.dir\\Debug\\\\" /Fd"cmTC_e089a.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\CheckFunctionExists.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=XParseGeometry /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e089a.dir\\Debug\\\\" /Fd"cmTC_e089a.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\Debug\\cmTC_e089a.exe" /INCREMENTAL /ILK:"cmTC_e089a.dir\\Debug\\cmTC_e089a.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-61lm4d/Debug/cmTC_e089a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-61lm4d/Debug/cmTC_e089a.lib" /MACHINE:X64  /machine:x64 cmTC_e089a.dir\\Debug\\CheckFunctionExists.obj
+        CheckFunctionExists.obj : error LNK2019: ббл«Є  ­  ­Ґа §аҐиҐ­­л© ў­Ґи­Ё© бЁ¬ў®« XParseGeometry ў дг­ЄжЁЁ main. [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\cmTC_e089a.vcxproj]
+        D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\Debug\\cmTC_e089a.exe : fatal error LNK1120: ­Ґа §аҐиҐ­­ле ў­Ґи­Ёе н«Ґ¬Ґ­в®ў: 1 [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\cmTC_e089a.vcxproj]
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\cmTC_e089a.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо) б ®иЁЎЄ®©.
+        
+        ЋиЁЎЄ  бЎ®аЄЁ.
+        
+        "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\cmTC_e089a.vcxproj" (жҐ«Ґў®© ®ЎкҐЄв Ї® г¬®«з ­Ёо) (1) ->
+        (–Ґ«Ґў®© ®ЎкҐЄв Link) -> 
+          CheckFunctionExists.obj : error LNK2019: ббл«Є  ­  ­Ґа §аҐиҐ­­л© ў­Ґи­Ё© бЁ¬ў®« XParseGeometry ў дг­ЄжЁЁ main. [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\cmTC_e089a.vcxproj]
+          D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\Debug\\cmTC_e089a.exe : fatal error LNK1120: ­Ґа §аҐиҐ­­ле ў­Ґи­Ёе н«Ґ¬Ґ­в®ў: 1 [D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-61lm4d\\cmTC_e089a.vcxproj]
+        
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 2
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.48
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:373 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file stdint.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-ys3502"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-ys3502"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-ys3502'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c3d79.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:04.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-ys3502\\cmTC_c3d79.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_c3d79.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-ys3502\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_c3d79.dir\\Debug\\cmTC_c3d79.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_c3d79.dir\\Debug\\cmTC_c3d79.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_c3d79.dir\\Debug\\cmTC_c3d79.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c3d79.dir\\Debug\\\\" /Fd"cmTC_c3d79.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-ys3502\\HAVE_STDINT_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c3d79.dir\\Debug\\\\" /Fd"cmTC_c3d79.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-ys3502\\HAVE_STDINT_H.c"
+          HAVE_STDINT_H.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-ys3502\\Debug\\cmTC_c3d79.exe" /INCREMENTAL /ILK:"cmTC_c3d79.dir\\Debug\\cmTC_c3d79.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-ys3502/Debug/cmTC_c3d79.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-ys3502/Debug/cmTC_c3d79.lib" /MACHINE:X64  /machine:x64 cmTC_c3d79.dir\\Debug\\HAVE_STDINT_H.obj
+          cmTC_c3d79.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-ys3502\\Debug\\cmTC_c3d79.exe
+        FinalizeBuildStatus:
+          ” ©« "cmTC_c3d79.dir\\Debug\\cmTC_c3d79.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+          ЋЎа йҐ­ЁҐ Є "cmTC_c3d79.dir\\Debug\\cmTC_c3d79.tlog\\cmTC_c3d79.lastbuildstate".
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-ys3502\\cmTC_c3d79.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        
+        ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 0
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.52
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:374 (CHECK_INCLUDE_FILES)"
+    checks:
+      - "Looking for include file inttypes.h"
+    directories:
+      source: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-tv10bp"
+      binary: "D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-tv10bp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_INTTYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-tv10bp'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_237ab.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        ‚ҐабЁп MSBuild 17.8.5+b5265ef37 ¤«п .NET Framework
+        ‘Ў®аЄ  ­ з в  23.04.2024 19:44:05.
+        
+        Џа®ҐЄв "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-tv10bp\\cmTC_237ab.vcxproj" ў г§«Ґ 1 (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        PrepareForBuild:
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_237ab.dir\\Debug\\".
+          ‘вагЄвгаЁа®ў ­­л© ўлў®¤ ўЄ«озҐ­. ”®а¬ вЁа®ў ­ЁҐ ¤Ё Ј­®бвЁЄЁ Є®¬ЇЁ«пв®а  Ўг¤Ґв ®ва ¦ вм ЁҐа аеЁо ®иЁЎ®Є. Џ®¤а®Ў­ҐҐ б¬. https://aka.ms/cpp/structured-output.
+          ‘®§¤ ­ЁҐ Є в «®Ј  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-tv10bp\\Debug\\".
+          ‘®§¤ ­ЁҐ Є в «®Ј  "cmTC_237ab.dir\\Debug\\cmTC_237ab.tlog\\".
+        InitializeBuildStatus:
+          ‘®§¤ ­ЁҐ "cmTC_237ab.dir\\Debug\\cmTC_237ab.tlog\\unsuccessfulbuild", в Є Є Є Ўл«® § ¤ ­® "AlwaysCreate".
+          ЋЎа йҐ­ЁҐ Є "cmTC_237ab.dir\\Debug\\cmTC_237ab.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_237ab.dir\\Debug\\\\" /Fd"cmTC_237ab.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-tv10bp\\HAVE_INTTYPES_H.c"
+          ЋЇвЁ¬Ё§ЁагойЁ© Є®¬ЇЁ«пв®а Microsoft (R) C/C++ ўҐабЁЁ 19.38.33135 ¤«п x64
+          (C) Љ®аЇ®а жЁп Њ ©Єа®б®дв (Microsoft Corporation).  ‚бҐ Їа ў  § йЁйҐ­л.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_237ab.dir\\Debug\\\\" /Fd"cmTC_237ab.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-tv10bp\\HAVE_INTTYPES_H.c"
+          HAVE_INTTYPES_H.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-tv10bp\\Debug\\cmTC_237ab.exe" /INCREMENTAL /ILK:"cmTC_237ab.dir\\Debug\\cmTC_237ab.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-tv10bp/Debug/cmTC_237ab.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/CMakeFiles/CMakeScratch/TryCompile-tv10bp/Debug/cmTC_237ab.lib" /MACHINE:X64  /machine:x64 cmTC_237ab.dir\\Debug\\HAVE_INTTYPES_H.obj
+          cmTC_237ab.vcxproj -> D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-tv10bp\\Debug\\cmTC_237ab.exe
+        FinalizeBuildStatus:
+          ” ©« "cmTC_237ab.dir\\Debug\\cmTC_237ab.tlog\\unsuccessfulbuild" г¤ «пҐвбп.
+          ЋЎа йҐ­ЁҐ Є "cmTC_237ab.dir\\Debug\\cmTC_237ab.tlog\\cmTC_237ab.lastbuildstate".
+        ‘Ў®аЄ  Їа®ҐЄв  "D:\\Programming\\C++\\Curse_2\\BattleModeling\\BattleModeling\\libs\\builded_freeglut-3.2.2\\CMakeFiles\\CMakeScratch\\TryCompile-tv10bp\\cmTC_237ab.vcxproj" § ўҐаиҐ­  (жҐ«ҐўлҐ ®ЎкҐЄвл Ї® г¬®«з ­Ёо).
+        
+        ‘Ў®аЄ  гбЇҐи­® § ўҐаиҐ­ .
+            ЏаҐ¤гЇаҐ¦¤Ґ­Ё©: 0
+            ЋиЁЎ®Є: 0
+        
+        Џа®и«® ўаҐ¬Ґ­Ё 00:00:00.53
+        
+      exitCode: 0
+...

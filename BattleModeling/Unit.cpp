@@ -279,6 +279,9 @@ bool Unit::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<u
 	}
 	return true;
 }
+unitHelpers::unitTypes Unit::getType() const {
+	return type;
+}
 /*
 	Builder
 */

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Programming\C++\Curse_2\BattleModeling\BattleModeling\libs\freeglut-3.2.2\progs\demos\Fractals_random\fractals_random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Programming\C++\Curse_2\BattleModeling\BattleModeling\libs\freeglut-3.2.2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{808C1E7B-A751-3076-B7AB-0202A73173CD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -4,6 +4,7 @@
 #include<omp.h>
 #include<fstream>
 #include"FileManager.h"
+//#include "libs\easy_plot_cpp-master\include\easy_plot.hpp"
 using namespace std;
 void pr(int num) {
 	for (int i = 0; i < 100; i++) {
@@ -35,7 +36,7 @@ public:
 	}
 };
 
-int main() {
+int main(int argc, char* argv[]) {
 	MoralUnitBuilder build;
 	Army army1;
 	Army army2;
@@ -96,96 +97,55 @@ int main() {
 	Unit patr = build.getResult();
 	build.reset();
 	////*********************************************
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2,2);
-	army1.addUnit(solider3, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider3, 1);
-	army1.addUnit(solider2, 2);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(solider3, 3);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider3, 2);
-	army1.addUnit(solider2, 2);
+	Army army1Rein, army2Rein;
+	army1Rein.addUnit(solider, 2);
+	army2Rein.addUnit(solider, 2);
+	army1Rein.addUnit(avi, 2);
+	army2Rein.addUnit(avi, 2);
+	army1Rein.addUnit(tank, 10);
+	army2Rein.addUnit(tank, 3);
+	army1Rein.addUnit(art, 2);
+	army2Rein.addUnit(art, 2);
+	army1Rein.addUnit(patr, 1);
+	army2Rein.addUnit(patr, 1);
 	army1.addUnit(solider, 2);
-	army1.addUnit(solider2, 5);
-	army1.addUnit(art, 1);
+	army2.addUnit(solider, 2);
+	army1.addUnit(avi, 2);
+	army2.addUnit(avi, 2);
+	army1.addUnit(tank, 3);
+	army2.addUnit(tank, 3);
+	army1.addUnit(art, 2);	
+	army2.addUnit(art, 2);
 	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(solider3, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider3, 1);
-	army1.addUnit(solider2, 2);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(solider3, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider3, 1);
-	army1.addUnit(solider2, 2);
-	army1.addUnit(solider, 1);
-	army1.addUnit(solider2, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-	army1.addUnit(art, 1);
-	army1.addUnit(patr, 1);
-
-	//army1.addUnit(solider, 1);
-	//army2.addUnit(solider, 60);
-	//army1.addUnit(avi, 10);
-	//army2.addUnit(avi, 6);
-	//army1.addUnit(tank, 15);
-	//army2.addUnit(tank, 9);
-	//army1.addUnit(art, 11);	
-	//army2.addUnit(art, 12);
-	//army1.addUnit(patr, 5);
-	//army2.addUnit(patr,6);
-	//BattleBuilder builder;
-	//BattleModeling battle = builder.setArmy(army1, army2)->getResult();
+	army2.addUnit(patr,1);
+	BattleBuilder builder;
+	BattleModeling battle = builder.setArmy(army1, army2)->setReinforcements(army1Rein,army2,50,50)->getResult();
+	battle();
 	//army1.countPower();
 	//army1.countViability();
 	//army1.sort();
-	cout << army1.toString()<<endl<<endl<<endl;
-	f.writeArmy(army1,"test");
-	Army fileArmy;
-	fileArmy = f.readArmy("test");
-	cout << fileArmy.toString() << endl;
+	//cout << army1.toString()<<endl<<endl<<endl;
+
+
+//ep::init(&argc, argv);
+//
+//ep::WindowSpec image_wstyle;
+//image_wstyle.is_grid = true;
+//image_wstyle.height = 320;
+//image_wstyle.width = 320;
+//float image_data[32][32] = {};
+//size_t image_ind = 0;
+//for (size_t x = 0; x < 32; ++x) {
+//	for (size_t y = 0; y < 32; ++y, ++image_ind) {
+//		image_data[x][y] = 1024 - std::sqrt((x - 18) * (x - 18) + (y - 18) * (y - 18));
+//	}
+//}
+//
+//image_wstyle.is_color_heatmap = true;
+//ep::draw_heatmap("image_heatmap", image_wstyle, &image_data[0][0], 32, 32);
+//
+//while (true) {
+//	std::this_thread::yield();
+//}
 	return 0;
 }
