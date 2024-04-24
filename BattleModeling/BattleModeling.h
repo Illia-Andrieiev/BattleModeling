@@ -5,23 +5,23 @@
 #include"Army.h"
 #include<memory>
 struct Supply {
-	double army1LapSupplies = 0;
-	double army2LapSupplies = 0;
-	int army1SupplyLapsAmount = 0;
-	int army2SupplyLapsAmount = 0;
+	double army1RoundSupplies = 0; ///< Round supplies for army1 
+	double army2RoundSupplies = 0; ///< Round supplies for army2 
+	int army1SupplyRoundAmount = 0; ///< How many rounds supplies will add for army1
+	int army2SupplyRoundAmount = 0; ///< How many rounds supplies will add for army2
 };
-
+/// Class that represents battle modeling
 class BattleModeling
 {
 	friend class BattleBuilder;	
 private:
-	Army army1;
-	Army army2;
-	Army army1Reinforcements;
-	Army army2Reinforcements;
-	double army1RoundReinforcement;
-	double army2RoundReinforcement;
-	Supply roundSupplies;
+	Army army1; ///< Army 1
+	Army army2; ///< Army 2
+	Army army1Reinforcements; ///< Reinforcements for army 1
+	Army army2Reinforcements; ///< Reinforcements for army 2
+	double army1RoundReinforcement; ///< Persents of reinforcements that will add to army 1 per round
+	double army2RoundReinforcement; ///< Persents of reinforcements that will add to army 1 per round
+	Supply roundSupplies; ///< Round supplies for armies
 	BattleModeling();
 	void battleRound();
 	std::vector<Circumstance> circumstances;
@@ -35,7 +35,7 @@ public:
 
 	void operator()();
 };
-
+/// Battle builder
 class BattleBuilder {
 	BattleModeling battle;
 public:

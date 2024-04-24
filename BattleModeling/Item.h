@@ -10,11 +10,11 @@ class Item
 {
 	friend class FileManager;
 private:
-	char name[256]; /// Item name
-	std::map<unitHelpers::unitTypes, double> powerCoefChanges; /// Multiply unit`s powerCoef. Parameters cannot be < 0
-	double changeViability; /// Add to unit`s viability. Can be < 0
-	double changeBasePower; /// Add to unit`s base power. Can be < 0
-	bool isApplied;
+	char name[256]; ///< Item name
+	std::map<unitHelpers::unitTypes, double> powerCoefChanges; ///< Multiply unit`s powerCoef. Parameters cannot be < 0
+	double changeViability; ///< Add to unit`s viability. Can be < 0
+	double changeBasePower; ///< Add to unit`s base power. Can be < 0
+	bool isApplied; ///< Is item applied on unit
 	bool isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2) const;
 public:
 	void apply();

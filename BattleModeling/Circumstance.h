@@ -8,8 +8,8 @@
 class Circumstance
 {
 	friend class FileManager;
-	char name[256]; /// Circumstance name
-	std::map<unitHelpers::unitTypes, double> powerChanges;/// multiply to unit`s power. Parameters cannot be < 0
+	char name[256]; ///< Circumstance name
+	std::map<unitHelpers::unitTypes, double> powerChanges;///< multiply to unit`s power. Parameters cannot be < 0
 public:
 	Circumstance(std::map<unitHelpers::unitTypes, double>& powerChanges, std::string name);
 	std::string getName() const;

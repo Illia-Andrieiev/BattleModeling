@@ -121,6 +121,8 @@ int main(int argc, char* argv[]) {
 	BattleBuilder builder;
 	BattleModeling battle = builder.setArmy(army1, army2)->setReinforcements(army1Rein,army2,50,50)->getResult();
 	battle();
+	battle();
+	
 	//army1.countPower();
 	//army1.countViability();
 	//army1.sort();

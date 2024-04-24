@@ -1,12 +1,13 @@
 #pragma once
 #include "Unit.h"
+///Unit with morality
 class MoralUnit :public Unit
 {
 	friend class MoralUnitBuilder;
 	friend class FileManager;
-	double morality;
-	double rateOfMoralityChanges;
-	const int TYPE_ID = 1;
+	double morality; ///< Units morality
+	double rateOfMoralityChanges; ///< Represent rate of morality droping
+	const int TYPE_ID = 1; ///< TYPE ID
 	void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) override;
 	double determinePower(double minPower, double maxPower) override;
 public:
@@ -22,7 +23,7 @@ public:
 	MoralUnit* clone() override;
 	MoralUnit* create() override;
 };
-
+///Concrete MoralUnit builder
 class MoralUnitBuilder :public BaseUnitBuilder {
 private:
 	MoralUnit unit;

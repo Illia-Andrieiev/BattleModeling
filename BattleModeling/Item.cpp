@@ -1,4 +1,6 @@
 #include "Item.h"
+#include <stdexcept>
+///Constructor
 Item::Item(std::map<unitHelpers::unitTypes, double>& powerChanges, const std::string& name, double changeViability, double changeBasePower) {
 	for (auto& param : powerChanges) {
 		if (param.second < 0)
@@ -15,18 +17,23 @@ Item::Item(std::map<unitHelpers::unitTypes, double>& powerChanges, const std::st
 std::map<unitHelpers::unitTypes, double> Item::getPowerChanges() const{
 	return powerCoefChanges;
 }
+/// Set isApplied true
 void Item::apply() {
 	isApplied = true;
 }
+/// Get base power changes 
 double Item::getBasePowerChanges() const {
 	return changeBasePower;
 }
+/// Get viability changes 
 double Item::getViabilityChanges() const {
 	return changeViability;
 }
+/// Return isApplied
 bool Item::isApply() const {
 	return isApplied;
 }
+/// Return string interpretation of Item 
 std::string Item::toString() {
 	std::string res = "powerCoefChanges: ";
 	for (auto& param : powerCoefChanges) {
@@ -37,11 +44,13 @@ std::string Item::toString() {
 		+ " is applied: " + std::to_string(isApplied);
 	return res;
 }
+/// Return is this item equal to other
 bool Item::isEqual(const Item& other) const{
 	return this->changeBasePower == other.changeBasePower && this->changeViability == other.changeViability &&
 		this->isApplied == other.isApplied && std::string(this->name) == std::string(other.name) &&
 		isMapsEqual(this->powerCoefChanges, other.powerCoefChanges);
 }
+/// Is two maps equal
 bool Item::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2) const{
 	bool res = true;
 	for (auto& pair : map1) {
@@ -50,9 +59,14 @@ bool Item::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<u
 			return false;
 	}
 	for (auto& pair : map2) {
-		res = map1.at(pair.first) == map2.at(pair.first);
-		if (!res)
+		try {
+			res = map1.at(pair.first) == map2.at(pair.first);
+			if (!res)
+				return false;
+		}
+		catch (const std::out_of_range& ) {
 			return false;
+		}
 	}
 	return true;
 }

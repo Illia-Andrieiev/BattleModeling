@@ -1,12 +1,15 @@
 #include "MoralUnit.h"
 #include <random>
+///Constructor
 MoralUnit::MoralUnit() {
 	this->morality = 100;
 	this->rateOfMoralityChanges = 1;
 }
+/// Return units TYPE ID
 int MoralUnit::getTypeID() {
 	return TYPE_ID;
 }
+/// Return units morality
 double MoralUnit::getMorality() const {
 	return morality;
 }
@@ -30,7 +33,7 @@ MoralUnit& MoralUnit::operator = (const MoralUnit& unit) {
 	this->priorityTarget = unit.priorityTarget;
 	return *this;
 }
-
+/// Set morality
 void MoralUnit::setMorality(double morality) {
 	if (morality < 0)
 		morality = 0;
@@ -41,16 +44,28 @@ void MoralUnit::setMorality(double morality) {
 /// Decrease viability on damage points. If viability <= 0 set alive = false. 
 /*!
 *  Decrease damage on viability points. Set new morailty as old_morality * coef, where 
-*  coef = new_viabiliy/old_viability. 0.5 <= coef < 1.
+*  coef = new_viabiliy/old_viability. 0.5 <= coef < 1. With 90% chanse armor takes damage
 */
 void MoralUnit::takeDamage(double& damage) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(0, 9);
+	if (distr(gen) != 9) {  ///< with 90% chanse armor take damage 
+		this->currentArmor -= damage;
+		if (currentArmor <= 0) {
+			damage = -currentArmor;
+			currentArmor = 0;
+		}
+		else
+			damage = 0;
+	}
 	this->viability -= damage;
 	if (viability <= 0) {
 		alive = false;
 		damage = -viability;
 		viability = 0;
 	}
-	else {
+	else { ///< If unit still alive, reduse morality 
 		double coef = (this->viability / (this->viability + damage));
 		coef < 0.5 ? coef = 0.5 : coef = coef;
 		this->morality = this->morality * coef;
@@ -102,28 +117,31 @@ double MoralUnit::determinePower(double minPower, double maxPower) {
 	std::normal_distribution<> distr(minPower, maxPower);
 	return distr(gen);
 }
+/// Attack fortification an foe`s units
 void MoralUnit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
-	attackFortification(fortification, damage);
-	if (posFirstAlive == -1 || units.size() == 0)
+	attackFortification(fortification, damage);///< At first attack fortification 
+	if (posFirstAlive == -1 || units.size() == 0) ///< If all unnits dead, return;
 		return;
-	while (damage > 0 && posFirstAlive != -1) {
-		int pos = chooseTargetNomer(units, posFirstAlive);
-		if (pos == -1)
+	while (damage > 0 && posFirstAlive != -1) { ///< While damage >0 and exists alive units in vector
+		int pos = chooseTargetNomer(units, posFirstAlive); ///< Choose unit to attack
+		if (pos == -1) ///< If units do not choosed, return
 			return;
-		units[pos]->takeDamage(damage);
+		units[pos]->takeDamage(damage); ///< attack unit
 		if (!units[pos]->isAlive()) {
-			std::swap(units[pos], units[posFirstAlive]);
-			posFirstAlive++;
-			if (posFirstAlive == units.size()) {
+			std::swap(units[pos], units[posFirstAlive]); ///< If unit dead, send him on vector`s start
+			posFirstAlive++; ///< Increase position of first alive
+			if (posFirstAlive == units.size()) { ///< if position of first alive == vector`s size, set pos = -1
 				posFirstAlive = -1;
 			}
-			setMorality(this->morality + 5);
+			setMorality(this->morality + 5); ///< increase units morality
 		}
 	}
 }
+/// Return string representation of MoralUnit
 std::string MoralUnit::toString() {
 	return Unit::toString() + " morality: " + std::to_string(morality);
 }
+/// Return exact copy of this unit
 MoralUnit* MoralUnit::clone() {
 	MoralUnit* newUnit = new MoralUnit();
 	newUnit->cycling = this->cycling;
@@ -144,12 +162,14 @@ MoralUnit* MoralUnit::clone() {
 	newUnit->currentArmor = this->currentArmor;
 	return newUnit;
 }
+/// Return default MoralUnit, but with same type and priority target wis this
 MoralUnit* MoralUnit::create() {
 	MoralUnit* res = new MoralUnit();
 	res->type = this->type;
 	res->priorityTarget = this->priorityTarget;
 	return res;
 }
+/// Is this unit equal to another
 bool MoralUnit::isEqual(Unit* unit) {
 	MoralUnit* unit1 = dynamic_cast<MoralUnit*>(unit);
 	if (unit1 == nullptr || items.size() != unit1->items.size() || unit1->getTypeID() != TYPE_ID) {

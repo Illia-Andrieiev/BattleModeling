@@ -2,6 +2,7 @@
 #include"MoralUnit.h"
 #include<fstream>
 #include"Army.h"
+/// Class for write/read objects in/from binary files
 class FileManager
 {
 	void writeMap(const std::map<unitHelpers::unitTypes, double>& map, std::fstream& stream);
