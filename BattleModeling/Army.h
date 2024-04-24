@@ -8,6 +8,7 @@ class Army
 	friend class Unit;
 	friend class BattleModeling;
 	friend class FileManager;
+	friend class AttackArmy;
 	std::vector<std::vector<Unit*>> units;/// All army units. Each subVector represent each unit type  
 	std::map<unitHelpers::unitTypes, int> unitTypesPositions;/// Positions of unit`s types in unit vector
 	std::mutex mt;

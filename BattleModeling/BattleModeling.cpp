@@ -1,7 +1,10 @@
 #include "BattleModeling.h"
 #include <thread>
 #include<random>
-BattleModeling::BattleModeling() {}
+BattleModeling::BattleModeling() {
+	army1RoundReinforcement = 100;
+	army2RoundReinforcement = 100;
+}
 Supply BattleModeling::getSupplies() const{
 	return roundSupplies;
 }
@@ -68,7 +71,7 @@ Unit* BattleModeling::chooseRandomUnit(Army& army, unitHelpers::unitTypes type) 
 			return nullptr;
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<> distr(army.positionOfFirstAlive[posType], army.units[posType].size()-1);
+		std::uniform_int_distribution<> distr(army.positionOfFirstAlive[posType], (int)army.units[posType].size()-1);
 		int pos = distr(gen);
 		Unit* resUnit = army.units[posType][pos]->clone();
 		std::swap(army.units[posType][pos], army.units[posType][army.positionOfFirstAlive[posType]]);
@@ -78,7 +81,7 @@ Unit* BattleModeling::chooseRandomUnit(Army& army, unitHelpers::unitTypes type) 
 		}
 		return resUnit;
 	}
-	catch (const std::out_of_range& e) {
+	catch (const std::out_of_range&) {
 		return nullptr;
 	}
 }
@@ -87,7 +90,7 @@ void BattleModeling::addReinforcement() {
 		return;
 	}
 	for (int i = 0; i < army1Reinforcements.units.size(); i++) {
-		int amountReinf = army1Reinforcements.units[i].size() * army1RoundReinforcement/100;
+		int amountReinf = (int)(army1Reinforcements.units[i].size() * army1RoundReinforcement/100);
 		while (amountReinf > 0) {
 			--amountReinf;
 			Unit* reinfUnit = chooseRandomUnit(army1Reinforcements, army1Reinforcements.units[i][0]->getType());
@@ -98,7 +101,7 @@ void BattleModeling::addReinforcement() {
 		}
 	}
 	for (int i = 0; i < army2Reinforcements.units.size(); i++) {
-		int amountReinf = army2Reinforcements.units[i].size() * army2RoundReinforcement / 100;
+		int amountReinf = (int)(army2Reinforcements.units[i].size() * army2RoundReinforcement / 100);
 		while (amountReinf > 0) {
 			--amountReinf;
 			Unit* reinfUnit = chooseRandomUnit(army2Reinforcements, army2Reinforcements.units[i][0]->getType());

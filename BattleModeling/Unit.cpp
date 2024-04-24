@@ -1,17 +1,86 @@
 #include "Unit.h"
 #include<random>
+AttackArmy::AttackArmy(double damage) {
+	this->damage = damage;
+}
+
+void AttackArmy::attackFortification(Unit& fortification, double& damage) {
+	if (fortification.isAlive()) {
+		double dam = damage / 2;
+		fortification.takeDamage(dam);
+		damage = damage / 2 + dam;
+	}
+}
+int AttackArmy::chooseTargetNomer(std::vector<Unit*>& units, int firstAlive) {
+	if (firstAlive == -1)
+		return -1;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(firstAlive, (int)units.size() - 1);
+	for (int i = 0; i < 120; i++) {
+		int pos = distr(gen);
+		if (units[pos]->getCycling().isActive)
+			return pos;
+	}
+	return -1;
+}
+unitHelpers::Cycling Unit::getCycling() const {
+	return cycling;
+}
+void AttackArmy::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
+	attackFortification(fortification, damage);
+	if (posFirstAlive == -1 || units.size() == 0)
+		return;
+	while (damage > 0 && posFirstAlive != -1) {
+		int pos = chooseTargetNomer(units, posFirstAlive);
+		if (pos == -1)
+			return;
+		units[pos]->takeDamage(damage);
+		if (!units[pos]->isAlive()) {
+			std::swap(units[pos], units[posFirstAlive]);
+			posFirstAlive++;
+			if (posFirstAlive == units.size()) {
+				posFirstAlive = -1;
+			}
+		}
+	}
+}
+/// Choose type of unit to attack.
+/*!
+* Use uniform_real_distribution. Weight of types to attack defines as power*unit`sTypeCoef
+*/
+unitHelpers::unitTypes AttackArmy::chooseTarget(Army& army) const {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(0, (int)army.units.size() - 1);
+	for (int i = 0; i < 100; i++) {
+		int param = distr(gen);
+		if (army.positionOfFirstAlive[army.unitTypesPositions[static_cast<unitHelpers::unitTypes>(param)]] != -1)
+			return static_cast<unitHelpers::unitTypes>(param);
+	}
+	return static_cast<unitHelpers::unitTypes>(0);
+}
+void AttackArmy::attackArmy(Army& army, double& supplies) {
+	if (supplies <= 0)
+		return;
+	supplies -= damage * 0.1;
+	supplies = supplies < 0 ? 0 : supplies;
+	unitHelpers::unitTypes type = chooseTarget(army);
+	attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);
+}
+
 /// Return is unit alive
 bool Unit::isAlive() const{
 	return alive;
 }
 /// Constructor
-Unit::Unit() {
+Unit::Unit() :AttackArmy(0) {
 	type = static_cast<unitHelpers::unitTypes>(0);
 	priorityTarget = static_cast<unitHelpers::unitTypes>(0);
 	this->minPower = 0;
 	this->maxPower = 0;
 	std::string name = "default";
-	for (int i = 0; i<name.size() && i < 256; i++)
+	for (int i = 0; i < name.size() && i < 256; i++)
 		this->name[i] = name[i];
 	this->viability = 0;
 	this->alive = true;
@@ -163,59 +232,8 @@ void Unit::applyItems() {
 		}
 	}
 }
-/// Choose type of unit to attack.
-/*!
-* Use uniform_real_distribution. Weight of types to attack defines as power*unit`sTypeCoef
-*/
-unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distr(0, (int)army.units.size()-1);
-	for (int i = 0; i < 100; i++) {
-		int param = distr(gen);
-		if (army.positionOfFirstAlive[army.unitTypesPositions[static_cast<unitHelpers::unitTypes>(param)]] != -1)
-			return static_cast<unitHelpers::unitTypes>(param);
-	}
-	return static_cast<unitHelpers::unitTypes>(0);
-}
-void Unit::attackFortification(Unit& fortification, double& damage) {
-	if (fortification.isAlive()) {
-		double dam = damage / 2;
-		fortification.takeDamage(dam);
-		damage = damage / 2 + dam;
-	}
-}
-int Unit::chooseTargetNomer(std::vector<Unit*>& units, int firstAlive) {
-	if (firstAlive == -1)
-		return -1;
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distr(firstAlive, (int)units.size() - 1);
-	for (int i = 0; i < 120; i++) {
-		int pos = distr(gen);
-		if (units[pos]->cycling.isActive)
-			return pos;
-	}
-	return -1;
-}
-void Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
-	attackFortification(fortification, damage);
-	if (posFirstAlive == -1 || units.size() == 0)
-		return;
-	while (damage > 0 && posFirstAlive != -1) {
-		int pos = chooseTargetNomer(units, posFirstAlive);
-		if (pos == -1)
-			return;
-		units[pos]->takeDamage(damage);
-		if (!units[pos]->isAlive()) {
-			std::swap(units[pos], units[posFirstAlive]);
-			posFirstAlive++;
-			if (posFirstAlive == units.size()) {
-				posFirstAlive = -1;
-			}
-		}
-	}
-}
+
+
 double  Unit::determinePower(double minPower, double maxPower) {
 	std::random_device rd;
 	std::mt19937 gen(rd());

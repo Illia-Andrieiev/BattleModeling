@@ -5,9 +5,23 @@
 #include"Item.h"
 #include"Clonable.h"
 #include"Army.h"
+class Unit;
+class Army;
+class AttackArmy {
+private:
+	double damage;
+protected:
+	AttackArmy(double damage);
+	virtual int chooseTargetNomer(std::vector<Unit*>& units, int firstAlive);
+	virtual void attackFortification(Unit& fortification, double& damage);
+	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
+	virtual unitHelpers::unitTypes chooseTarget(Army& army) const;
+public:
+	virtual void attackArmy(Army& army, double& supplies);
+};
 
 class UnitBuilder;
-class Unit:public Cloneable<typename Unit*>, public Prototype<typename Unit*>
+class Unit :public Cloneable<typename Unit*>, public Prototype<typename Unit*>, public AttackArmy
 {
 	friend class Army;
 	friend class UnitBuilder;
@@ -29,10 +43,6 @@ protected:
 	std::map<unitHelpers::unitTypes, double> powerCoef; /// Multiply on default damage to another unit`s types 
 	unitHelpers::unitTypes type; /// Unit`s type
 	unitHelpers::unitTypes priorityTarget; /// Preferable Units type to attack 
-	unitHelpers::unitTypes chooseTarget(Army& army) const;
-	int chooseTargetNomer(std::vector<Unit*>& units, int firstAlive);
-	void attackFortification(Unit& fortification, double& damage);
-	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	std::string boolToStr(bool flag);
 	virtual void renovateArmor(double& supplies);
 	virtual double determinePower(double minPower, double maxPower);
@@ -40,7 +50,7 @@ protected:
 public:
 	virtual int getTypeID();
 	Unit();
-	Unit& operator = (const Unit& unit);
+	Unit& operator =(const Unit& unit);
 	virtual bool isEqual(Unit* unit);
 	bool isAlive() const;
 	void applyItems();
@@ -55,11 +65,11 @@ public:
 	bool getIsActive() const;
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
 	virtual void updateCycle();
-	virtual void attackArmy(Army& army, double& supplies);
+	void attackArmy(Army& army, double& supplies) override;
 	Unit* clone() override;
 	Unit* create() override;
 	unitHelpers::unitTypes getType() const;
-
+	unitHelpers::Cycling getCycling() const;
 };
 class BaseUnitBuilder {
 public:
