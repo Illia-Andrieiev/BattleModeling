@@ -30,7 +30,7 @@ private:
 public:
 	MoralUnitBuilder();
 	virtual void reset();
-	virtual MoralUnit& getResult();
+	virtual MoralUnit getResult();
 	virtual MoralUnitBuilder* setName(const std::string& name) override;
 	virtual MoralUnitBuilder* addItem(const Item& item) override;
 	virtual MoralUnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability) override;

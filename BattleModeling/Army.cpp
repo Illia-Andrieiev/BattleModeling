@@ -39,7 +39,13 @@ Army::~Army() {
 Army& Army::operator =(const Army& army) {
 	if (this == &army)
 		return *this;
-
+	for (auto& u : units) {
+		for (auto& uun : u)
+			delete uun;
+	}
+	units.clear();
+	unitTypesPositions.clear();
+	positionOfFirstAlive.clear();
 	for (int i = 0; i < army.units.size(); i++) {
 		for (int j = 0; j < army.units[i].size(); j++) {
 			addUnit(*(army.units[i][j]->clone()), 1);

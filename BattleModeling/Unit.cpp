@@ -80,7 +80,100 @@ void AttackArmy::attackArmy(Army& army, double& supplies) {
 	unitHelpers::unitTypes type = chooseTarget(army); ///< Choose type to attack
 	attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);///< attack choosed type
 }
+/*
 
+
+
+*/
+
+void AttackArmyTest::attackFortificationTest() {
+	using namespace boost::ut;
+	Unit fortification;
+	fortification.viability = 100;
+	"attackFortification"_test = [&] {
+		double damage = 50.0;
+		bool fortificationTarget = false;
+
+		AttackArmy attack(damage,fortificationTarget);
+		attack.attackFortification(fortification, damage);
+
+		expect(fortification.getViability());
+		expect(damage);
+		};
+	fortification.viability = 100;
+	"attackFortification (fortificationTarget is true)"_test = [&] {
+
+		double damage = 50.0;
+		bool fortificationTarget = true;
+
+		AttackArmy attack(damage, fortificationTarget);
+		attack.attackFortification(fortification, damage);
+
+		expect(fortification.getViability() ==50) ;
+		expect(damage == 0);
+		};
+	fortification.viability = 0;
+	"attackFortification (fortification is dead)"_test = [&] {
+		double damage = 50.0;
+		bool fortificationTarget = false;
+
+		AttackArmy attack(damage, fortificationTarget);
+		attack.attackFortification(fortification, damage);
+
+		expect(fortification.getViability()==0);
+		expect(damage);
+		};
+}
+void AttackArmyTest::attackUnitTypeTest() {
+	using namespace boost::ut;
+	Unit fortification;
+	fortification.viability = 100;
+	Unit u1,u2;
+	u1.viability = 50;
+	u2.viability = 60;
+	"attackUnitType (attack alive units)"_test = [&] {
+		double damage = 50.0;
+		int posFirstAlive = 0;
+		std::vector<Unit*> units;
+		units.push_back(&u1);
+		units.push_back(&u2);
+
+		AttackArmy attack(damage,false);
+		attack.attackUnitType(fortification, damage, posFirstAlive, units);
+
+		expect(fortification.getViability()) << 75.0;
+		expect(units[0]->getViability() == 25 && units[1]->getViability() ==60|| units[1]->getViability() == 35 && units[0]->getViability() == 50);
+		expect(posFirstAlive==0);
+		expect(damage==0);
+		};
+	u1.viability = 20;
+	u2.viability = 20;
+	fortification.viability = 0;
+	"attackUnitType (attack alive units)"_test = [&] {
+		double damage = 30.0;
+		int posFirstAlive = 0;
+		std::vector<Unit*> units;
+		units.push_back(&u1);
+		units.push_back(&u2);
+
+		AttackArmy attack(damage, false);
+		attack.attackUnitType(fortification, damage, posFirstAlive, units);
+
+		expect(fortification.getViability()==0);
+		expect(units[0]->getViability() == 0 && units[1]->getViability() == 10 || units[0]->getViability() == 10 && units[1]->getViability() == 0);
+		expect(posFirstAlive == 1);
+		expect(damage == 0);
+		};
+}
+void AttackArmyTest::test() {
+	attackFortificationTest();
+	attackUnitTypeTest();
+}
+/*
+
+
+
+*/
 /// Return is unit alive
 bool Unit::isAlive() const{
 	return alive;
@@ -111,6 +204,7 @@ Unit& Unit::operator = (const Unit& unit) {
 	this->minPower = unit.minPower;
 	this->maxPower = unit.maxPower;
 	this->viability = unit.viability;
+	this->alive = unit.alive;
 	this->powerCoef = unit.powerCoef;
 	this->type = unit.type;
 	this->isRenovateArmor = unit.isRenovateArmor;
@@ -302,6 +396,7 @@ Unit* Unit::clone() {
 	newUnit->viability = this->viability;
 	newUnit->powerCoef = this->powerCoef;
 	newUnit->type = this->type;
+	newUnit->alive = this->alive;
 	newUnit->items = this->items;
 	newUnit->priorityTarget = this->priorityTarget;
 	newUnit->isRenovateArmor = this->isRenovateArmor;
@@ -334,7 +429,169 @@ bool Unit::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<u
 /// Return unit`s type
 unitHelpers::unitTypes Unit::getType() const {
 	return type;
+
 }
+/// Return unit`s current armor
+double Unit::getCurrentArmor() const {
+	return currentArmor;
+}
+/*
+
+
+*/
+void UnitTest::isEqualTest() {
+	using namespace boost::ut;
+	"isEqual (all properties are equal)"_test = [&] {
+		Unit u1 = builder.getResult();
+		Unit u2 = builder.getResult();
+		expect(u1.isEqual(&u2) == true >> fatal) << "Units must be equal!";
+		};
+
+	"isEqual (some properties are different)"_test = [&] {
+		Unit u1 = builder.getResult();
+		Unit u2 = builder.setArmor(50,false)->getResult();
+		expect(u1.isEqual(&u2) == false);
+		};
+	builder.setArmor(0, false);
+}
+void UnitTest::applyItemsTest() {
+	using namespace boost::ut;
+	Unit u1 = builder.getResult();
+	u1.items.clear();
+	"applyItems_1"_test = [&] {
+		double minPower = u1.getMinBasePower();
+		double maxPower = u1.getMaxBasePower();
+		double vi = u1.getViability();
+		u1.applyItems();
+		expect(minPower == u1.getMinBasePower() && maxPower == u1.getMaxBasePower() && vi == u1.getViability());
+		};
+	"applyItems_2"_test = [&] {
+		Unit u2 = builder.getResult();
+		u2.applyItems();
+		expect(u2.getMinBasePower()== 87 && 112 == u2.getMaxBasePower() && 726 == u2.getViability());
+		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1 && u2.getPowerCoef()[unitHelpers::armoredVehickle] == 0.003375);
+		};
+}
+void UnitTest::takeDamageTest() {
+	using namespace boost::ut;
+	Unit u1 = builder.getResult();
+	"takeDamage_1"_test = [&] {
+		double dam = 40;
+		u1.takeDamage(dam);
+		expect(u1.getViability() == 60 && dam == 0 && u1.isAlive());
+		};
+	"takeDamage_2"_test = [&] {
+		double dam = 100;
+		u1.takeDamage(dam);
+		expect(u1.getViability() == 0 && dam == 40 && !u1.isAlive());
+		};
+	u1 = builder.setArmor(50,false)->getResult();
+	"takeDamage_3"_test = [&] {
+		double dam = 80;
+		u1.takeDamage(dam);
+		expect((u1.getViability() == 20 && u1.getCurrentArmor() == 50 || u1.getViability() == 70 && u1.getCurrentArmor() == 0) && dam == 0 && u1.isAlive());
+		};
+}
+void UnitTest::updateCycleTest() {
+	using namespace boost::ut;
+
+	"Unit::updateCycle (cycling is active)"_test = [] {
+		Unit unit;
+		unit.cycling.isActive = true;
+		unit.cycling.currentCycle = 0;
+		unit.cycling.cyclesToReplenishment = 3;
+		unit.cycling.cyclesToActivation = 5;
+
+		unit.updateCycle();
+
+		expect(unit.cycling.isActive) ;
+		expect(unit.cycling.currentCycle == 1);
+		};
+
+	"Unit::updateCycle (cycling is inactive)"_test = [] {
+		Unit unit;
+		unit.cycling.isActive = false;
+		unit.cycling.currentCycle = 1;
+		unit.cycling.cyclesToReplenishment = 3;
+		unit.cycling.cyclesToActivation = 5;
+
+		unit.updateCycle();
+
+		expect(!unit.cycling.isActive) ;
+		expect(unit.cycling.currentCycle == 2) ;
+		};
+
+	"Unit::updateCycle (cycling reaches cyclesToReplenishment)"_test = [] {
+		Unit unit;
+		unit.cycling.isActive = true;
+		unit.cycling.currentCycle = 2;
+		unit.cycling.cyclesToReplenishment = 3;
+		unit.cycling.cyclesToActivation = 5;
+
+		unit.updateCycle();
+
+		expect(!unit.cycling.isActive);
+		expect(unit.cycling.currentCycle== 0);
+		};
+
+	"Unit::updateCycle (cycling reaches cyclesToActivation)"_test = [] {
+		Unit unit;
+		unit.cycling.isActive = false;
+		unit.cycling.currentCycle = 4;
+		unit.cycling.cyclesToReplenishment = 3;
+		unit.cycling.cyclesToActivation = 5;
+
+		unit.updateCycle();
+
+		expect(unit.cycling.isActive);
+		expect(unit.cycling.currentCycle == 0);
+		};
+}
+void UnitTest::cloneTest() {
+	using namespace boost::ut;
+	Unit u = builder.getResult();
+	"clone_1"_test = [&] {
+		Unit* u2 = u.clone();
+		expect(u.isEqual(u2));
+		delete u2;
+		};
+	"clone_2"_test = [&] {
+		Unit* u2 = u.clone();
+		u2->updateCycle();
+		expect(!u.isEqual(u2));
+		delete u2;
+		};
+}
+void UnitTest::createTest() {
+	using namespace boost::ut;
+	Unit u = builder.getResult();
+	"create_1"_test = [&] {
+		Unit* u2 = u.create();
+		expect(u.getType() == u2->getType());
+		delete u2;
+		};
+}
+UnitTest::UnitTest() {
+	std::string namesol("Solider 1");
+	unitHelpers::Cycling soliderCycle(10, 2, true);
+	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
+	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1}};
+	Item item(soliderPowerCoef, "Item name", 313, 31);
+	builder.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25,50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item);
+}
+void UnitTest::test() {
+	isEqualTest();
+	takeDamageTest();
+	applyItemsTest();
+	updateCycleTest();
+	cloneTest();
+	createTest();
+}
+/*
+
+
+*/
 /*
 	Builder
 */
@@ -344,7 +601,7 @@ UnitBuilder::UnitBuilder() {
 void UnitBuilder::reset() {
 	unit = Unit();
 }
-Unit& UnitBuilder::getResult() {
+Unit UnitBuilder::getResult() {
 	return unit;
 }
 UnitBuilder* UnitBuilder::setName(const std::string& name) {

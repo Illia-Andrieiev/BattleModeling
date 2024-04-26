@@ -22,11 +22,13 @@ MoralUnit& MoralUnit::operator = (const MoralUnit& unit) {
 		this->name[i] = unit.name[i];
 	this->minPower = unit.minPower;
 	this->maxPower = unit.maxPower;
+	this->alive = unit.alive;
 	this->morality = unit.morality;
 	this->viability = unit.viability;
 	this->powerCoef = unit.powerCoef;
 	this->type = unit.type;
 	this->items = unit.items;
+	this->alive = unit.alive;
 	this->isRenovateArmor = unit.isRenovateArmor;
 	this->maxArmor = unit.maxArmor;
 	this->currentArmor = unit.currentArmor;
@@ -195,7 +197,7 @@ MoralUnitBuilder::MoralUnitBuilder() {
 void MoralUnitBuilder::reset() {
 	unit = MoralUnit();
 }
-MoralUnit& MoralUnitBuilder::getResult() {
+MoralUnit MoralUnitBuilder::getResult() {
 	return unit;
 }
 MoralUnitBuilder* MoralUnitBuilder::setName(const std::string& name) {

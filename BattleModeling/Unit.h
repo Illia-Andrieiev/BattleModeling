@@ -5,10 +5,14 @@
 #include"Item.h"
 #include"Clonable.h"
 #include"Army.h"
+#include"libs/boost/ut.hpp"
 class Unit;
 class Army;
+class AttackArmyTest;
+class UnitTest;
 /// Class for template method attack army for Unit
 class AttackArmy {
+	friend class AttackArmyTest;
 private:
 	double damage;
 	
@@ -22,7 +26,13 @@ protected:
 public:
 	virtual void attackArmy(Army& army, double& supplies);
 };
-
+class AttackArmyTest {
+private:
+	void attackFortificationTest();
+	void attackUnitTypeTest();
+public:
+	void test();
+};
 class UnitBuilder;
 /// Unit class for representing units on battle field
 class Unit :public Cloneable<typename Unit*>, public Prototype<typename Unit*>, public AttackArmy
@@ -30,6 +40,8 @@ class Unit :public Cloneable<typename Unit*>, public Prototype<typename Unit*>, 
 	friend class Army;
 	friend class UnitBuilder;
 	friend class FileManager;
+	friend class AttackArmyTest;
+	friend class UnitTest;
 private:
 	const int TYPE_ID = 0; ///< TYPE ID
 protected:
@@ -68,12 +80,14 @@ public:
 	bool getIsActive() const;
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
 	virtual void updateCycle();
+	double getCurrentArmor() const;
 	void attackArmy(Army& army, double& supplies) override;
 	Unit* clone() override;
 	Unit* create() override;
 	unitHelpers::unitTypes getType() const;
 	unitHelpers::Cycling getCycling() const;
 };
+
 /// Base Unit`s abstract builder
 class BaseUnitBuilder {
 public:
@@ -93,7 +107,7 @@ private:
 public:
 	UnitBuilder();
 	virtual void reset();
-	virtual Unit& getResult();
+	virtual Unit getResult();
 	virtual UnitBuilder* setName(const std::string& name) override;
 	virtual UnitBuilder* addItem(const Item& item) override;
 	virtual UnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability) override;
@@ -102,4 +116,17 @@ public:
 	virtual UnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef) override;
 	virtual UnitBuilder* setCycling(const unitHelpers::Cycling& cycling) override;
 	virtual UnitBuilder* setArmor(double armor, bool isRenovate) override;
+};
+class UnitTest {
+	UnitBuilder builder;
+	void isEqualTest();
+	void applyItemsTest();
+	void takeDamageTest();
+	void updateCycleTest();
+	void cloneTest();
+	void createTest();
+
+public:
+	UnitTest();
+	void test();
 };
