@@ -141,10 +141,10 @@ void AttackArmyTest::attackUnitTypeTest() {
 		AttackArmy attack(damage,false);
 		attack.attackUnitType(fortification, damage, posFirstAlive, units);
 
-		expect(fortification.getViability()) << 75.0;
-		expect(units[0]->getViability() == 25 && units[1]->getViability() ==60|| units[1]->getViability() == 35 && units[0]->getViability() == 50);
-		expect(posFirstAlive==0);
-		expect(damage==0);
+		expect(fortification.getViability()== 75 >> fatal);
+		expect(units[0]->getViability() == 25 && units[1]->getViability() ==60|| units[1]->getViability() == 35 && units[0]->getViability() == 50 >> fatal);
+		expect(posFirstAlive==0 >> fatal);
+		expect(damage==0 >> fatal);
 		};
 	u1.viability = 20;
 	u2.viability = 20;
@@ -159,10 +159,10 @@ void AttackArmyTest::attackUnitTypeTest() {
 		AttackArmy attack(damage, false);
 		attack.attackUnitType(fortification, damage, posFirstAlive, units);
 
-		expect(fortification.getViability()==0);
-		expect(units[0]->getViability() == 0 && units[1]->getViability() == 10 || units[0]->getViability() == 10 && units[1]->getViability() == 0);
-		expect(posFirstAlive == 1);
-		expect(damage == 0);
+		expect(fortification.getViability()==0 >> fatal);
+		expect(units[0]->getViability() == 0 && units[1]->getViability() == 10 || units[0]->getViability() == 10 && units[1]->getViability() == 0 >> fatal);
+		expect(posFirstAlive == 1 >> fatal);
+		expect(damage == 0 >> fatal);
 		};
 }
 void AttackArmyTest::test() {
@@ -457,19 +457,28 @@ void UnitTest::isEqualTest() {
 void UnitTest::applyItemsTest() {
 	using namespace boost::ut;
 	Unit u1 = builder.getResult();
+	Unit u2 = builder.getResult();
 	u1.items.clear();
 	"applyItems_1"_test = [&] {
 		double minPower = u1.getMinBasePower();
 		double maxPower = u1.getMaxBasePower();
 		double vi = u1.getViability();
 		u1.applyItems();
-		expect(minPower == u1.getMinBasePower() && maxPower == u1.getMaxBasePower() && vi == u1.getViability());
+		expect(minPower == u1.getMinBasePower() && maxPower == u1.getMaxBasePower());
+		expect(vi == u1.getViability());
 		};
 	"applyItems_2"_test = [&] {
-		Unit u2 = builder.getResult();
 		u2.applyItems();
 		expect(u2.getMinBasePower()== 87 && 112 == u2.getMaxBasePower() && 726 == u2.getViability());
-		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1 && u2.getPowerCoef()[unitHelpers::armoredVehickle] == 0.003375);
+		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1 );
+		expect(u2.getPowerCoef()[unitHelpers::armoredVehickle] == 0.003375);
+		};
+	"applyItems_3"_test = [&] {
+		u2.applyItems();
+		expect(u2.getMinBasePower() == 87 && 112 == u2.getMaxBasePower());
+		expect(726 == u2.getViability());
+		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1 );
+		expect(u2.getPowerCoef()[unitHelpers::armoredVehickle] == 0.003375);
 		};
 }
 void UnitTest::takeDamageTest() {
@@ -478,18 +487,24 @@ void UnitTest::takeDamageTest() {
 	"takeDamage_1"_test = [&] {
 		double dam = 40;
 		u1.takeDamage(dam);
-		expect(u1.getViability() == 60 && dam == 0 && u1.isAlive());
+		expect(u1.getViability() == 60);
+		expect(dam == 0);
+		expect(u1.isAlive());
 		};
 	"takeDamage_2"_test = [&] {
 		double dam = 100;
 		u1.takeDamage(dam);
-		expect(u1.getViability() == 0 && dam == 40 && !u1.isAlive());
+		expect(u1.getViability() == 0 );
+		expect(!u1.isAlive());
+		expect(dam == 40);
 		};
 	u1 = builder.setArmor(50,false)->getResult();
 	"takeDamage_3"_test = [&] {
 		double dam = 80;
 		u1.takeDamage(dam);
-		expect((u1.getViability() == 20 && u1.getCurrentArmor() == 50 || u1.getViability() == 70 && u1.getCurrentArmor() == 0) && dam == 0 && u1.isAlive());
+		expect(u1.getViability() == 20 && u1.getCurrentArmor() == 50 || u1.getViability() == 70 && u1.getCurrentArmor() == 0);
+		expect(dam == 0);
+		expect(u1.isAlive());
 		};
 }
 void UnitTest::updateCycleTest() {

@@ -22,3 +22,12 @@ public:
 	Circumstance readCircumstance(std::fstream& stream);
 };
 
+class FileManagerTest {
+	bool isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2) const;
+	void itemTest();
+	void unitTest();
+	void circumstanceTest();
+	void armyTest();
+public:
+	void test();
+};

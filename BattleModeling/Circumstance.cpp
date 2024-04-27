@@ -1,4 +1,5 @@
 #include "Circumstance.h"
+#include <stdexcept>
 ///Constructor
 Circumstance::Circumstance(std::map<unitHelpers::unitTypes, double>& powerChanges, std::string name) {
 	for (int i = 0; i < name.size() && i < 256; i++)
@@ -21,4 +22,27 @@ void Circumstance::setPowerChanges(std::map<unitHelpers::unitTypes, double>& pow
 	}
 	this->powerChanges = powerChanges;
 }
-
+/// Is circumstances equal
+bool Circumstance::isEqual(const Circumstance& other) const {
+	return  std::string(this->name) == std::string(other.name) && isMapsEqual(this->powerChanges, other.powerChanges);
+}
+/// Is two maps equal
+bool Circumstance::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2) const {
+	bool res = true;
+	for (auto& pair : map1) {
+		res = map1.at(pair.first) == map2.at(pair.first);
+		if (!res)
+			return false;
+	}
+	for (auto& pair : map2) {
+		try {
+			res = map1.at(pair.first) == map2.at(pair.first);
+			if (!res)
+				return false;
+		}
+		catch (const std::out_of_range&) {
+			return false;
+		}
+	}
+	return true;
+}

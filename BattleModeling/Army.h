@@ -10,6 +10,7 @@ class Army
 	friend class BattleModeling;
 	friend class FileManager;
 	friend class AttackArmy;
+protected:
 	char name[256];
 	std::vector<std::vector<Unit*>> units;///< All army units. Each subVector represent each unit type  
 	std::map<unitHelpers::unitTypes, int> unitTypesPositions;///< Positions of unit`s types in unit vector
@@ -21,6 +22,7 @@ class Army
 	std::vector<int> positionOfFirstAlive; ///< Positions of first alive unit in appropriate vectors.
 	void attackType(Army& army, std::vector<Unit*>& type, int posFirstAlive);
 	void sortType(std::vector<Unit*>& units);
+	void addUnitTest();
 public:
 	Army();
 	Army(Unit& fortification);
@@ -29,8 +31,10 @@ public:
 	void countPower();
 	double getSupplies() const;
 	void changeSupplies(double supply);
+	int getAmountOfUniqueUnits();
 	double getViability() const;
 	double countViability();
+	std::map<unitHelpers::unitTypes, double> getPower() const;
 	void addUnit(Unit& unit, int amount) ;
 	void attackArmy(Army& army);
 	std::string toString();
@@ -39,5 +43,16 @@ public:
 	void applyCircumstance(const Circumstance& circ);
 	void sort();
 	void setName(const std::string& name);
+	bool isUnitsEqual(const Army& other) const;
+	std::string getName();
 };
-
+class ArmyTest:public Army {
+	Army army;
+	Army sortedArmy;
+	void sortTest();
+	void isUitsEqualTest();
+	void getAmountOfUniqueUnitsTest();
+public:
+	ArmyTest();
+	void test();
+};

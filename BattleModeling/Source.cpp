@@ -39,8 +39,14 @@ public:
 int main(int argc, char* argv[]) {
 	AttackArmyTest t1;
 	UnitTest t2;
+	MoralUnitTest t3;
+	FileManagerTest t4;
+	ArmyTest t5;
 	t1.test();
 	t2.test();
+	t3.test();
+	t4.test();
+	t5.test();
 	//MoralUnitBuilder build;
 	//Army army1;
 	//Army army2;

@@ -1,9 +1,11 @@
 #pragma once
 #include "Unit.h"
 ///Unit with morality
+class MoralUnitTest;
 class MoralUnit :public Unit
 {
 	friend class MoralUnitBuilder;
+	friend class MoralUnitTest;
 	friend class FileManager;
 	double morality; ///< Units morality
 	double rateOfMoralityChanges; ///< Represent rate of morality droping
@@ -23,6 +25,7 @@ public:
 	MoralUnit* clone() override;
 	MoralUnit* create() override;
 };
+
 ///Concrete MoralUnit builder
 class MoralUnitBuilder :public BaseUnitBuilder {
 private:
@@ -40,4 +43,15 @@ public:
 	virtual MoralUnitBuilder* setCycling(const unitHelpers::Cycling& cycling) override;
 	virtual MoralUnitBuilder* setMorality(double morality, double rateOfMoralityChanges);
 	virtual MoralUnitBuilder* setArmor(double armor, bool isRenovate) override;
+};
+class MoralUnitTest {
+	MoralUnitBuilder builder;
+	void isEqualTest();
+	void takeDamageTest();
+	void cloneTest();
+	void createTest();
+	void attackUnitTypeTest();
+public:
+	MoralUnitTest();
+	void test();
 };

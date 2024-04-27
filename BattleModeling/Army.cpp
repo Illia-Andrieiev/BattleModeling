@@ -1,6 +1,6 @@
 #include "Army.h"
 #include<thread>
-#include <omp.h>
+#include"MoralUnit.h"
 ///Constructor
 Army::Army(){
 	viability = countViability();
@@ -155,6 +155,10 @@ std::string Army::toString() {
 double Army::getViability() const{
 	return viability;
 }
+/// Return power;
+std::map<unitHelpers::unitTypes, double> Army::getPower() const {
+	return power;
+}
 /// Count summ viability of all units
 double Army::countViability() {
 	viability = 0;
@@ -216,9 +220,241 @@ void Army::sortType(std::vector<Unit*>& units) {
 		}
 	}
 }
+/// Return amount of unique units in army
+int Army::getAmountOfUniqueUnits() {
+	Army army = *this;
+	army.sort();
+	int size = 0; ///< Find amount of unique units in army
+	for (int i = 0; i < army.units.size(); i++) {
+		for (int j = 0; j < army.units[i].size(); j++) {
+			while (j + 1 < (int)army.units[i].size() && army.units[i][j]->isEqual(army.units[i][j + 1])) {
+				++j;
+			}
+			++size;
+		}
+	}
+	return size;
+}
 /// Sort all vector of units by placing equal units alongside
 void Army::sort() {
 	for (int i = 0; i < units.size(); i++) {
 		sortType(units[i]);
 	}
+}
+/// Return true, if units of armies equal and arranged in the same order
+bool Army::isUnitsEqual(const Army& other) const {
+	if (this->units.size() != other.units.size())
+		return false;
+	for (int i = 0; i < units.size(); i++) {
+		if (this->units[i].size() != other.units[i].size())
+			return false;
+		for (int j = 0; j < units[i].size(); j++) {
+			if (!units[i][j]->isEqual(other.units[i][j]))
+				return false;
+		}
+	}
+	return true;
+}
+/// Return string name
+std::string Army::getName() {
+	return std::string(name);
+}
+/*
+**************************************************
+*/
+ArmyTest::ArmyTest() {
+	std::string namesol("Solider 1");
+	unitHelpers::Cycling soliderCycle(10, 2, true);
+	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
+	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1} };
+	Item item(soliderPowerCoef, "Item name", 313, 31);
+	MoralUnitBuilder build;
+	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(75.4, 1);
+	MoralUnit solider = build.getResult();
+	build.reset();
+	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName("solider 2")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle)->addItem(item);
+	Unit solider2 = build.getResult();
+	build.reset();
+	build.setCycling(soliderCycle)->setFortificationTarget(true)->setName("solider 3")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle);
+	Unit solider3 = build.getResult();
+	build.reset();
+	//******************************
+	std::string nameavi("F-16");
+	unitHelpers::Cycling aviCycle(8, 2, true);
+	std::map<unitHelpers::unitTypes, double> aviPowerCoef = { {unitHelpers::aviation,1}, {unitHelpers::infantry,0.2},
+	{unitHelpers::armoredVehickle,0.8}, {unitHelpers::artilery,0.8} };
+	build.setCycling(aviCycle)->setFortificationTarget(false)->setName(nameavi)->setPowerAndViability(200, 220, 600)->setPowerCoef(aviPowerCoef)
+		->setTypes(unitHelpers::unitTypes::aviation, unitHelpers::unitTypes::aviation);
+	Unit avi = build.getResult();
+	build.reset();
+	//*****************************
+	std::string nametank("T-64 Bulat");
+	unitHelpers::Cycling tankCycle(12, 1, true);
+	std::map<unitHelpers::unitTypes, double> tankPowerCoef = { {unitHelpers::aviation,0.01}, {unitHelpers::infantry,1.3},
+	{unitHelpers::armoredVehickle,1.5}, {unitHelpers::artilery,0.5} };
+	build.setCycling(tankCycle)->setFortificationTarget(false)->setName(nametank)->setPowerAndViability(150, 200, 600)->setPowerCoef(tankPowerCoef)
+		->setTypes(unitHelpers::unitTypes::armoredVehickle, unitHelpers::unitTypes::armoredVehickle);
+	Unit tank = build.getResult();
+	build.reset();
+	//*******************************
+	std::string nameart("Caesar");
+	std::string namepatr("Patriot");
+	unitHelpers::Cycling artCycle(10, 0, true);
+	std::map<unitHelpers::unitTypes, double> artPowerCoef = { {unitHelpers::aviation,0}, {unitHelpers::infantry,1.5},
+	{unitHelpers::armoredVehickle,1}, {unitHelpers::artilery,0.8} };
+	std::map<unitHelpers::unitTypes, double> patrPowerCoef = { {unitHelpers::aviation,2}, {unitHelpers::infantry,0.2},
+	{unitHelpers::armoredVehickle,0.3}, {unitHelpers::artilery,0.3} };
+	build.setCycling(artCycle)->setFortificationTarget(false)->setName(nameart)->setPowerAndViability(150, 150, 400)->setPowerCoef(artPowerCoef)
+		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::armoredVehickle);
+	Unit art = build.getResult();
+	build.reset();
+	build.setCycling(artCycle)->setFortificationTarget(false)->setName(namepatr)->setPowerAndViability(150, 150, 450)->setPowerCoef(patrPowerCoef)
+		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::aviation)->setArmor(12, true);
+	Unit patr = build.getResult();
+	build.reset();
+	////*********************************************
+	army.setName("Army for testing");
+	army.changeSupplies(23232);
+	army.addUnit(solider, 2);
+	army.addUnit(solider2, 2);
+	army.addUnit(solider3, 1);
+	army.addUnit(solider, 2);
+	army.addUnit(solider2, 2);
+	army.addUnit(solider3, 1);
+	army.addUnit(solider2, 2);
+	army.addUnit(solider3, 1);
+	army.addUnit(avi, 5);
+	army.addUnit(tank, 3);
+	army.addUnit(art, 2);
+	army.addUnit(patr, 1);
+	army.addUnit(art, 2);
+	army.addUnit(patr, 1);
+	army.addUnit(art, 2);
+	army.addUnit(patr, 1);
+	sortedArmy.addUnit(solider, 4);
+	sortedArmy.addUnit(solider2, 6);
+	sortedArmy.addUnit(solider3, 3);
+	sortedArmy.addUnit(avi, 5);
+	sortedArmy.addUnit(tank, 3);
+	sortedArmy.addUnit(art, 6);
+	sortedArmy.addUnit(patr, 3);
+}
+void ArmyTest::sortTest() {
+	Army army = this->army;
+	using namespace boost::ut;
+	"sort"_test = [&] {
+		army.sort();
+		expect(army.getAmountOfUniqueUnits() == 7);
+		Unit u;
+		army.addUnit(u,1);
+		expect(army.getAmountOfUniqueUnits() == 8);
+		};
+}
+void ArmyTest::isUitsEqualTest() {
+	using namespace boost::ut;
+	"isUnitsEqual"_test = [&] {
+		expect(!army.isUnitsEqual(sortedArmy));
+		expect(army.isUnitsEqual(army));
+		};
+}
+void ArmyTest::getAmountOfUniqueUnitsTest() {
+	using namespace boost::ut;
+	Army army = this->army;
+	"getAmountOfUniqueUnits"_test = [&] {
+		expect(army.getAmountOfUniqueUnits() == 7);
+		expect(sortedArmy.getAmountOfUniqueUnits() == 7);
+		Unit u;
+		army.addUnit(u, 3);
+		expect(army.getAmountOfUniqueUnits() == 8);
+		double dam = 999999;
+		u.takeDamage(dam);
+		army.addUnit(u, 5);
+		expect(army.getAmountOfUniqueUnits() == 9);
+		};
+}
+void Army::addUnitTest() {
+	std::string namesol("Solider 1");
+	unitHelpers::Cycling soliderCycle(10, 2, true);
+	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
+	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1} };
+	Item item(soliderPowerCoef, "Item name", 313, 31);
+	MoralUnitBuilder build;
+	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(75.4, 1);
+	MoralUnit solider = build.getResult();
+	build.reset();
+	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName("solider 2")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle)->addItem(item);
+	Unit solider2 = build.getResult();
+	build.reset();
+	build.setCycling(soliderCycle)->setFortificationTarget(true)->setName("solider 3")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle);
+	Unit solider3 = build.getResult();
+	build.reset();
+	//******************************
+	std::string nameavi("F-16");
+	unitHelpers::Cycling aviCycle(8, 2, true);
+	std::map<unitHelpers::unitTypes, double> aviPowerCoef = { {unitHelpers::aviation,1}, {unitHelpers::infantry,0.2},
+	{unitHelpers::armoredVehickle,0.8}, {unitHelpers::artilery,0.8} };
+	build.setCycling(aviCycle)->setFortificationTarget(false)->setName(nameavi)->setPowerAndViability(200, 220, 600)->setPowerCoef(aviPowerCoef)
+		->setTypes(unitHelpers::unitTypes::aviation, unitHelpers::unitTypes::aviation);
+	Unit avi = build.getResult();
+	build.reset();
+	//*****************************
+	std::string nametank("T-64 Bulat");
+	unitHelpers::Cycling tankCycle(12, 1, true);
+	std::map<unitHelpers::unitTypes, double> tankPowerCoef = { {unitHelpers::aviation,0.01}, {unitHelpers::infantry,1.3},
+	{unitHelpers::armoredVehickle,1.5}, {unitHelpers::artilery,0.5} };
+	build.setCycling(tankCycle)->setFortificationTarget(false)->setName(nametank)->setPowerAndViability(150, 200, 600)->setPowerCoef(tankPowerCoef)
+		->setTypes(unitHelpers::unitTypes::armoredVehickle, unitHelpers::unitTypes::armoredVehickle);
+	Unit tank = build.getResult();
+	build.reset();
+	//*******************************
+	std::string nameart("Caesar");
+	unitHelpers::Cycling artCycle(10, 0, true);
+	std::map<unitHelpers::unitTypes, double> artPowerCoef = { {unitHelpers::aviation,0}, {unitHelpers::infantry,1.5},
+	{unitHelpers::armoredVehickle,1}, {unitHelpers::artilery,0.8} };
+	build.setCycling(artCycle)->setFortificationTarget(false)->setName(nameart)->setPowerAndViability(150, 150, 400)->setPowerCoef(artPowerCoef)
+		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::armoredVehickle);
+	Unit art = build.getResult();
+	build.reset();
+
+	////*********************************************
+	Army sortedArmy;
+	sortedArmy.addUnit(solider, 4);
+	sortedArmy.addUnit(solider2, 6);
+	sortedArmy.addUnit(solider3, 3);
+	sortedArmy.addUnit(avi, 5);
+	sortedArmy.addUnit(tank, 3);
+	Army temp = *this;
+	*this = sortedArmy;
+	using namespace boost::ut;
+	"addUnit"_test = [&] {
+		expect(units.size() == 3);
+		addUnit(art, 2);
+		expect(units.size() == 4);
+		expect(positionOfFirstAlive[3] == 0);
+		expect(units[3].size() == 2);
+		Unit art1 = art;
+		double dem = 10000;
+		art1.takeDamage(dem);
+		addUnit(art1, 4);
+		expect(units[3].size() == 6);
+		expect(positionOfFirstAlive[3] == 4);
+		expect(unitTypesPositions[unitHelpers::artilery] == 3);
+		expect(unitTypesPositions[unitHelpers::infantry] == 0);
+		expect(unitTypesPositions[unitHelpers::armoredVehickle] == 2);
+		expect(unitTypesPositions[unitHelpers::aviation] == 1);
+		};
+	*this = temp;
+}
+
+void ArmyTest::test() {
+	sortTest();
+	isUitsEqualTest();
+	addUnitTest();
+	getAmountOfUniqueUnitsTest();
 }

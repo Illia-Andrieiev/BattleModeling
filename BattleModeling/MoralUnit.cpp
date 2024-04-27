@@ -189,6 +189,128 @@ bool MoralUnit::isEqual(Unit* unit) {
 		&& isMapsEqual(this->powerCoef, unit1->powerCoef);
 }
 /*
+
+
+*/
+void MoralUnitTest::isEqualTest() {
+	using namespace boost::ut;
+	"isEqual (all properties are equal)"_test = [&] {
+		MoralUnit u1 = builder.getResult();
+		MoralUnit u2 = builder.getResult();
+		expect(u1.isEqual(&u2) == true >> fatal) << "Units must be equal!";
+		};
+
+	"isEqual (some properties are different)"_test = [&] {
+		MoralUnit u1 = builder.getResult();
+		MoralUnit u2 = builder.setArmor(50, false)->getResult();
+		expect(u1.isEqual(&u2) == false);
+		};
+	builder.setArmor(0, false);
+}
+void MoralUnitTest::attackUnitTypeTest() {
+	using namespace boost::ut;
+	MoralUnit fortification;
+	fortification.viability = 100;
+	MoralUnit u1, u2;
+	u1.viability = 50;
+	u2.viability = 60;
+	MoralUnit un = builder.getResult();
+	"attackUnitType (attack alive units)"_test = [&] {
+		double damage = 50.0;
+		int posFirstAlive = 0;
+		std::vector<Unit*> units;
+		units.push_back(&u1);
+		units.push_back(&u2);
+		un.attackUnitType(fortification, damage, posFirstAlive, units);
+
+		expect(fortification.getViability()==75 >> fatal);
+		expect(un.getMorality() == 90 && (units[0]->getViability() == 25 && units[1]->getViability() == 60 || units[1]->getViability() == 35 && units[0]->getViability() == 50) >> fatal);
+		expect(posFirstAlive == 0 >> fatal);
+		expect(damage == 0 >> fatal);
+		};
+	u1.viability = 20;
+	u2.viability = 20;
+	fortification.viability = 0;
+	"attackUnitType (attack alive units)"_test = [&] {
+		double damage = 30.0;
+		int posFirstAlive = 0;
+		std::vector<Unit*> units;
+		units.push_back(&u1);
+		units.push_back(&u2);
+
+		un.attackUnitType(fortification, damage, posFirstAlive, units);
+		expect(fortification.getViability() == 0 >> fatal);
+		expect(units[0]->getViability() == 0 && units[1]->getViability() == 10 || units[0]->getViability() == 10 && units[1]->getViability() == 0 >> fatal);
+		expect(posFirstAlive == 1 >> fatal);
+		expect(un.getMorality() == 95 >>fatal);
+		expect(damage == 0 >> fatal);
+		};
+}
+void MoralUnitTest::takeDamageTest() {
+	using namespace boost::ut;
+	MoralUnit u1 = builder.getResult();
+	"takeDamage_1"_test = [&] {
+		double dam = 40;
+		u1.takeDamage(dam);
+		expect(u1.getViability() == 60 && dam == 0 && u1.isAlive()&& u1.getMorality()==54);
+		};
+	"takeDamage_2"_test = [&] {
+		double dam = 100;
+		u1.takeDamage(dam);
+		expect(u1.getViability() == 0 && dam == 40 && !u1.isAlive());
+		};
+	u1 = builder.setArmor(50, false)->getResult();
+	"takeDamage_3"_test = [&] {
+		double dam = 80;
+		u1.takeDamage(dam);
+		expect((u1.getViability() == 20 && u1.getCurrentArmor() == 50. && 49.98 <= u1.getMorality() && u1.getMorality() <= 50. || u1.getViability() == 70 && u1.getCurrentArmor() == 0&& 62.98<=u1.getMorality()&& u1.getMorality() <=63.) && dam == 0 && u1.isAlive());
+		};
+}
+void MoralUnitTest::cloneTest() {
+	using namespace boost::ut;
+	MoralUnit u = builder.getResult();
+	"clone_1"_test = [&] {
+		Unit* u2 = u.clone();
+		expect(u.isEqual(u2));
+		delete u2;
+		};
+	"clone_2"_test = [&] {
+		Unit* u2 = u.clone();
+		u2->updateCycle();
+		expect(!u.isEqual(u2));
+		delete u2;
+		};
+}
+void MoralUnitTest::createTest() {
+	using namespace boost::ut;
+	MoralUnit u = builder.getResult();
+	"create_1"_test = [&] {
+		Unit* u2 = u.create();
+		expect(u.getType() == u2->getType());
+		delete u2;
+		};
+}
+MoralUnitTest::MoralUnitTest() {
+	std::string namesol("Solider 1");
+	unitHelpers::Cycling soliderCycle(10, 2, true);
+	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
+	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1} };
+	Item item(soliderPowerCoef, "Item name", 313, 31);
+	builder.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(90,1);
+}
+void MoralUnitTest::test() {
+	isEqualTest();
+	takeDamageTest();
+	cloneTest();
+	createTest();
+	attackUnitTypeTest();
+}
+/*
+
+
+*/
+/*
 	Builder
 */
 MoralUnitBuilder::MoralUnitBuilder() {
