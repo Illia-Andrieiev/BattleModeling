@@ -43,6 +43,10 @@ Army& Army::operator =(const Army& army) {
 		for (auto& uun : u)
 			delete uun;
 	}
+	for (int i = 0; i < units.size(); i++) {
+		for (int j = 0; j < units[i].size(); j++)
+			delete units[i][j];
+	}
 	units.clear();
 	unitTypesPositions.clear();
 	positionOfFirstAlive.clear();
@@ -258,6 +262,26 @@ bool Army::isUnitsEqual(const Army& other) const {
 /// Return string name
 std::string Army::getName() {
 	return std::string(name);
+}
+MementoArmy* Army::createMemento(short round = 0) {
+	return new MementoArmy(*this, round);
+}
+void Army::reinstateMemento(MementoArmy* memento) {
+	for (int i = 0; i < units.size(); i++) {
+		for (int j = 0; j < units[i].size(); j++)
+			delete units[i][j];
+	}
+	units.clear();
+	unitTypesPositions.clear();
+	positionOfFirstAlive.clear();
+	for (int i = 0; i < memento->units.size(); i++) {
+		for (int j = 0; j < memento->units[i].size(); j++) {
+			addUnit(*(memento->units[i][j]->clone()), 1);
+		}
+	}
+	delete fortification;
+	fortification = memento->fortification->clone();
+	supplies = memento->supplies;
 }
 /*
 **************************************************
@@ -520,4 +544,31 @@ Unit* SequentiallyTypeIterator::getNext() {
 		return res;
 	}
 	return nullptr;
+}
+MementoArmy::MementoArmy(const Army& army, short round = 0) {
+	for (int i = 0; i < army.units.size(); i++) {
+		this->units.push_back(std::vector<Unit*>());
+		for (int j = 0; j < army.units[i].size(); j++) {
+			this->units[i].push_back(army.units[i][j]->clone());
+		}
+	}
+	fortification = army.fortification->clone();
+	supplies = army.supplies;
+	this->round = round;
+	this->prev = nullptr;
+}
+MementoArmy::~MementoArmy() {
+	for (int i = 0; i < units.size(); i++) {
+		for (int j = 0; j < units[i].size(); j++) {
+			delete units[i][j];
+		}
+	}
+	delete fortification;
+	if (prev != nullptr)
+		delete prev;
+}
+void MementoArmy::setPrevMemento(MementoArmy* memento) {
+	if (prev != nullptr)
+		delete prev;
+	prev = memento;
 }

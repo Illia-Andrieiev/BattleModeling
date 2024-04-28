@@ -207,6 +207,7 @@ void FileManager::writeArmy(Army& army, const std::string& fileName) {
 	if (!stream.is_open())
 		std::cerr << "File do not open!";
 	army.sort(); ///< sorting army
+	army.countViability();
 	stream.write((char*)&army.name[0], sizeof(army.name));
 	stream.write((char*)&army.viability, sizeof(double));
 	stream.write((char*)&army.supplies, sizeof(double));

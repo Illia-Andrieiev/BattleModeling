@@ -10,7 +10,19 @@ public:
 	virtual Iterator* createSequentiallyTypeIterator() = 0;
 	virtual Iterator* createEachTypeIterator() = 0;
 };
-
+class Army;
+class MementoArmy {
+	friend class Army;
+	std::vector<std::vector<Unit*>> units;
+	Unit* fortification;
+	double supplies;
+	short round;
+	MementoArmy* prev;
+public:
+	MementoArmy(const Army& army, short round);
+	~MementoArmy();
+	void setPrevMemento(MementoArmy* memento);
+};
 /// Class to represent army on battle field
 class Army : public ArmyCollection
 {
@@ -18,6 +30,7 @@ class Army : public ArmyCollection
 	friend class BattleModeling;
 	friend class FileManager;
 	friend class AttackArmy;
+	friend class MementoArmy;
 protected:
 	char name[256];
 	std::vector<std::vector<Unit*>> units;///< All army units. Each subVector represent each unit type  
@@ -55,6 +68,8 @@ public:
 	std::string getName();
 	Iterator* createSequentiallyTypeIterator() override;
 	Iterator* createEachTypeIterator() override;
+	MementoArmy* createMemento(short round = 0);
+	void reinstateMemento(MementoArmy* memento);
 };
 class ArmyTest:public Army {
 	Army army;
