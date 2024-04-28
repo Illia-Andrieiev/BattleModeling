@@ -32,7 +32,6 @@ public:
 	static BattleModeling& getBattleModeling();
 	void addCircumstance(const Circumstance& circ);
 	Supply getSupplies() const;
-
 	void operator()();
 };
 /// Battle builder
@@ -46,4 +45,8 @@ public:
 	BattleBuilder* setReinforcements(const Army& army1Reinforcements, const Army& army2Reinforcements,
 		double  army1RoundReinforcement, double army2RoundReinforcement);
 	BattleBuilder* setArmy(const Army& army1, const Army& army2);
+};
+class BattleModelingTest {
+public:
+	void test();
 };

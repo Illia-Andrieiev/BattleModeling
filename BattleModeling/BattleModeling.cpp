@@ -1,4 +1,6 @@
 #include "BattleModeling.h"
+#include"MoralUnit.h"
+#include"FileManager.h"
 #include <thread>
 #include<random>
 ///Constructor
@@ -169,4 +171,17 @@ BattleBuilder* BattleBuilder::setArmy(const Army& army1, const Army& army2) {
 	battle.army1 = army1;
 	battle.army2 = army2;
 	return this;
+}
+
+void BattleModelingTest::test() {
+	AttackArmyTest t1;
+	UnitTest t2;
+	MoralUnitTest t3;
+	FileManagerTest t4;
+	ArmyTest t5;
+	t1.test();
+	t2.test();
+	t3.test();
+	t4.test();
+	t5.test();
 }

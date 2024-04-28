@@ -1,9 +1,6 @@
 #include<iostream>
 #include"BattleModeling.h"
-#include"MoralUnit.h"
-#include<omp.h>
 #include<fstream>
-#include"FileManager.h"
 //#include "libs\easy_plot_cpp-master\include\easy_plot.hpp"
 using namespace std;
 void pr(int num) {
@@ -37,16 +34,8 @@ public:
 };
 
 int main(int argc, char* argv[]) {
-	AttackArmyTest t1;
-	UnitTest t2;
-	MoralUnitTest t3;
-	FileManagerTest t4;
-	ArmyTest t5;
-	t1.test();
-	t2.test();
-	t3.test();
-	t4.test();
-	t5.test();
+	BattleModelingTest t;
+	t.test();
 	//MoralUnitBuilder build;
 	//Army army1;
 	//Army army2;
