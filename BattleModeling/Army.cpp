@@ -458,3 +458,66 @@ void ArmyTest::test() {
 	addUnitTest();
 	getAmountOfUniqueUnitsTest();
 }
+Iterator* Army::createSequentiallyTypeIterator() {
+	return new SequentiallyTypeIterator(units);
+}
+Iterator* Army::createEachTypeIterator() {
+	return new EachTypeIterator(units);
+}
+EachTypeIterator::EachTypeIterator(const std::vector<std::vector<Unit*>>& units) {
+	this->units = units;
+	curI = 0;
+	curJ = 0;
+}
+bool EachTypeIterator::hasMore() {
+	if (curI < units.size() && curJ < units[curI].size())
+		return true;
+	return false;
+}
+/// Return units in ascending order of raw number
+Unit* EachTypeIterator::getNext() {
+	if (hasMore()) {
+		Unit* res = units[curI][curJ];
+		++curI;
+		int i = curI;
+		if (curI >= units.size()) {
+			curI = 0;
+			curJ++;
+		}
+		while(units[curI].size() <= curJ) {
+			++curI;
+			if (curI == i)
+				break;
+			if (curI >= units.size()) {
+				curI = 0;
+				++curJ;
+			}
+			
+		}
+		return res;
+	}
+	return nullptr;
+}
+SequentiallyTypeIterator::SequentiallyTypeIterator(const std::vector<std::vector<Unit*>>& units) {
+	this->units = units;
+	curI = 0;
+	curJ = 0;
+}
+bool SequentiallyTypeIterator::hasMore(){
+	if (curI < units.size() && curJ < units[curI].size())
+		return true;
+	return false;
+}
+/// Return units in ascending order of column number
+Unit* SequentiallyTypeIterator::getNext() {
+	if (hasMore()) {
+		Unit* res = units[curI][curJ];
+		++curJ;
+		if (units[curI].size() == curJ) {
+			curJ = 0;
+			++curI;
+		}
+		return res;
+	}
+	return nullptr;
+}

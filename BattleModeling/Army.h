@@ -3,8 +3,16 @@
 #include"Unit.h"
 #include"Circumstance.h"
 #include<mutex>
+class Iterator;
+/// Interface to crate iterators
+class ArmyCollection {
+public:
+	virtual Iterator* createSequentiallyTypeIterator() = 0;
+	virtual Iterator* createEachTypeIterator() = 0;
+};
+
 /// Class to represent army on battle field
-class Army
+class Army : public ArmyCollection
 {
 	friend class Unit;
 	friend class BattleModeling;
@@ -45,6 +53,8 @@ public:
 	void setName(const std::string& name);
 	bool isUnitsEqual(const Army& other) const;
 	std::string getName();
+	Iterator* createSequentiallyTypeIterator() override;
+	Iterator* createEachTypeIterator() override;
 };
 class ArmyTest:public Army {
 	Army army;
@@ -55,4 +65,33 @@ class ArmyTest:public Army {
 public:
 	ArmyTest();
 	void test();
+};
+/// Iterator interface
+class Iterator {
+public:
+	virtual Unit* getNext()=0;
+	virtual bool hasMore()=0;
+};
+
+/// Return units in ascending order of raw number
+class EachTypeIterator : public Iterator
+{
+private:
+	std::vector<std::vector<Unit*>> units;
+	int curI, curJ;
+public:
+	EachTypeIterator(const std::vector<std::vector<Unit*>>& units);
+	bool hasMore() override;
+	Unit* getNext() override;
+};
+/// Return units in ascending order of column number
+class SequentiallyTypeIterator : public Iterator
+{
+private:
+	std::vector<std::vector<Unit*>> units;
+	int curI, curJ;
+public:
+	SequentiallyTypeIterator(const std::vector<std::vector<Unit*>>& units);
+	bool hasMore() override;
+	Unit* getNext() override;
 };

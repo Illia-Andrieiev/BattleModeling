@@ -62,7 +62,7 @@ void BattleModeling::operator()() {
 	while (this->army1.getViability() > 0 && this->army2.getViability() > 0) {
 		battleRound();
 		addReinforcement(); ///< Add reinforcement
-//		system("pause");
+		system("pause");
 	}
 	this->army1 = army1;
 	this->army2 = army2;
