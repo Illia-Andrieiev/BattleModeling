@@ -105,7 +105,9 @@ void MoralUnit::updateCycle() {
 *   if morality >= 50 && morality < 85 : axPower = minPower + (maxPower - minPower) * morality / 100;
 *   if morality < 50 : minPower *= (morality + 50) / 100, maxPower = minPower + (maxPower - minPower) * morality / 100;
 */
-double MoralUnit::determinePower(double minPower, double maxPower) {
+double MoralUnit::determinePower() {
+	double minPower = this->minPower;
+	double maxPower = this->maxPower;
 	if (morality >= 50 && morality < 85) {
 		maxPower = minPower + (maxPower - minPower) * morality / 100;
 	}

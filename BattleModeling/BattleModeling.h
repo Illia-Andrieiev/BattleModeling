@@ -15,6 +15,10 @@ class BattleModeling
 {
 	friend class BattleBuilder;	
 private:
+	std::shared_ptr<MementoArmy> army1Memento;
+	std::shared_ptr<MementoArmy> army2Memento;
+	int round;///< Current battle round
+	int mementoRounds; ///< Every mementoRounds make mementos
 	Army army1; ///< Army 1
 	Army army2; ///< Army 2
 	Army army1Reinforcements; ///< Reinforcements for army 1
@@ -32,6 +36,9 @@ public:
 	static BattleModeling& getBattleModeling();
 	void addCircumstance(const Circumstance& circ);
 	Supply getSupplies() const;
+	std::shared_ptr<MementoArmy> getArmy1Memento();
+	std::shared_ptr<MementoArmy> getArmy2Memento();
+	int getRound() const;
 	void operator()();
 };
 /// Battle builder
@@ -45,6 +52,7 @@ public:
 	BattleBuilder* setReinforcements(const Army& army1Reinforcements, const Army& army2Reinforcements,
 		double  army1RoundReinforcement, double army2RoundReinforcement);
 	BattleBuilder* setArmy(const Army& army1, const Army& army2);
+	BattleBuilder* createMemento(int mementoRounds);
 };
 class BattleModelingTest {
 public:

@@ -57,6 +57,13 @@ void AttackArmy::attackUnitType(Unit& fortification, double& damage, int& posFir
 * Use uniform_real_distribution. Weight of types to attack defines as power*unit`sTypeCoef
 */
 unitHelpers::unitTypes AttackArmy::chooseTarget(Army& army) const {
+	return chooseRandomTarget(army);
+}
+/// Choose type of unit to attack.
+/*!
+* Use uniform_real_distribution. Weight of types to attack defines as power*unit`sTypeCoef
+*/
+unitHelpers::unitTypes AttackArmy::chooseRandomTarget(Army& army) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distr(0, (int)army.units.size() - 1);
@@ -73,11 +80,12 @@ unitHelpers::unitTypes AttackArmy::chooseTarget(Army& army) const {
 * \param[in,out] supplies Units supplies to attack army. Decrease supplies on 0.1*power.
 */
 void AttackArmy::attackArmy(Army& army, double& supplies) {
-	if (supplies <= 0)///< If not enough supplies, return
+	if (!prepareForAttack(supplies))
 		return;
-	supplies -= damage * 0.1; ///< change supplies
-	supplies = supplies < 0 ? 0 : supplies;
-	unitHelpers::unitTypes type = chooseTarget(army); ///< Choose type to attack
+	double power = determinePower(); ///< Determine units power
+	manageSupplies(supplies, power);
+	unitHelpers::unitTypes type = chooseTarget(army);
+	double damage = determineDamage(type, power); ///< find damage on type
 	attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);///< attack choosed type
 }
 /*
@@ -354,35 +362,44 @@ void Unit::applyItems() {
 	}
 }
 /// Using normal distribution determine power 
-double  Unit::determinePower(double minPower, double maxPower) {
+double  Unit::determinePower() {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::normal_distribution<> distr(minPower, maxPower);
 	return distr(gen);
 }
+bool Unit::prepareForAttack(const double& supplies){
+	if (!cycling.isActive) { ///< If unit unactive, update cycle and return
+		updateCycle();
+		return false;
+	}
+	updateCycle(); ///< update cycle
+	if (supplies <= 0) ///< If not enough supplies, return
+		return false;
+	return true;
+}
+double Unit::determineDamage(unitHelpers::unitTypes type, double power) {
+	 return power * powerCoef[type];
+}
+ void Unit::manageSupplies(double& supplies, double power) {
+	 supplies -= power * 0.1; ///< change supplies
+	 supplies = supplies < 0 ? 0 : supplies;
+	 renovateArmor(supplies); ///< renovate armor
+ }
+ unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
+	 int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]]; ///< find position of last alive priorityTarget unit 
+	 unitHelpers::unitTypes type = priorityTarget; ///< type to attack
+	 if (posAlivePriorityTarget == -1) ///< If all priority targets dead, choose type randomly
+		 type = chooseRandomTarget(army);
+	 return type;
+ }
 /// Attack foes army if enough suoolies. Change supplies
 /*!
 * \param[in,out] army Army to attack
 * \param[in,out] supplies Units supplies to attack army. Decrease supplies on 0.1*power.
 */
 void Unit::attackArmy(Army& army, double& supplies) {
-	if (!cycling.isActive) { ///< If unit unactive, update cycle and return
-		updateCycle();
-		return;
-	}
-	updateCycle(); ///< update cycle
-	if (supplies <= 0) ///< If not enough supplies, return
-		return;
-	double power = determinePower(minPower, maxPower); ///< Determine units power
-	supplies -= power * 0.1; ///< change supplies
-	supplies = supplies < 0 ? 0 : supplies;
-	renovateArmor(supplies); ///< renovate armor
-	int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]]; ///< find position of last alive priorityTarget unit 
-	unitHelpers::unitTypes type = priorityTarget; ///< type to attack
-	if(posAlivePriorityTarget == -1) ///< If all priority targets dead, choose type randomly
-		type = chooseTarget(army);
-	double damage = power * powerCoef[type]; ///< find damage on type
-	attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);///< attack choosed type
+	
 }
 /// Return exact copy of this unit
 Unit* Unit::clone() {
@@ -488,8 +505,8 @@ void UnitTest::takeDamageTest() {
 		double dam = 40;
 		u1.takeDamage(dam);
 		expect(u1.getViability() == 60);
-		expect(dam == 0);
 		expect(u1.isAlive());
+		expect(dam == 0);
 		};
 	"takeDamage_2"_test = [&] {
 		double dam = 100;

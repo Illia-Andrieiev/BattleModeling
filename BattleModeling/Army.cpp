@@ -43,10 +43,6 @@ Army& Army::operator =(const Army& army) {
 		for (auto& uun : u)
 			delete uun;
 	}
-	for (int i = 0; i < units.size(); i++) {
-		for (int j = 0; j < units[i].size(); j++)
-			delete units[i][j];
-	}
 	units.clear();
 	unitTypesPositions.clear();
 	positionOfFirstAlive.clear();
@@ -263,9 +259,11 @@ bool Army::isUnitsEqual(const Army& other) const {
 std::string Army::getName() {
 	return std::string(name);
 }
-MementoArmy* Army::createMemento(short round = 0) {
-	return new MementoArmy(*this, round);
+/// Create memento
+std::shared_ptr<MementoArmy> Army::createMemento(int round) {
+	return std::make_shared<MementoArmy>(*this, round);
 }
+/// Reinstate Memento
 void Army::reinstateMemento(MementoArmy* memento) {
 	for (int i = 0; i < units.size(); i++) {
 		for (int j = 0; j < units[i].size(); j++)
@@ -282,6 +280,10 @@ void Army::reinstateMemento(MementoArmy* memento) {
 	delete fortification;
 	fortification = memento->fortification->clone();
 	supplies = memento->supplies;
+}
+/// Reinstate Memento
+void Army::reinstateMemento(std::shared_ptr<MementoArmy> memento) {
+	reinstateMemento(memento.get());
 }
 /*
 **************************************************
@@ -488,8 +490,7 @@ Iterator* Army::createSequentiallyTypeIterator() {
 Iterator* Army::createEachTypeIterator() {
 	return new EachTypeIterator(units);
 }
-EachTypeIterator::EachTypeIterator(const std::vector<std::vector<Unit*>>& units) {
-	this->units = units;
+EachTypeIterator::EachTypeIterator(const std::vector<std::vector<Unit*>>& units):units(units) {
 	curI = 0;
 	curJ = 0;
 }
@@ -545,7 +546,7 @@ Unit* SequentiallyTypeIterator::getNext() {
 	}
 	return nullptr;
 }
-MementoArmy::MementoArmy(const Army& army, short round = 0) {
+MementoArmy::MementoArmy(const Army& army, int round ) {
 	for (int i = 0; i < army.units.size(); i++) {
 		this->units.push_back(std::vector<Unit*>());
 		for (int j = 0; j < army.units[i].size(); j++) {
@@ -564,11 +565,10 @@ MementoArmy::~MementoArmy() {
 		}
 	}
 	delete fortification;
-	if (prev != nullptr)
-		delete prev;
 }
 void MementoArmy::setPrevMemento(MementoArmy* memento) {
-	if (prev != nullptr)
-		delete prev;
+	prev = std::shared_ptr<MementoArmy>(memento);
+}
+void MementoArmy::setPrevMemento(std::shared_ptr<MementoArmy> memento) {
 	prev = memento;
 }

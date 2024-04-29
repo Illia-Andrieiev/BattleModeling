@@ -15,14 +15,19 @@ class AttackArmy {
 	friend class AttackArmyTest;
 private:
 	double damage;
-	
+
 protected:
+	virtual bool prepareForAttack(const double& supplies) { return true; };
+	virtual double determineDamage(unitHelpers::unitTypes type, double power) { return damage; };
+	virtual void manageSupplies(double& supplies, double power) {};
 	bool fortificationTarget; ///< Always attack fortifications first
 	AttackArmy(double damage, bool fortificationTarget);
 	virtual int chooseTargetNomer(std::vector<Unit*>& units, int firstAlive);
+	virtual double determinePower() { return damage; };
 	virtual void attackFortification(Unit& fortification, double& damage);
 	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	virtual unitHelpers::unitTypes chooseTarget(Army& army) const;
+	static unitHelpers::unitTypes chooseRandomTarget(Army& army);
 public:
 	virtual void attackArmy(Army& army, double& supplies);
 };
@@ -60,7 +65,11 @@ protected:
 	unitHelpers::unitTypes priorityTarget; ///< Preferable Units type to attack 
 	std::string boolToStr(bool flag);
 	virtual void renovateArmor(double& supplies);
-	virtual double determinePower(double minPower, double maxPower);
+	virtual bool prepareForAttack(const double& supplies) override;
+	virtual void manageSupplies(double& supplies, double power) override;
+	virtual double determineDamage(unitHelpers::unitTypes type, double power) override;
+	virtual double determinePower() override;
+	virtual unitHelpers::unitTypes chooseTarget(Army& army) const override;
 	bool isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, std::map<unitHelpers::unitTypes, double> map2);
 public:
 	virtual int getTypeID();

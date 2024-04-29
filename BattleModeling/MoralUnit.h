@@ -11,7 +11,7 @@ class MoralUnit :public Unit
 	double rateOfMoralityChanges; ///< Represent rate of morality droping
 	const int TYPE_ID = 1; ///< TYPE ID
 	void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) override;
-	double determinePower(double minPower, double maxPower) override;
+	double determinePower() override;
 public:
 	virtual int getTypeID() override;
 	MoralUnit();

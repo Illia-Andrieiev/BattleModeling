@@ -3,6 +3,7 @@
 #include"Unit.h"
 #include"Circumstance.h"
 #include<mutex>
+#include<memory>
 class Iterator;
 /// Interface to crate iterators
 class ArmyCollection {
@@ -10,18 +11,20 @@ public:
 	virtual Iterator* createSequentiallyTypeIterator() = 0;
 	virtual Iterator* createEachTypeIterator() = 0;
 };
+class Unit;
 class Army;
 class MementoArmy {
 	friend class Army;
 	std::vector<std::vector<Unit*>> units;
 	Unit* fortification;
 	double supplies;
-	short round;
-	MementoArmy* prev;
+	int round;
+	std::shared_ptr<MementoArmy> prev;
 public:
-	MementoArmy(const Army& army, short round);
+	MementoArmy(const Army& army, int round);
 	~MementoArmy();
 	void setPrevMemento(MementoArmy* memento);
+	void setPrevMemento(std::shared_ptr<MementoArmy> memento);
 };
 /// Class to represent army on battle field
 class Army : public ArmyCollection
@@ -68,8 +71,9 @@ public:
 	std::string getName();
 	Iterator* createSequentiallyTypeIterator() override;
 	Iterator* createEachTypeIterator() override;
-	MementoArmy* createMemento(short round = 0);
+	std::shared_ptr<MementoArmy> createMemento(int round);
 	void reinstateMemento(MementoArmy* memento);
+	void reinstateMemento(std::shared_ptr<MementoArmy> memento);
 };
 class ArmyTest:public Army {
 	Army army;
@@ -92,7 +96,7 @@ public:
 class EachTypeIterator : public Iterator
 {
 private:
-	std::vector<std::vector<Unit*>> units;
+	const std::vector<std::vector<Unit*>>& units;
 	int curI, curJ;
 public:
 	EachTypeIterator(const std::vector<std::vector<Unit*>>& units);

@@ -5,8 +5,18 @@
 #include<random>
 ///Constructor
 BattleModeling::BattleModeling() {
+	army1Memento = nullptr;
+	army2Memento = nullptr;
 	army1RoundReinforcement = 100;
 	army2RoundReinforcement = 100;
+	round = 0;
+	mementoRounds = 0;
+}
+std::shared_ptr<MementoArmy> BattleModeling::getArmy1Memento() {
+	return army1Memento;
+}
+std::shared_ptr<MementoArmy> BattleModeling::getArmy2Memento() {
+	return army2Memento;
 }
 /// Return armies supplies
 Supply BattleModeling::getSupplies() const{
@@ -14,6 +24,7 @@ Supply BattleModeling::getSupplies() const{
 }
 /// One battle round
 void BattleModeling::battleRound() {
+	round++;
 	///< Attack army
 	std::thread army1Thread([&]() {army1.attackArmy(army2);});
 	army2.attackArmy(army1);
@@ -60,6 +71,16 @@ void BattleModeling::operator()() {
 	this->army2.countViability();
 	th1.join();
 	while (this->army1.getViability() > 0 && this->army2.getViability() > 0) {
+		if (mementoRounds != 0) { ///< Create mementos
+			if (round % mementoRounds == 0) {
+				std::shared_ptr<MementoArmy> army1Memento = army1.createMemento(round);
+				army1Memento->setPrevMemento(this->army1Memento);
+				this->army1Memento = army1Memento;
+				std::shared_ptr<MementoArmy> army2Memento = army2.createMemento(round);
+				army2Memento->setPrevMemento(this->army2Memento);
+				this->army2Memento = army2Memento;
+			}
+		}
 		battleRound();
 		addReinforcement(); ///< Add reinforcement
 		system("pause");
@@ -138,8 +159,9 @@ void BattleModeling::addReinforcement() {
 		}
 	}
 }
-
-
+int BattleModeling::getRound() const {
+	return round;
+}
 BattleBuilder::BattleBuilder() {
 	reset();
 }
@@ -172,7 +194,10 @@ BattleBuilder* BattleBuilder::setArmy(const Army& army1, const Army& army2) {
 	battle.army2 = army2;
 	return this;
 }
-
+BattleBuilder* BattleBuilder::createMemento(int mementoRounds) {
+	battle.mementoRounds = mementoRounds;
+	return this;
+}
 void BattleModelingTest::test() {
 	AttackArmyTest t1;
 	UnitTest t2;
