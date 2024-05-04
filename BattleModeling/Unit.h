@@ -3,7 +3,7 @@
 #include<map>
 #include<iostream>
 #include"Item.h"
-#include"Clonable.h"
+#include"Cloneable.h"
 #include"Army.h"
 #include"libs/boost/ut.hpp"
 class Unit;
@@ -100,17 +100,17 @@ public:
 /// Base Unit`s abstract builder
 class BaseUnitBuilder {
 public:
-	virtual BaseUnitBuilder* setName(const std::string& name)=0;
-	virtual BaseUnitBuilder* addItem(const Item& item) =0;
-	virtual BaseUnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability)=0;
-	virtual BaseUnitBuilder* setFortificationTarget(bool fortificationTarget)=0;
-	virtual BaseUnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget)=0;
-	virtual BaseUnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef)=0;
-	virtual BaseUnitBuilder* setCycling(const unitHelpers::Cycling& cycling)=0;
-	virtual BaseUnitBuilder* setArmor(double armor,bool isRenovate) = 0;
+	virtual BaseUnitBuilder* setName(const std::string& name) = 0;
+	virtual BaseUnitBuilder* addItem(const Item& item) = 0;
+	virtual BaseUnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability) = 0;
+	virtual BaseUnitBuilder* setFortificationTarget(bool fortificationTarget) = 0;
+	virtual BaseUnitBuilder* setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget) = 0;
+	virtual BaseUnitBuilder* setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef) = 0;
+	virtual BaseUnitBuilder* setCycling(const unitHelpers::Cycling& cycling) = 0;
+	virtual BaseUnitBuilder* setArmor(double armor, bool isRenovate) = 0;
 };
 /// Concrete Unit builder
-class UnitBuilder: BaseUnitBuilder{
+class UnitBuilder : BaseUnitBuilder {
 private:
 	Unit unit;
 public:

@@ -59,7 +59,7 @@ public:
 	double getViability() const;
 	double countViability();
 	std::map<unitHelpers::unitTypes, double> getPower() const;
-	void addUnit(Unit& unit, int amount) ;
+	void addUnit(Unit& unit, int amount);
 	void attackArmy(Army& army);
 	std::string toString();
 	Army& operator =(const Army& army);
@@ -75,7 +75,7 @@ public:
 	void reinstateMemento(MementoArmy* memento);
 	void reinstateMemento(std::shared_ptr<MementoArmy> memento);
 };
-class ArmyTest:public Army {
+class ArmyTest :public Army {
 	Army army;
 	Army sortedArmy;
 	void sortTest();
@@ -88,8 +88,8 @@ public:
 /// Iterator interface
 class Iterator {
 public:
-	virtual Unit* getNext()=0;
-	virtual bool hasMore()=0;
+	virtual Unit* getNext() = 0;
+	virtual bool hasMore() = 0;
 };
 
 /// Return units in ascending order of raw number

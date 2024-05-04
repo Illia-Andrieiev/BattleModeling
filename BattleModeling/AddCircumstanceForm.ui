@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddCircumstanceFormClass</class>
+ <widget class="QDialog" name="AddCircumstanceFormClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>863</width>
+    <height>354</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AddCircumstanceForm</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>861</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="7" column="3" rowspan="6">
+     <widget class="QListWidget" name="UnitTypes"/>
+    </item>
+    <item row="5" column="3" colspan="2">
+     <widget class="QLineEdit" name="CircumstanceNameLineEdit"/>
+    </item>
+    <item row="6" column="3">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Choose type to change:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="4">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Enter power coef:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="5">
+     <widget class="QPushButton" name="AddCircumstanceButton">
+      <property name="text">
+       <string>Add Circumstance</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="5">
+     <widget class="QPushButton" name="ToMenu">
+      <property name="styleSheet">
+       <string notr="true">background-color:#F0FFFF;
+font-weight:800;
+color:black;
+</string>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="5">
+     <widget class="QPushButton" name="AddPowerCoef">
+      <property name="text">
+       <string>Add power coef</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="4">
+     <widget class="QLineEdit" name="PowerCoef">
+      <property name="text">
+       <string>1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="3">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Enter circumstance name:&lt;b style =&quot;color:red;&quot;&gt;*&lt;/b&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" rowspan="8" colspan="2">
+     <widget class="QListWidget" name="CircumstancesListWidget"/>
+    </item>
+    <item row="4" column="0" colspan="2" alignment="Qt::AlignmentFlag::AlignHCenter">
+     <widget class="QLabel" name="label_1">
+      <property name="text">
+       <string>Circumstances</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="5">
+     <widget class="QPushButton" name="DeleteCircumstanceButton">
+      <property name="text">
+       <string>Delete Circumstance</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

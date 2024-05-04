@@ -45,7 +45,7 @@ void MoralUnit::setMorality(double morality) {
 }
 /// Decrease viability on damage points. If viability <= 0 set alive = false. 
 /*!
-*  Decrease damage on viability points. Set new morailty as old_morality * coef, where 
+*  Decrease damage on viability points. Set new morailty as old_morality * coef, where
 *  coef = new_viabiliy/old_viability. 0.5 <= coef < 1. With 90% chanse armor takes damage
 */
 void MoralUnit::takeDamage(double& damage) {
@@ -77,7 +77,7 @@ void MoralUnit::takeDamage(double& damage) {
 /// Add 1 to current cycle. Manage isActive atribute. 
 /*!
 *   Increase morality by 2 each unactive round, decrease by 0.5 each active,
-*   and increase by 3.5 at round, when unit go unactive. 
+*   and increase by 3.5 at round, when unit go unactive.
 */
 void MoralUnit::updateCycle() {
 	if (cycling.isActive) {
@@ -88,7 +88,7 @@ void MoralUnit::updateCycle() {
 			setMorality(this->morality + 3.5);
 			return;
 		}
-		setMorality(this->morality - 0.5*rateOfMoralityChanges);
+		setMorality(this->morality - 0.5 * rateOfMoralityChanges);
 	}
 	else {
 		cycling.currentCycle++;
@@ -111,7 +111,7 @@ double MoralUnit::determinePower() {
 	if (morality >= 50 && morality < 85) {
 		maxPower = minPower + (maxPower - minPower) * morality / 100;
 	}
-	if(morality < 50) {
+	if (morality < 50) {
 		double coef = (morality + 50) / 100;
 		minPower *= coef;
 		maxPower = minPower + (maxPower - minPower) * morality / 100;
@@ -225,7 +225,7 @@ void MoralUnitTest::attackUnitTypeTest() {
 		units.push_back(&u2);
 		un.attackUnitType(fortification, damage, posFirstAlive, units);
 
-		expect(fortification.getViability()==75 >> fatal);
+		expect(fortification.getViability() == 75 >> fatal);
 		expect(un.getMorality() == 90 && (units[0]->getViability() == 25 && units[1]->getViability() == 60 || units[1]->getViability() == 35 && units[0]->getViability() == 50) >> fatal);
 		expect(posFirstAlive == 0 >> fatal);
 		expect(damage == 0 >> fatal);
@@ -244,7 +244,7 @@ void MoralUnitTest::attackUnitTypeTest() {
 		expect(fortification.getViability() == 0 >> fatal);
 		expect(units[0]->getViability() == 0 && units[1]->getViability() == 10 || units[0]->getViability() == 10 && units[1]->getViability() == 0 >> fatal);
 		expect(posFirstAlive == 1 >> fatal);
-		expect(un.getMorality() == 95 >>fatal);
+		expect(un.getMorality() == 95 >> fatal);
 		expect(damage == 0 >> fatal);
 		};
 }
@@ -254,7 +254,7 @@ void MoralUnitTest::takeDamageTest() {
 	"takeDamage_1"_test = [&] {
 		double dam = 40;
 		u1.takeDamage(dam);
-		expect(u1.getViability() == 60 && dam == 0 && u1.isAlive()&& u1.getMorality()==54);
+		expect(u1.getViability() == 60 && dam == 0 && u1.isAlive() && u1.getMorality() == 54);
 		};
 	"takeDamage_2"_test = [&] {
 		double dam = 100;
@@ -265,7 +265,7 @@ void MoralUnitTest::takeDamageTest() {
 	"takeDamage_3"_test = [&] {
 		double dam = 80;
 		u1.takeDamage(dam);
-		expect((u1.getViability() == 20 && u1.getCurrentArmor() == 50. && 49.98 <= u1.getMorality() && u1.getMorality() <= 50. || u1.getViability() == 70 && u1.getCurrentArmor() == 0&& 62.98<=u1.getMorality()&& u1.getMorality() <=63.) && dam == 0 && u1.isAlive());
+		expect((u1.getViability() == 20 && u1.getCurrentArmor() == 50. && 49.98 <= u1.getMorality() && u1.getMorality() <= 50. || u1.getViability() == 70 && u1.getCurrentArmor() == 0 && 62.98 <= u1.getMorality() && u1.getMorality() <= 63.) && dam == 0 && u1.isAlive());
 		};
 }
 void MoralUnitTest::cloneTest() {
@@ -299,7 +299,7 @@ MoralUnitTest::MoralUnitTest() {
 	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1} };
 	Item item(soliderPowerCoef, "Item name", 313, 31);
 	builder.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
-		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(90,1);
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(90, 1);
 }
 void MoralUnitTest::test() {
 	isEqualTest();

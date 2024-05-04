@@ -19,18 +19,18 @@ std::shared_ptr<MementoArmy> BattleModeling::getArmy2Memento() {
 	return army2Memento;
 }
 /// Return armies supplies
-Supply BattleModeling::getSupplies() const{
+Supply BattleModeling::getSupplies() const {
 	return roundSupplies;
 }
 /// One battle round
 void BattleModeling::battleRound() {
 	round++;
 	///< Attack army
-	std::thread army1Thread([&]() {army1.attackArmy(army2);});
+	std::thread army1Thread([&]() {army1.attackArmy(army2); });
 	army2.attackArmy(army1);
 	army1Thread.join();
 	///< Count viability
-	double viability1=0, viability2=0;
+	double viability1 = 0, viability2 = 0;
 	std::thread th1([&]() {viability1 = army1.countViability(); });
 	std::thread th2([&]() {viability2 = army2.countViability(); });
 	///< Count power
@@ -40,13 +40,13 @@ void BattleModeling::battleRound() {
 	th2.join();
 	th3.join();
 	///< Print armies
-	std::cout << "army1 viability: "<< viability1 << std::endl << army1.toString()<<std::endl;
-	std::cout << "army2: viability: " << viability2 << std::endl << army2.toString()<<std::endl;
+	std::cout << "army1 viability: " << viability1 << std::endl << army1.toString() << std::endl;
+	std::cout << "army2: viability: " << viability2 << std::endl << army2.toString() << std::endl;
 
 }
 /// Main Battle modeling method 
 void BattleModeling::operator()() {
-	Army army1, army2, reinf1,reinf2;
+	Army army1, army2, reinf1, reinf2;
 	army1 = this->army1;
 	army2 = this->army2;
 	reinf1 = this->army1Reinforcements;
@@ -117,7 +117,7 @@ Unit* BattleModeling::chooseRandomUnit(Army& army, unitHelpers::unitTypes type) 
 			return nullptr;
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<> distr(army.positionOfFirstAlive[posType], (int)army.units[posType].size()-1);
+		std::uniform_int_distribution<> distr(army.positionOfFirstAlive[posType], (int)army.units[posType].size() - 1);
 		int pos = distr(gen);
 		Unit* resUnit = army.units[posType][pos]->clone();
 		std::swap(army.units[posType][pos], army.units[posType][army.positionOfFirstAlive[posType]]);///< Swap last added unit to start. 
@@ -137,13 +137,13 @@ void BattleModeling::addReinforcement() {
 		return;
 	}
 	for (int i = 0; i < army1Reinforcements.units.size(); i++) { ///< For every type
-		int amountReinf = (int)(army1Reinforcements.units[i].size() * army1RoundReinforcement/100); ///< How many units will add 
+		int amountReinf = (int)(army1Reinforcements.units[i].size() * army1RoundReinforcement / 100); ///< How many units will add 
 		while (amountReinf > 0) {
 			--amountReinf;
 			Unit* reinfUnit = chooseRandomUnit(army1Reinforcements, army1Reinforcements.units[i][0]->getType()); ///< Choose unit to add
 			if (reinfUnit == nullptr)
 				break;
-			army1.addUnit(*reinfUnit,1);
+			army1.addUnit(*reinfUnit, 1);
 			delete reinfUnit;
 		}
 	}
@@ -171,7 +171,7 @@ void BattleBuilder::reset() {
 BattleModeling& BattleBuilder::getResult() {
 	return battle;
 }
-BattleBuilder* BattleBuilder::setSupplies(const Supply& lapSupplies){
+BattleBuilder* BattleBuilder::setSupplies(const Supply& lapSupplies) {
 	battle.roundSupplies = lapSupplies;
 	return this;
 }

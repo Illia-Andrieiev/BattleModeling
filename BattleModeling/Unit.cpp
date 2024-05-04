@@ -12,7 +12,7 @@ void AttackArmy::attackFortification(Unit& fortification, double& damage) {
 			fortification.takeDamage(dam);
 			damage = damage / 2 + dam;
 		}
-		if(fortificationTarget)
+		if (fortificationTarget)
 			fortification.takeDamage(damage);
 	}
 }
@@ -102,7 +102,7 @@ void AttackArmyTest::attackFortificationTest() {
 		double damage = 50.0;
 		bool fortificationTarget = false;
 
-		AttackArmy attack(damage,fortificationTarget);
+		AttackArmy attack(damage, fortificationTarget);
 		attack.attackFortification(fortification, damage);
 
 		expect(fortification.getViability());
@@ -117,7 +117,7 @@ void AttackArmyTest::attackFortificationTest() {
 		AttackArmy attack(damage, fortificationTarget);
 		attack.attackFortification(fortification, damage);
 
-		expect(fortification.getViability() ==50) ;
+		expect(fortification.getViability() == 50);
 		expect(damage == 0);
 		};
 	fortification.viability = 0;
@@ -128,7 +128,7 @@ void AttackArmyTest::attackFortificationTest() {
 		AttackArmy attack(damage, fortificationTarget);
 		attack.attackFortification(fortification, damage);
 
-		expect(fortification.getViability()==0);
+		expect(fortification.getViability() == 0);
 		expect(damage);
 		};
 }
@@ -136,7 +136,7 @@ void AttackArmyTest::attackUnitTypeTest() {
 	using namespace boost::ut;
 	Unit fortification;
 	fortification.viability = 100;
-	Unit u1,u2;
+	Unit u1, u2;
 	u1.viability = 50;
 	u2.viability = 60;
 	"attackUnitType (attack alive units)"_test = [&] {
@@ -146,13 +146,13 @@ void AttackArmyTest::attackUnitTypeTest() {
 		units.push_back(&u1);
 		units.push_back(&u2);
 
-		AttackArmy attack(damage,false);
+		AttackArmy attack(damage, false);
 		attack.attackUnitType(fortification, damage, posFirstAlive, units);
 
-		expect(fortification.getViability()== 75 >> fatal);
-		expect(units[0]->getViability() == 25 && units[1]->getViability() ==60|| units[1]->getViability() == 35 && units[0]->getViability() == 50 >> fatal);
-		expect(posFirstAlive==0 >> fatal);
-		expect(damage==0 >> fatal);
+		expect(fortification.getViability() == 75 >> fatal);
+		expect(units[0]->getViability() == 25 && units[1]->getViability() == 60 || units[1]->getViability() == 35 && units[0]->getViability() == 50 >> fatal);
+		expect(posFirstAlive == 0 >> fatal);
+		expect(damage == 0 >> fatal);
 		};
 	u1.viability = 20;
 	u2.viability = 20;
@@ -167,7 +167,7 @@ void AttackArmyTest::attackUnitTypeTest() {
 		AttackArmy attack(damage, false);
 		attack.attackUnitType(fortification, damage, posFirstAlive, units);
 
-		expect(fortification.getViability()==0 >> fatal);
+		expect(fortification.getViability() == 0 >> fatal);
 		expect(units[0]->getViability() == 0 && units[1]->getViability() == 10 || units[0]->getViability() == 10 && units[1]->getViability() == 0 >> fatal);
 		expect(posFirstAlive == 1 >> fatal);
 		expect(damage == 0 >> fatal);
@@ -183,11 +183,11 @@ void AttackArmyTest::test() {
 
 */
 /// Return is unit alive
-bool Unit::isAlive() const{
+bool Unit::isAlive() const {
 	return alive;
 }
 /// Constructor
-Unit::Unit() :AttackArmy(0,false) {
+Unit::Unit() :AttackArmy(0, false) {
 	type = static_cast<unitHelpers::unitTypes>(0);
 	priorityTarget = static_cast<unitHelpers::unitTypes>(0);
 	this->minPower = 0;
@@ -231,15 +231,15 @@ bool Unit::isEqual(Unit* unit) {
 	if (this->TYPE_ID != unit->TYPE_ID || items.size() != unit->items.size())
 		return false;
 	bool res1 = true;
-	for (int i = 0; i < items.size();i++) {
+	for (int i = 0; i < items.size(); i++) {
 		if (!res1)
 			return false;
 	}
-	return this->alive == unit->alive && this->currentArmor == unit->currentArmor && this->cycling.isEqual( unit->cycling) &&
+	return this->alive == unit->alive && this->currentArmor == unit->currentArmor && this->cycling.isEqual(unit->cycling) &&
 		this->fortificationTarget == unit->fortificationTarget && this->isRenovateArmor == unit->isRenovateArmor &&
 		this->maxArmor == unit->maxArmor && this->maxPower == unit->maxPower && this->minPower == unit->minPower &&
 		this->type == unit->type && this->viability == unit->viability && this->priorityTarget == unit->priorityTarget
-		&& isMapsEqual(this->powerCoef,unit->powerCoef);
+		&& isMapsEqual(this->powerCoef, unit->powerCoef);
 }
 /// Decrease viability on damage points. If viability <= 0 set alive = false. 
 /*!
@@ -287,7 +287,7 @@ double Unit::getMaxBasePower() const {
 	return maxPower;
 }
 ///Return unit`s name
-std::string Unit::getName() const{
+std::string Unit::getName() const {
 	return std::string(name);
 }
 /// Return unit`s viability
@@ -300,12 +300,12 @@ std::vector<Item> Unit::getItems() const {
 }
 
 std::string Unit::boolToStr(bool flag) {
-	return flag ? "true": "false";
+	return flag ? "true" : "false";
 }
 /// Return string representation of MoralUnit
 std::string Unit::toString() {
 	std::string res("Name: " + std::string(name) + " viability: " + std::to_string(viability) + " alive: " + boolToStr(alive));
-	for (int i = 0; i < items.size();i++) {
+	for (int i = 0; i < items.size(); i++) {
 		res = res + "; item " + std::to_string(i + 1) + ": " + items[i].toString();
 	}
 	return res;
@@ -368,7 +368,7 @@ double  Unit::determinePower() {
 	std::normal_distribution<> distr(minPower, maxPower);
 	return distr(gen);
 }
-bool Unit::prepareForAttack(const double& supplies){
+bool Unit::prepareForAttack(const double& supplies) {
 	if (!cycling.isActive) { ///< If unit unactive, update cycle and return
 		updateCycle();
 		return false;
@@ -379,27 +379,27 @@ bool Unit::prepareForAttack(const double& supplies){
 	return true;
 }
 double Unit::determineDamage(unitHelpers::unitTypes type, double power) {
-	 return power * powerCoef[type];
+	return power * powerCoef[type];
 }
- void Unit::manageSupplies(double& supplies, double power) {
-	 supplies -= power * 0.1; ///< change supplies
-	 supplies = supplies < 0 ? 0 : supplies;
-	 renovateArmor(supplies); ///< renovate armor
- }
- unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
-	 int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]]; ///< find position of last alive priorityTarget unit 
-	 unitHelpers::unitTypes type = priorityTarget; ///< type to attack
-	 if (posAlivePriorityTarget == -1) ///< If all priority targets dead, choose type randomly
-		 type = chooseRandomTarget(army);
-	 return type;
- }
+void Unit::manageSupplies(double& supplies, double power) {
+	supplies -= power * 0.1; ///< change supplies
+	supplies = supplies < 0 ? 0 : supplies;
+	renovateArmor(supplies); ///< renovate armor
+}
+unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
+	int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]]; ///< find position of last alive priorityTarget unit 
+	unitHelpers::unitTypes type = priorityTarget; ///< type to attack
+	if (posAlivePriorityTarget == -1) ///< If all priority targets dead, choose type randomly
+		type = chooseRandomTarget(army);
+	return type;
+}
 /// Attack foes army if enough suoolies. Change supplies
 /*!
 * \param[in,out] army Army to attack
 * \param[in,out] supplies Units supplies to attack army. Decrease supplies on 0.1*power.
 */
 void Unit::attackArmy(Army& army, double& supplies) {
-	
+
 }
 /// Return exact copy of this unit
 Unit* Unit::clone() {
@@ -466,7 +466,7 @@ void UnitTest::isEqualTest() {
 
 	"isEqual (some properties are different)"_test = [&] {
 		Unit u1 = builder.getResult();
-		Unit u2 = builder.setArmor(50,false)->getResult();
+		Unit u2 = builder.setArmor(50, false)->getResult();
 		expect(u1.isEqual(&u2) == false);
 		};
 	builder.setArmor(0, false);
@@ -486,15 +486,15 @@ void UnitTest::applyItemsTest() {
 		};
 	"applyItems_2"_test = [&] {
 		u2.applyItems();
-		expect(u2.getMinBasePower()== 87 && 112 == u2.getMaxBasePower() && 726 == u2.getViability());
-		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1 );
+		expect(u2.getMinBasePower() == 87 && 112 == u2.getMaxBasePower() && 726 == u2.getViability());
+		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1);
 		expect(u2.getPowerCoef()[unitHelpers::armoredVehickle] == 0.003375);
 		};
 	"applyItems_3"_test = [&] {
 		u2.applyItems();
 		expect(u2.getMinBasePower() == 87 && 112 == u2.getMaxBasePower());
 		expect(726 == u2.getViability());
-		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1 );
+		expect(u2.getPowerCoef()[unitHelpers::unitTypes::infantry] == 1);
 		expect(u2.getPowerCoef()[unitHelpers::armoredVehickle] == 0.003375);
 		};
 }
@@ -511,11 +511,11 @@ void UnitTest::takeDamageTest() {
 	"takeDamage_2"_test = [&] {
 		double dam = 100;
 		u1.takeDamage(dam);
-		expect(u1.getViability() == 0 );
+		expect(u1.getViability() == 0);
 		expect(!u1.isAlive());
 		expect(dam == 40);
 		};
-	u1 = builder.setArmor(50,false)->getResult();
+	u1 = builder.setArmor(50, false)->getResult();
 	"takeDamage_3"_test = [&] {
 		double dam = 80;
 		u1.takeDamage(dam);
@@ -536,7 +536,7 @@ void UnitTest::updateCycleTest() {
 
 		unit.updateCycle();
 
-		expect(unit.cycling.isActive) ;
+		expect(unit.cycling.isActive);
 		expect(unit.cycling.currentCycle == 1);
 		};
 
@@ -549,8 +549,8 @@ void UnitTest::updateCycleTest() {
 
 		unit.updateCycle();
 
-		expect(!unit.cycling.isActive) ;
-		expect(unit.cycling.currentCycle == 2) ;
+		expect(!unit.cycling.isActive);
+		expect(unit.cycling.currentCycle == 2);
 		};
 
 	"Unit::updateCycle (cycling reaches cyclesToReplenishment)"_test = [] {
@@ -563,7 +563,7 @@ void UnitTest::updateCycleTest() {
 		unit.updateCycle();
 
 		expect(!unit.cycling.isActive);
-		expect(unit.cycling.currentCycle== 0);
+		expect(unit.cycling.currentCycle == 0);
 		};
 
 	"Unit::updateCycle (cycling reaches cyclesToActivation)"_test = [] {
@@ -607,9 +607,9 @@ UnitTest::UnitTest() {
 	std::string namesol("Solider 1");
 	unitHelpers::Cycling soliderCycle(10, 2, true);
 	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
-	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1}};
+	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1} };
 	Item item(soliderPowerCoef, "Item name", 313, 31);
-	builder.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25,50, 100)->setPowerCoef(soliderPowerCoef)
+	builder.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item);
 }
 void UnitTest::test() {
@@ -653,7 +653,7 @@ UnitBuilder* UnitBuilder::addItem(const Item& item) {
 UnitBuilder* UnitBuilder::setPowerAndViability(double minPower, double maxPower, double viability) {
 	if (minPower < 0 || maxPower <= 0 || viability <= 0)
 		return this;
-	unit.minPower = minPower; 
+	unit.minPower = minPower;
 	unit.maxPower = maxPower;
 	unit.viability = viability;
 	return this;

@@ -49,7 +49,7 @@ void FileManager::writeItem(const Item& item, std::fstream& stream) {
 /// Read Item from stream in binary format
 Item FileManager::readItem(std::fstream& stream) {
 	std::map<unitHelpers::unitTypes, double> map;
-	Item item(map, "default",0,0);
+	Item item(map, "default", 0, 0);
 	item.powerCoefChanges = readMap(stream);
 	stream.read((char*)&item.name[0], sizeof(item.name));
 	stream.read((char*)&item.changeViability, sizeof(double));
@@ -99,7 +99,7 @@ Unit* FileManager::readBaseUnit(std::fstream& stream) {
 	stream.read((char*)&unit->type, sizeof(unit->type));
 	stream.read((char*)&unit->priorityTarget, sizeof(unit->priorityTarget));
 	unit->powerCoef = readMap(stream);
-	int size=0;
+	int size = 0;
 	stream.read((char*)&size, sizeof(int));
 	for (int i = 0; i < size; i++) {
 		unit->items.push_back(readItem(stream));
@@ -203,7 +203,7 @@ void FileManager::writeUnit(Unit* unit, int amount, std::fstream& stream) {
 /// Write Army in file in binary format
 void FileManager::writeArmy(Army& army, const std::string& fileName) {
 	std::fstream stream;
-	stream.open(fileName, std::ios::binary | std::ios::out |std::ios::app);
+	stream.open(fileName, std::ios::binary | std::ios::out | std::ios::app);
 	if (!stream.is_open())
 		std::cerr << "File do not open!";
 	army.sort(); ///< sorting army
@@ -216,7 +216,7 @@ void FileManager::writeArmy(Army& army, const std::string& fileName) {
 	int size = 0; ///< Find amount of unique units in army
 	for (int i = 0; i < army.units.size(); i++) {
 		for (int j = 0; j < army.units[i].size(); j++) {
-			while (j + 1 < (int)army.units[i].size() && army.units[i][j]->isEqual(army.units[i][j+1])) {
+			while (j + 1 < (int)army.units[i].size() && army.units[i][j]->isEqual(army.units[i][j + 1])) {
 				++j;
 			}
 			++size;
@@ -242,7 +242,7 @@ void FileManager::writeArmy(Army& army, const std::string& fileName) {
 Army FileManager::readArmy(const std::string& fileName) {
 	Army army;
 	std::fstream stream;
-	stream.open(fileName, std::ios::binary | std::ios::in );
+	stream.open(fileName, std::ios::binary | std::ios::in);
 	if (!stream.is_open())
 		std::cerr << "File do not open!";
 	stream.read((char*)&army.name[0], sizeof(army.name));
@@ -250,10 +250,10 @@ Army FileManager::readArmy(const std::string& fileName) {
 	stream.read((char*)&army.supplies, sizeof(double));
 	army.power = readMap(stream);
 	int amount = 1;
-	army.fortification = readUnit(stream,amount);
+	army.fortification = readUnit(stream, amount);
 	int size = 0;
 	stream.read((char*)&size, sizeof(int));
-	while (size>0)
+	while (size > 0)
 	{
 		Unit* u = readUnit(stream, amount);
 		army.addUnit(*u, amount);
@@ -321,13 +321,13 @@ void FileManagerTest::unitTest() {
 		Item item(soliderPowerCoef, "Item name", 313, 31);
 		UnitBuilder builder;
 		Unit unit1 = builder.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
-			->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setArmor(30,true)->getResult();
-		f.writeUnit(&unit1, 3 ,s);
+			->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setArmor(30, true)->getResult();
+		f.writeUnit(&unit1, 3, s);
 		expect(std::filesystem::exists(fileName) == true >> fatal);
 		s.close();
 		s.open(fileName, std::ios::binary | std::ios::in | std::ios::out);
 		int amount = 0;
-		Unit* unit2 = f.readUnit(s,amount);
+		Unit* unit2 = f.readUnit(s, amount);
 		expect(unit1.isEqual(unit2) == true);
 		expect(amount == 3);
 		delete unit2;
@@ -343,7 +343,7 @@ void FileManagerTest::unitTest() {
 		{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1} };
 		Item item(soliderPowerCoef, "Item name", 313, 31);
 		MoralUnitBuilder builder;
-		MoralUnit unit1 = builder.setCycling(soliderCycle)->setMorality(72.2,2)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		MoralUnit unit1 = builder.setCycling(soliderCycle)->setMorality(72.2, 2)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 			->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setArmor(30, true)->getResult();
 		f.writeUnit(&unit1, 3, s);
 		expect(std::filesystem::exists(fileName) == true >> fatal);
@@ -363,11 +363,11 @@ void FileManagerTest::armyTest() {
 	std::string namesol("Solider 1");
 	unitHelpers::Cycling soliderCycle(10, 2, true);
 	std::map<unitHelpers::unitTypes, double> soliderPowerCoef = { {unitHelpers::aviation,0.05}, {unitHelpers::infantry,1},
-	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1}};
+	{unitHelpers::armoredVehickle,0.15}, {unitHelpers::artilery,0.1} };
 	Item item(soliderPowerCoef, "Item name", 313, 31);
 	MoralUnitBuilder build;
-	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25,50, 100)->setPowerCoef(soliderPowerCoef)
-		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(75.4,1);
+	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
+		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(75.4, 1);
 	MoralUnit solider = build.getResult();
 	build.reset();
 	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName("solider 2")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
@@ -383,7 +383,7 @@ void FileManagerTest::armyTest() {
 	unitHelpers::Cycling aviCycle(8, 2, true);
 	std::map<unitHelpers::unitTypes, double> aviPowerCoef = { {unitHelpers::aviation,1}, {unitHelpers::infantry,0.2},
 	{unitHelpers::armoredVehickle,0.8}, {unitHelpers::artilery,0.8} };
-	build.setCycling(aviCycle)->setFortificationTarget(false)->setName(nameavi)->setPowerAndViability(200,220, 600)->setPowerCoef(aviPowerCoef)
+	build.setCycling(aviCycle)->setFortificationTarget(false)->setName(nameavi)->setPowerAndViability(200, 220, 600)->setPowerCoef(aviPowerCoef)
 		->setTypes(unitHelpers::unitTypes::aviation, unitHelpers::unitTypes::aviation);
 	Unit avi = build.getResult();
 	build.reset();
@@ -392,7 +392,7 @@ void FileManagerTest::armyTest() {
 	unitHelpers::Cycling tankCycle(12, 1, true);
 	std::map<unitHelpers::unitTypes, double> tankPowerCoef = { {unitHelpers::aviation,0.01}, {unitHelpers::infantry,1.3},
 	{unitHelpers::armoredVehickle,1.5}, {unitHelpers::artilery,0.5} };
-	build.setCycling(tankCycle)->setFortificationTarget(false)->setName(nametank)->setPowerAndViability(150,200, 600)->setPowerCoef(tankPowerCoef)
+	build.setCycling(tankCycle)->setFortificationTarget(false)->setName(nametank)->setPowerAndViability(150, 200, 600)->setPowerCoef(tankPowerCoef)
 		->setTypes(unitHelpers::unitTypes::armoredVehickle, unitHelpers::unitTypes::armoredVehickle);
 	Unit tank = build.getResult();
 	build.reset();
@@ -404,12 +404,12 @@ void FileManagerTest::armyTest() {
 	{unitHelpers::armoredVehickle,1}, {unitHelpers::artilery,0.8} };
 	std::map<unitHelpers::unitTypes, double> patrPowerCoef = { {unitHelpers::aviation,2}, {unitHelpers::infantry,0.2},
 	{unitHelpers::armoredVehickle,0.3}, {unitHelpers::artilery,0.3} };
-	build.setCycling(artCycle)->setFortificationTarget(false)->setName(nameart)->setPowerAndViability(150,150, 400)->setPowerCoef(artPowerCoef)
+	build.setCycling(artCycle)->setFortificationTarget(false)->setName(nameart)->setPowerAndViability(150, 150, 400)->setPowerCoef(artPowerCoef)
 		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::armoredVehickle);
 	Unit art = build.getResult();
 	build.reset();
-	build.setCycling(artCycle)->setFortificationTarget(false)->setName(namepatr)->setPowerAndViability(150,150, 450)->setPowerCoef(patrPowerCoef)
-		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::aviation)->setArmor(12,true);
+	build.setCycling(artCycle)->setFortificationTarget(false)->setName(namepatr)->setPowerAndViability(150, 150, 450)->setPowerCoef(patrPowerCoef)
+		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::aviation)->setArmor(12, true);
 	Unit patr = build.getResult();
 	build.reset();
 	////*********************************************
@@ -421,7 +421,7 @@ void FileManagerTest::armyTest() {
 	army1.addUnit(solider3, 3);
 	army1.addUnit(avi, 5);
 	army1.addUnit(tank, 3);
-	army1.addUnit(art, 4);	
+	army1.addUnit(art, 4);
 	army1.addUnit(patr, 3);
 	using namespace boost::ut;
 	std::string fileName = "armyTest";
@@ -429,11 +429,11 @@ void FileManagerTest::armyTest() {
 	"MoralUnit_read/write"_test = [&] {
 		army1.countPower();
 		army1.countViability();
-		f.writeArmy(army1,fileName);
+		f.writeArmy(army1, fileName);
 		expect(std::filesystem::exists(fileName) == true >> fatal);
 		Army army2 = f.readArmy(fileName);
 		expect(army1.isUnitsEqual(army2) == true);
-		expect(isMapsEqual(army1.getPower(),army2.getPower()));
+		expect(isMapsEqual(army1.getPower(), army2.getPower()));
 		expect(army1.getViability() == army2.getViability());
 		expect(army1.getSupplies() == army2.getSupplies());
 		expect(army1.getName() == army2.getName());

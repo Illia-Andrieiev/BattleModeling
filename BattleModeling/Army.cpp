@@ -2,22 +2,22 @@
 #include<thread>
 #include"MoralUnit.h"
 ///Constructor
-Army::Army(){
+Army::Army() {
 	viability = countViability();
 	supplies = 0;
 	fortification = new Unit();
 }
 ///Constructor
-Army::Army(Unit& fortification){
+Army::Army(Unit& fortification) {
 	this->fortification = fortification.clone();
 	viability = countViability();
 	supplies = 0;
 }
 /// Copyconstructor
-Army::Army(const Army& army){
+Army::Army(const Army& army) {
 	for (int i = 0; i < army.units.size(); i++) {
 		for (int j = 0; j < army.units[i].size(); j++) {
-			addUnit(*army.units[i][j]->clone(),1);
+			addUnit(*army.units[i][j]->clone(), 1);
 		}
 	}
 	for (int i = 0; i < 256; i++)
@@ -82,7 +82,7 @@ void Army::countPower() {
 void Army::addUnit(Unit& unit, int amount) {
 	for (int i = 0; i < units.size(); i++) {
 		if (units[i].size() > 0 && units[i][0]->type == unit.type) { ///< Find vector to insert
-			while (amount > 0) { 
+			while (amount > 0) {
 				--amount;
 				units[i].push_back(unit.clone()); ///< Add unit to army
 				if (!unit.isAlive()) { ///< If unit dead
@@ -104,7 +104,8 @@ void Army::addUnit(Unit& unit, int amount) {
 	unitTypesPositions[unit.type] = (int)units.size() - 1;
 	if (unit.isAlive()) {
 		positionOfFirstAlive.push_back(0);
-	}else {
+	}
+	else {
 		positionOfFirstAlive.push_back(-1);
 	}
 	while (amount > 0) {
@@ -127,7 +128,7 @@ void Army::attackArmy(Army& army) {
 	std::vector<std::thread> threads;
 	for (int i = 0; i < units.size(); ++i)
 	{
-		threads.push_back(std::thread([&,i]()
+		threads.push_back(std::thread([&, i]()
 			{ attackType(army, units[i], positionOfFirstAlive[i]); })); ///< For each unit`s type vector create thread and attack foe army
 	}
 	for (auto& thread : threads)
@@ -148,11 +149,11 @@ std::string Army::toString() {
 		res = res + "{" + std::to_string(param.first) + ", " + std::to_string(param.second) + "}; ";
 	}
 	res += "viability: " + std::to_string(viability);
-	res += " fortification: " +fortification->toString();
+	res += " fortification: " + fortification->toString();
 	return res;
 }
 /// Return viability
-double Army::getViability() const{
+double Army::getViability() const {
 	return viability;
 }
 /// Return power;
@@ -171,7 +172,7 @@ double Army::countViability() {
 	return viability;
 }
 /// Return army supplies
-double Army::getSupplies() const{
+double Army::getSupplies() const {
 	return supplies;
 }
 /// Add supplies to current army`s supplies
@@ -205,15 +206,15 @@ void Army::applyCircumstance(const Circumstance& circ) {
 /// Sort vector of units by placing equal units alongside
 void Army::sortType(std::vector<Unit*>& units) {
 	for (int i = 0; i < units.size() - 1; i++) {
-		int cur = i+1;
-		int j = i+1;
+		int cur = i + 1;
+		int j = i + 1;
 		while (j < units.size() && units[i]->isEqual(units[j])) {
 			++i;
 			++j;
 			++cur;
 		}
 		for (; j < units.size(); j++) {
-			if (units[i]->isEqual(units[j])) {		
+			if (units[i]->isEqual(units[j])) {
 				std::swap(units[cur], units[j]);
 				++cur;
 			}
@@ -375,7 +376,7 @@ void ArmyTest::sortTest() {
 		army.sort();
 		expect(army.getAmountOfUniqueUnits() == 7);
 		Unit u;
-		army.addUnit(u,1);
+		army.addUnit(u, 1);
 		expect(army.getAmountOfUniqueUnits() == 8);
 		};
 }
@@ -490,7 +491,7 @@ Iterator* Army::createSequentiallyTypeIterator() {
 Iterator* Army::createEachTypeIterator() {
 	return new EachTypeIterator(units);
 }
-EachTypeIterator::EachTypeIterator(const std::vector<std::vector<Unit*>>& units):units(units) {
+EachTypeIterator::EachTypeIterator(const std::vector<std::vector<Unit*>>& units) :units(units) {
 	curI = 0;
 	curJ = 0;
 }
@@ -509,7 +510,7 @@ Unit* EachTypeIterator::getNext() {
 			curI = 0;
 			curJ++;
 		}
-		while(units[curI].size() <= curJ) {
+		while (units[curI].size() <= curJ) {
 			++curI;
 			if (curI == i)
 				break;
@@ -517,7 +518,7 @@ Unit* EachTypeIterator::getNext() {
 				curI = 0;
 				++curJ;
 			}
-			
+
 		}
 		return res;
 	}
@@ -528,7 +529,7 @@ SequentiallyTypeIterator::SequentiallyTypeIterator(const std::vector<std::vector
 	curI = 0;
 	curJ = 0;
 }
-bool SequentiallyTypeIterator::hasMore(){
+bool SequentiallyTypeIterator::hasMore() {
 	if (curI < units.size() && curJ < units[curI].size())
 		return true;
 	return false;
@@ -546,7 +547,7 @@ Unit* SequentiallyTypeIterator::getNext() {
 	}
 	return nullptr;
 }
-MementoArmy::MementoArmy(const Army& army, int round ) {
+MementoArmy::MementoArmy(const Army& army, int round) {
 	for (int i = 0; i < army.units.size(); i++) {
 		this->units.push_back(std::vector<Unit*>());
 		for (int j = 0; j < army.units[i].size(); j++) {

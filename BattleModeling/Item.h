@@ -19,11 +19,17 @@ private:
 public:
 	void apply();
 	bool isEqual(const Item& other) const;
+	Item();
+	void setName(std::string name);
+	void setPowerCoef(std::pair<unitHelpers::unitTypes, double> typeCoef);
+	void setViabilityChanges(double viabilityChanges);
+	void setBasePowerChanges(double powerChanges);
 	Item(std::map<unitHelpers::unitTypes, double>& powerChanges, const std::string& name, double changeViability, double changeBasePower);
 	std::map<unitHelpers::unitTypes, double> getPowerChanges() const;
 	double getBasePowerChanges() const;
 	double getViabilityChanges() const;
 	bool isApply() const;
 	std::string toString();
+	std::string getName();
 };
 

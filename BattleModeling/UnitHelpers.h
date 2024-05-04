@@ -33,7 +33,7 @@ namespace unitHelpers {
 			this->isActive = true;
 		}
 		/// Is this Cycling equal to another
-		bool isEqual (const Cycling& other) const{
+		bool isEqual(const Cycling& other) const {
 			return this->currentCycle == other.currentCycle && this->cyclesToActivation == other.cyclesToActivation &&
 				this->cyclesToReplenishment == other.cyclesToReplenishment && this->isActive == other.isActive;
 		}

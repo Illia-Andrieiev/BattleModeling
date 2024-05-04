@@ -46,3 +46,10 @@ bool Circumstance::isMapsEqual(std::map<unitHelpers::unitTypes, double> map1, st
 	}
 	return true;
 }
+void Circumstance::setName(std::string name) {
+	for (int i = 0; i < 256 && i < name.size(); i++)
+		this->name[i] = name[i];
+}
+void Circumstance::setPowerCoef(std::pair<unitHelpers::unitTypes, double> typeCoef) {
+	powerChanges[typeCoef.first] = typeCoef.second;
+}

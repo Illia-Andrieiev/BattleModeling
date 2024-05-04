@@ -13,7 +13,7 @@ struct Supply {
 /// Class that represents battle modeling
 class BattleModeling
 {
-	friend class BattleBuilder;	
+	friend class BattleBuilder;
 private:
 	std::shared_ptr<MementoArmy> army1Memento;
 	std::shared_ptr<MementoArmy> army2Memento;
@@ -46,9 +46,9 @@ class BattleBuilder {
 	BattleModeling battle;
 public:
 	BattleBuilder();
-	void reset() ;
+	void reset();
 	BattleModeling& getResult();
-	BattleBuilder* setSupplies(const Supply& lapSupplies) ;
+	BattleBuilder* setSupplies(const Supply& lapSupplies);
 	BattleBuilder* setReinforcements(const Army& army1Reinforcements, const Army& army2Reinforcements,
 		double  army1RoundReinforcement, double army2RoundReinforcement);
 	BattleBuilder* setArmy(const Army& army1, const Army& army2);

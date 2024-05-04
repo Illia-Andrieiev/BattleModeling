@@ -1,7 +1,7 @@
 #ifndef EASY_COMMON_HPP_INCLUDED
 #define EASY_COMMON_HPP_INCLUDED
 
-#include "D:\Programming\C++\Curse_2\BattleModeling\BattleModeling\libs\freeglut-3.2.2\include\GL\freeglut.h"
+#include "libs\freeglut-3.2.2\include\GL\freeglut.h"
 #include <string>
 #include <vector>
 #include <thread>
