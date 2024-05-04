@@ -100,6 +100,8 @@ public:
 /// Base Unit`s abstract builder
 class BaseUnitBuilder {
 public:
+	virtual std::shared_ptr<Unit> getResult()=0;
+	virtual void reset()=0;
 	virtual BaseUnitBuilder* setName(const std::string& name) = 0;
 	virtual BaseUnitBuilder* addItem(const Item& item) = 0;
 	virtual BaseUnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability) = 0;
@@ -110,14 +112,13 @@ public:
 	virtual BaseUnitBuilder* setArmor(double armor, bool isRenovate) = 0;
 };
 /// Concrete Unit builder
-class UnitBuilder : BaseUnitBuilder {
+class UnitBuilder :public BaseUnitBuilder {
 private:
-	Unit unit;
+	std::shared_ptr<Unit> unit;
 public:
 	UnitBuilder();
-	UnitBuilder(Unit unit);
-	virtual void reset();
-	virtual Unit getResult();
+	virtual void reset() override;
+	virtual std::shared_ptr<Unit> getResult() override;
 	virtual UnitBuilder* setName(const std::string& name) override;
 	virtual UnitBuilder* addItem(const Item& item) override;
 	virtual UnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability) override;

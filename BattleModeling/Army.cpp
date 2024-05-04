@@ -298,15 +298,15 @@ ArmyTest::ArmyTest() {
 	MoralUnitBuilder build;
 	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(75.4, 1);
-	MoralUnit solider = build.getResult();
+	MoralUnit solider = *std::dynamic_pointer_cast<MoralUnit>(build.getResult());
 	build.reset();
 	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName("solider 2")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle)->addItem(item);
-	Unit solider2 = build.getResult();
+	Unit solider2 = *build.getResult();
 	build.reset();
 	build.setCycling(soliderCycle)->setFortificationTarget(true)->setName("solider 3")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle);
-	Unit solider3 = build.getResult();
+	Unit solider3 = *build.getResult();
 	build.reset();
 	//******************************
 	std::string nameavi("F-16");
@@ -315,7 +315,7 @@ ArmyTest::ArmyTest() {
 	{unitHelpers::armoredVehickle,0.8}, {unitHelpers::artilery,0.8} };
 	build.setCycling(aviCycle)->setFortificationTarget(false)->setName(nameavi)->setPowerAndViability(200, 220, 600)->setPowerCoef(aviPowerCoef)
 		->setTypes(unitHelpers::unitTypes::aviation, unitHelpers::unitTypes::aviation);
-	Unit avi = build.getResult();
+	Unit avi = *build.getResult();
 	build.reset();
 	//*****************************
 	std::string nametank("T-64 Bulat");
@@ -324,7 +324,7 @@ ArmyTest::ArmyTest() {
 	{unitHelpers::armoredVehickle,1.5}, {unitHelpers::artilery,0.5} };
 	build.setCycling(tankCycle)->setFortificationTarget(false)->setName(nametank)->setPowerAndViability(150, 200, 600)->setPowerCoef(tankPowerCoef)
 		->setTypes(unitHelpers::unitTypes::armoredVehickle, unitHelpers::unitTypes::armoredVehickle);
-	Unit tank = build.getResult();
+	Unit tank = *build.getResult();
 	build.reset();
 	//*******************************
 	std::string nameart("Caesar");
@@ -336,11 +336,11 @@ ArmyTest::ArmyTest() {
 	{unitHelpers::armoredVehickle,0.3}, {unitHelpers::artilery,0.3} };
 	build.setCycling(artCycle)->setFortificationTarget(false)->setName(nameart)->setPowerAndViability(150, 150, 400)->setPowerCoef(artPowerCoef)
 		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::armoredVehickle);
-	Unit art = build.getResult();
+	Unit art = *build.getResult();
 	build.reset();
 	build.setCycling(artCycle)->setFortificationTarget(false)->setName(namepatr)->setPowerAndViability(150, 150, 450)->setPowerCoef(patrPowerCoef)
 		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::aviation)->setArmor(12, true);
-	Unit patr = build.getResult();
+	Unit patr = *build.getResult();
 	build.reset();
 	////*********************************************
 	army.setName("Army for testing");
@@ -411,15 +411,15 @@ void Army::addUnitTest() {
 	MoralUnitBuilder build;
 	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName(namesol)->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::infantry)->addItem(item)->addItem(item)->setMorality(75.4, 1);
-	MoralUnit solider = build.getResult();
+	MoralUnit solider = *std::dynamic_pointer_cast<MoralUnit>(build.getResult());
 	build.reset();
 	build.setCycling(soliderCycle)->setFortificationTarget(false)->setName("solider 2")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle)->addItem(item);
-	Unit solider2 = build.getResult();
+	Unit solider2 = *build.getResult();
 	build.reset();
 	build.setCycling(soliderCycle)->setFortificationTarget(true)->setName("solider 3")->setPowerAndViability(25, 50, 100)->setPowerCoef(soliderPowerCoef)
 		->setTypes(unitHelpers::unitTypes::infantry, unitHelpers::unitTypes::armoredVehickle);
-	Unit solider3 = build.getResult();
+	Unit solider3 = *build.getResult();
 	build.reset();
 	//******************************
 	std::string nameavi("F-16");
@@ -428,7 +428,7 @@ void Army::addUnitTest() {
 	{unitHelpers::armoredVehickle,0.8}, {unitHelpers::artilery,0.8} };
 	build.setCycling(aviCycle)->setFortificationTarget(false)->setName(nameavi)->setPowerAndViability(200, 220, 600)->setPowerCoef(aviPowerCoef)
 		->setTypes(unitHelpers::unitTypes::aviation, unitHelpers::unitTypes::aviation);
-	Unit avi = build.getResult();
+	Unit avi = *build.getResult();
 	build.reset();
 	//*****************************
 	std::string nametank("T-64 Bulat");
@@ -437,7 +437,7 @@ void Army::addUnitTest() {
 	{unitHelpers::armoredVehickle,1.5}, {unitHelpers::artilery,0.5} };
 	build.setCycling(tankCycle)->setFortificationTarget(false)->setName(nametank)->setPowerAndViability(150, 200, 600)->setPowerCoef(tankPowerCoef)
 		->setTypes(unitHelpers::unitTypes::armoredVehickle, unitHelpers::unitTypes::armoredVehickle);
-	Unit tank = build.getResult();
+	Unit tank = *build.getResult();
 	build.reset();
 	//*******************************
 	std::string nameart("Caesar");
@@ -446,7 +446,7 @@ void Army::addUnitTest() {
 	{unitHelpers::armoredVehickle,1}, {unitHelpers::artilery,0.8} };
 	build.setCycling(artCycle)->setFortificationTarget(false)->setName(nameart)->setPowerAndViability(150, 150, 400)->setPowerCoef(artPowerCoef)
 		->setTypes(unitHelpers::unitTypes::artilery, unitHelpers::unitTypes::armoredVehickle);
-	Unit art = build.getResult();
+	Unit art = *build.getResult();
 	build.reset();
 
 	////*********************************************

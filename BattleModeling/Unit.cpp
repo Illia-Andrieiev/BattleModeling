@@ -466,22 +466,22 @@ double Unit::getCurrentArmor() const {
 void UnitTest::isEqualTest() {
 	using namespace boost::ut;
 	"isEqual (all properties are equal)"_test = [&] {
-		Unit u1 = builder.getResult();
-		Unit u2 = builder.getResult();
+		Unit u1 = *builder.getResult();
+		Unit u2 = *builder.getResult();
 		expect(u1.isEqual(&u2) == true >> fatal) << "Units must be equal!";
 		};
 
 	"isEqual (some properties are different)"_test = [&] {
-		Unit u1 = builder.getResult();
-		Unit u2 = builder.setArmor(50, false)->getResult();
+		Unit u1 = *builder.getResult();
+		Unit u2 = *builder.setArmor(50, false)->getResult();
 		expect(u1.isEqual(&u2) == false);
 		};
 	builder.setArmor(0, false);
 }
 void UnitTest::applyItemsTest() {
 	using namespace boost::ut;
-	Unit u1 = builder.getResult();
-	Unit u2 = builder.getResult();
+	Unit u1 = *builder.getResult();
+	Unit u2 = *builder.getResult();
 	u1.items.clear();
 	"applyItems_1"_test = [&] {
 		double minPower = u1.getMinBasePower();
@@ -507,7 +507,7 @@ void UnitTest::applyItemsTest() {
 }
 void UnitTest::takeDamageTest() {
 	using namespace boost::ut;
-	Unit u1 = builder.getResult();
+	Unit u1 = *builder.getResult();
 	"takeDamage_1"_test = [&] {
 		double dam = 40;
 		u1.takeDamage(dam);
@@ -522,7 +522,7 @@ void UnitTest::takeDamageTest() {
 		expect(!u1.isAlive());
 		expect(dam == 40);
 		};
-	u1 = builder.setArmor(50, false)->getResult();
+	u1 = *builder.setArmor(50, false)->getResult();
 	"takeDamage_3"_test = [&] {
 		double dam = 80;
 		u1.takeDamage(dam);
@@ -588,7 +588,7 @@ void UnitTest::updateCycleTest() {
 }
 void UnitTest::cloneTest() {
 	using namespace boost::ut;
-	Unit u = builder.getResult();
+	Unit u = *builder.getResult();
 	"clone_1"_test = [&] {
 		Unit* u2 = u.clone();
 		expect(u.isEqual(u2));
@@ -603,7 +603,7 @@ void UnitTest::cloneTest() {
 }
 void UnitTest::createTest() {
 	using namespace boost::ut;
-	Unit u = builder.getResult();
+	Unit u = *builder.getResult();
 	"create_1"_test = [&] {
 		Unit* u2 = u.create();
 		expect(u.getType() == u2->getType());
@@ -637,59 +637,57 @@ void UnitTest::test() {
 UnitBuilder::UnitBuilder() {
 	reset();
 }
-UnitBuilder::UnitBuilder(Unit unit) {
-	this->unit = unit;
-}
+
 void UnitBuilder::reset() {
-	unit = Unit();
+	unit = std::make_shared<Unit>();
 }
-Unit UnitBuilder::getResult() {
+std::shared_ptr<Unit> UnitBuilder::getResult() {
 	return unit;
 }
 UnitBuilder* UnitBuilder::setName(const std::string& name) {
 	int i;
 	for (i = 0; i < name.size() && i < 256; i++) {
-		unit.name[i] = name[i];
+		unit->name[i] = name[i];
 	}
 	for (; i < 256; i++) {
-		unit.name[i] = '\0';
+		unit->name[i] = '\0';
 	}
 	return this;
 }
 UnitBuilder* UnitBuilder::addItem(const Item& item) {
-	unit.items.push_back(item);
+	unit->items.push_back(item);
 	return this;
 }
 UnitBuilder* UnitBuilder::setPowerAndViability(double minPower, double maxPower, double viability) {
 	if (minPower < 0 || maxPower <= 0 || viability <= 0)
 		return this;
-	unit.minPower = minPower;
-	unit.maxPower = maxPower;
-	unit.viability = viability;
+	unit->minPower = minPower;
+	unit->maxPower = maxPower;
+	unit->viability = viability;
 	return this;
 }
 UnitBuilder* UnitBuilder::setFortificationTarget(bool fortificationTarget) {
-	unit.fortificationTarget = fortificationTarget;
+	unit->fortificationTarget = fortificationTarget;
 	return this;
 }
 UnitBuilder* UnitBuilder::setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget) {
-	unit.type = type;
-	unit.priorityTarget = priorityTarget;
+	unit->type = type;
+	unit->priorityTarget = priorityTarget;
 	return this;
 }
 UnitBuilder* UnitBuilder::setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef) {
-	unit.powerCoef = powerCoef;
+	unit->powerCoef = powerCoef;
 	return this;
 }
 UnitBuilder* UnitBuilder::setCycling(const unitHelpers::Cycling& cycling) {
-	unit.cycling = cycling;
+	unit->cycling = cycling;
 	return this;
 }
 UnitBuilder* UnitBuilder::setArmor(double armor, bool isRenovate) {
 	if (armor < 0)
 		armor = 0;
-	unit.currentArmor = armor;
-	unit.maxArmor = armor;
-	unit.isRenovateArmor = isRenovate;
+	unit->currentArmor = armor;
+	unit->maxArmor = armor;
+	unit->isRenovateArmor = isRenovate;
 	return this;
 }

@@ -29,12 +29,11 @@ public:
 ///Concrete MoralUnit builder
 class MoralUnitBuilder :public BaseUnitBuilder {
 private:
-	MoralUnit unit;
+	std::shared_ptr<MoralUnit> unit;
 public:
 	MoralUnitBuilder();
-	MoralUnitBuilder(MoralUnit unit);
-	virtual void reset();
-	virtual MoralUnit getResult();
+	virtual void reset() override;
+	virtual std::shared_ptr<Unit> getResult() override;
 	virtual MoralUnitBuilder* setName(const std::string& name) override;
 	virtual MoralUnitBuilder* addItem(const Item& item) override;
 	virtual MoralUnitBuilder* setPowerAndViability(double minPower, double maxPower, double viability) override;

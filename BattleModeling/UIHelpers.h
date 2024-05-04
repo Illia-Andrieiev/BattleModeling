@@ -6,4 +6,5 @@ namespace styles {
 }
 namespace uiFunctions {
     extern void fillTypes(QListWidget* list);
+    extern int stringToIntUnitTypes(std::string type);
 }

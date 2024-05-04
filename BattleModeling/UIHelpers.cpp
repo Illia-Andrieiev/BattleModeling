@@ -44,4 +44,23 @@ namespace uiFunctions {
             armoredVehickle,
             infantry*/
     }
+    int stringToIntUnitTypes(std::string type) {
+        if (type == "Artilery" || type == "artilery") {
+            return 0;
+        }
+        if (type == "Aviation" || type == "aviation") {
+            return 1;
+        }
+        if (type == "Armored vehickle" || type == "armored vehickle" || type == "armoredVehickle" || type == "ArmoredVehickle") {
+            return 2;
+        }
+        if (type == "Infantry" || type == "infantry") {
+            return 3;
+        }
+        return -1;
+        /*artilery,
+    aviation,
+    armoredVehickle,
+    infantry*/
+    }
 }

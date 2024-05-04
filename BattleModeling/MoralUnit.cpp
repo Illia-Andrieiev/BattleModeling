@@ -197,14 +197,14 @@ bool MoralUnit::isEqual(Unit* unit) {
 void MoralUnitTest::isEqualTest() {
 	using namespace boost::ut;
 	"isEqual (all properties are equal)"_test = [&] {
-		MoralUnit u1 = builder.getResult();
-		MoralUnit u2 = builder.getResult();
+		MoralUnit u1 = *std::dynamic_pointer_cast<MoralUnit>(builder.getResult());
+		MoralUnit u2 = *std::dynamic_pointer_cast<MoralUnit>(builder.getResult());
 		expect(u1.isEqual(&u2) == true >> fatal) << "Units must be equal!";
 		};
 
 	"isEqual (some properties are different)"_test = [&] {
-		MoralUnit u1 = builder.getResult();
-		MoralUnit u2 = builder.setArmor(50, false)->getResult();
+		MoralUnit u1 = *std::dynamic_pointer_cast<MoralUnit>(builder.getResult());
+		MoralUnit u2 = *std::dynamic_pointer_cast<MoralUnit>(builder.setArmor(50, false)->getResult());
 		expect(u1.isEqual(&u2) == false);
 		};
 	builder.setArmor(0, false);
@@ -216,7 +216,7 @@ void MoralUnitTest::attackUnitTypeTest() {
 	MoralUnit u1, u2;
 	u1.viability = 50;
 	u2.viability = 60;
-	MoralUnit un = builder.getResult();
+	MoralUnit un = *std::dynamic_pointer_cast<MoralUnit>(builder.getResult());
 	"attackUnitType (attack alive units)"_test = [&] {
 		double damage = 50.0;
 		int posFirstAlive = 0;
@@ -250,7 +250,7 @@ void MoralUnitTest::attackUnitTypeTest() {
 }
 void MoralUnitTest::takeDamageTest() {
 	using namespace boost::ut;
-	MoralUnit u1 = builder.getResult();
+	MoralUnit u1 = *std::dynamic_pointer_cast<MoralUnit>(builder.getResult());
 	"takeDamage_1"_test = [&] {
 		double dam = 40;
 		u1.takeDamage(dam);
@@ -261,7 +261,7 @@ void MoralUnitTest::takeDamageTest() {
 		u1.takeDamage(dam);
 		expect(u1.getViability() == 0 && dam == 40 && !u1.isAlive());
 		};
-	u1 = builder.setArmor(50, false)->getResult();
+	u1 = *std::dynamic_pointer_cast<MoralUnit>(builder.setArmor(50, false)->getResult());
 	"takeDamage_3"_test = [&] {
 		double dam = 80;
 		u1.takeDamage(dam);
@@ -270,7 +270,7 @@ void MoralUnitTest::takeDamageTest() {
 }
 void MoralUnitTest::cloneTest() {
 	using namespace boost::ut;
-	MoralUnit u = builder.getResult();
+	MoralUnit u = *std::dynamic_pointer_cast<MoralUnit>(builder.getResult());
 	"clone_1"_test = [&] {
 		Unit* u2 = u.clone();
 		expect(u.isEqual(u2));
@@ -285,7 +285,7 @@ void MoralUnitTest::cloneTest() {
 }
 void MoralUnitTest::createTest() {
 	using namespace boost::ut;
-	MoralUnit u = builder.getResult();
+	MoralUnit u = *std::dynamic_pointer_cast<MoralUnit>(builder.getResult());
 	"create_1"_test = [&] {
 		Unit* u2 = u.create();
 		expect(u.getType() == u2->getType());
@@ -318,66 +318,64 @@ void MoralUnitTest::test() {
 MoralUnitBuilder::MoralUnitBuilder() {
 	reset();
 }
-MoralUnitBuilder::MoralUnitBuilder(MoralUnit unit) {
-	this->unit = unit;
-}
+
 void MoralUnitBuilder::reset() {
-	unit = MoralUnit();
+	unit = std::make_shared<MoralUnit>();
 }
-MoralUnit MoralUnitBuilder::getResult() {
+std::shared_ptr<Unit> MoralUnitBuilder::getResult() {
 	return unit;
 }
 MoralUnitBuilder* MoralUnitBuilder::setName(const std::string& name) {
 	int i;
 	for (i = 0; i < name.size() && i < 256; i++) {
-		unit.name[i] = name[i];
+		unit->name[i] = name[i];
 	}
 	for (; i < 256; i++) {
-		unit.name[i] = '\0';
+		unit->name[i] = '\0';
 	}
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::addItem(const Item& item) {
-	unit.items.push_back(item);
+	unit->items.push_back(item);
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::setPowerAndViability(double minPower, double maxPower, double viability) {
 	if (minPower < 0 || maxPower <= 0 || viability <= 0)
 		return this;
-	unit.minPower = minPower;
-	unit.maxPower = maxPower;
-	unit.viability = viability;
+	unit->minPower = minPower;
+	unit->maxPower = maxPower;
+	unit->viability = viability;
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::setFortificationTarget(bool fortificationTarget) {
-	unit.fortificationTarget = fortificationTarget;
+	unit->fortificationTarget = fortificationTarget;
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::setTypes(unitHelpers::unitTypes type, unitHelpers::unitTypes priorityTarget) {
-	unit.type = type;
-	unit.priorityTarget = priorityTarget;
+	unit->type = type;
+	unit->priorityTarget = priorityTarget;
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::setPowerCoef(const std::map<unitHelpers::unitTypes, double>& powerCoef) {
-	unit.powerCoef = powerCoef;
+	unit->powerCoef = powerCoef;
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::setCycling(const unitHelpers::Cycling& cycling) {
-	unit.cycling = cycling;
+	unit->cycling = cycling;
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::setMorality(double morality, double rateOfMoralityChanges = 1) {
-	unit.setMorality(morality);
+	unit->setMorality(morality);
 	if (rateOfMoralityChanges <= 0)
 		rateOfMoralityChanges = 1;
-	unit.rateOfMoralityChanges = rateOfMoralityChanges;
+	unit->rateOfMoralityChanges = rateOfMoralityChanges;
 	return this;
 }
 MoralUnitBuilder* MoralUnitBuilder::setArmor(double armor, bool isRenovate) {
 	if (armor < 0)
 		armor = 0;
-	unit.currentArmor = armor;
-	unit.maxArmor = armor;
-	unit.isRenovateArmor = isRenovate;
+	unit->currentArmor = armor;
+	unit->maxArmor = armor;
+	unit->isRenovateArmor = isRenovate;
 	return this;
 }
