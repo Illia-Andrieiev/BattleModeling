@@ -379,7 +379,14 @@ bool Unit::prepareForAttack(const double& supplies) {
 	return true;
 }
 double Unit::determineDamage(unitHelpers::unitTypes type, double power) {
-	return power * powerCoef[type];
+	double res = 1;
+	try {
+		res = power * powerCoef.at(type);
+	}
+	catch (const std::out_of_range&) {
+		return power;
+	}
+	return res;
 }
 void Unit::manageSupplies(double& supplies, double power) {
 	supplies -= power * 0.1; ///< change supplies

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddCyclingAndPowerCoefFormClass</class>
+ <widget class="QDialog" name="AddCyclingAndPowerCoefFormClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>644</width>
+    <height>413</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AddCyclingAndPowerCoefForm</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>641</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="3" column="1" colspan="2">
+     <widget class="QLineEdit" name="RoundsToActivation">
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <widget class="QLineEdit" name="RoundsToReplenishment">
+      <property name="text">
+       <string>10</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QListWidget" name="UnitTypes"/>
+    </item>
+    <item row="2" column="3">
+     <widget class="QPushButton" name="ToMenu">
+      <property name="styleSheet">
+       <string notr="true">background-color:#F0FFFF;
+font-weight:800;
+color:black;
+</string>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Choose type to change:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QLineEdit" name="PowerCoef">
+      <property name="text">
+       <string>1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="2">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Enter Unit`s rounds to activation:&lt;b style =&quot;color:red;&quot;&gt;*&lt;/b&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Enter Unit`s rounds to replenishment:&lt;b style =&quot;color:red;&quot;&gt;*&lt;/b&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="3">
+     <widget class="QPushButton" name="AddPowerCoef">
+      <property name="text">
+       <string>Add power coef</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="2">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Enter power coef:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="3">
+     <widget class="QPushButton" name="FinishButton">
+      <property name="text">
+       <string>Finish</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QRadioButton" name="IsActive">
+      <property name="text">
+       <string>Is unit active now</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

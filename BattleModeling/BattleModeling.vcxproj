@@ -99,7 +99,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AddCircumstanceForm.cpp" />
+    <ClCompile Include="AddCyclingAndPowerCoefForm.cpp" />
     <ClCompile Include="AddItemForm.cpp" />
+    <ClCompile Include="AddUnitForm.cpp" />
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="BattleModeling.cpp" />
     <ClCompile Include="Circumstance.cpp" />
@@ -110,7 +112,9 @@
     <ClCompile Include="Unit.cpp" />
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="AddCircumstanceForm.ui" />
+    <QtUic Include="AddCyclingAndPowerCoefForm.ui" />
     <QtUic Include="AddItemForm.ui" />
+    <QtUic Include="AddUnitForm.ui" />
     <QtUic Include="MainWindow.ui" />
     <QtMoc Include="MainWindow.h" />
     <ClCompile Include="MainWindow.cpp" />
@@ -119,6 +123,8 @@
   <ItemGroup>
     <QtMoc Include="AddItemForm.h" />
     <QtMoc Include="AddCircumstanceForm.h" />
+    <QtMoc Include="AddUnitForm.h" />
+    <QtMoc Include="AddCyclingAndPowerCoefForm.h" />
     <ClInclude Include="Army.h" />
     <ClInclude Include="BattleModeling.h" />
     <ClInclude Include="Circumstance.h" />
