@@ -318,6 +318,9 @@ void MoralUnitTest::test() {
 MoralUnitBuilder::MoralUnitBuilder() {
 	reset();
 }
+MoralUnitBuilder::MoralUnitBuilder(MoralUnit unit) {
+	this->unit = unit;
+}
 void MoralUnitBuilder::reset() {
 	unit = MoralUnit();
 }

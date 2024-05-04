@@ -8,10 +8,10 @@ class AddCyclingAndPowerCoefForm : public QDialog
 	Q_OBJECT
 
 public:
-	AddCyclingAndPowerCoefForm(Unit* unit,QWidget *parent = nullptr);
+	AddCyclingAndPowerCoefForm(QWidget *parent = nullptr);
 	~AddCyclingAndPowerCoefForm();
 
 private:
-	Unit* unit;
+	BaseUnitBuilder& build;
 	Ui::AddCyclingAndPowerCoefFormClass ui;
 };

@@ -183,7 +183,7 @@
      </widget>
     </item>
     <item row="8" column="5">
-     <widget class="QPushButton" name="AddUnitButton">
+     <widget class="QPushButton" name="AddUnit">
       <property name="text">
        <string>Add Unit</string>
       </property>

@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include"AddItemForm.h"
 #include"AddCircumstanceForm.h"
+#include"AddUnitForm.h"
 #include "UIHelpers.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,6 +16,11 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_AddItemButton_clicked() {
     AddItemForm w;
+    w.setModal(true);
+    w.exec();
+}
+void MainWindow::on_AddUnitButton_clicked() {
+    AddUnitForm w;
     w.setModal(true);
     w.exec();
 }

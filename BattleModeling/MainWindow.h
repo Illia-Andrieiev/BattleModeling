@@ -13,6 +13,7 @@ public:
 private slots:
     void on_AddItemButton_clicked();
     void on_AddCircumstanceButton_clicked();
+    void on_AddUnitButton_clicked();
 private:
     void setStyles();
     Ui::MainWindowClass ui;

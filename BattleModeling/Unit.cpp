@@ -637,6 +637,9 @@ void UnitTest::test() {
 UnitBuilder::UnitBuilder() {
 	reset();
 }
+UnitBuilder::UnitBuilder(Unit unit) {
+	this->unit = unit;
+}
 void UnitBuilder::reset() {
 	unit = Unit();
 }

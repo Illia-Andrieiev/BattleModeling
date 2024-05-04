@@ -1,10 +1,8 @@
 #include "AddCyclingAndPowerCoefForm.h"
 
-AddCyclingAndPowerCoefForm::AddCyclingAndPowerCoefForm(Unit* unit, QWidget *parent)
-	: QDialog(parent),unit(unit)
+AddCyclingAndPowerCoefForm::AddCyclingAndPowerCoefForm( QWidget *parent)
+	: QDialog(parent),build(build)
 {
-	if (unit == nullptr)
-		this->close();
 	ui.setupUi(this);
 }
 

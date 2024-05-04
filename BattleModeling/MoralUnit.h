@@ -32,6 +32,7 @@ private:
 	MoralUnit unit;
 public:
 	MoralUnitBuilder();
+	MoralUnitBuilder(MoralUnit unit);
 	virtual void reset();
 	virtual MoralUnit getResult();
 	virtual MoralUnitBuilder* setName(const std::string& name) override;

@@ -115,6 +115,7 @@ private:
 	Unit unit;
 public:
 	UnitBuilder();
+	UnitBuilder(Unit unit);
 	virtual void reset();
 	virtual Unit getResult();
 	virtual UnitBuilder* setName(const std::string& name) override;
