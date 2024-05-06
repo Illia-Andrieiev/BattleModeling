@@ -1,0 +1,10 @@
+^D:\PROGRAMMING\C++\CURSE_2\BATTLEMODELING\BATTLEMODELING\LIBS\BUILDED_FREEGLUT-3.2.2\CMAKEFILES\9E033882C57C2256435EE16F1F5B90CE\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/freeglut-3.2.2 -BD:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/builded_freeglut-3.2.2/freeglut.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\Programming\C++\Curse_2\BattleModeling\BattleModeling\libs\builded_freeglut-3.2.2\x64\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Programming\C++\Curse_2\BattleModeling\BattleModeling\libs\builded_freeglut-3.2.2\bin\Debug\freeglutd.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Programming\C++\Curse_2\BattleModeling\BattleModeling\libs\builded_freeglut-3.2.2\bin\Debug\timerd.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

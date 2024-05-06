@@ -1,0 +1,5 @@
+﻿  Building Custom Rule D:/Programming/C++/Curse_2/BattleModeling/BattleModeling/libs/freeglut-3.2.2/CMakeLists.txt
+  shapes.c
+  glmatrix.c
+  Создание кода...
+  shapes.vcxproj -> D:\Programming\C++\Curse_2\BattleModeling\BattleModeling\libs\builded_freeglut-3.2.2\bin\Debug\shapesd.exe
