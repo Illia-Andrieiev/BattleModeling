@@ -6,10 +6,6 @@
 ChangeBattleCircumstancesForm::ChangeBattleCircumstancesForm(BattleModeling& battle,QWidget *parent)
 	: QDialog(parent),battle(battle)
 {
-	QRegularExpression rx("[^/'\":;]*");
-	QValidator* validator = new QRegularExpressionValidator(rx, this);
-	ui.Army1Circ->setValidator(validator);
-	ui.Army2Circ->setValidator(validator);
 	ui.setupUi(this);
 	for (auto& circ : battle.getCircumstances()) {
 		ui.AppliedCircs->addItem(QString::fromStdString(circ.getName()));

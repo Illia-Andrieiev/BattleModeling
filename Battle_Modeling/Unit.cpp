@@ -79,6 +79,7 @@ unitHelpers::unitTypes AttackArmy::chooseRandomTarget(Army& army) {
 * \param[in,out] army Army to attack
 * \param[in,out] supplies Units supplies to attack army. Decrease supplies on 0.1*power.
 */
+
 void AttackArmy::attackArmy(Army& army, double& supplies) {
 	if (!prepareForAttack(supplies))
 		return;
@@ -378,7 +379,7 @@ void Unit::applyItems() {
 double  Unit::determinePower() {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::normal_distribution<> distr(minPower, maxPower);
+	std::uniform_real_distribution<> distr(minPower, maxPower);
 	return distr(gen);
 }
 bool Unit::prepareForAttack(const double& supplies) {
@@ -407,19 +408,18 @@ void Unit::manageSupplies(double& supplies, double power) {
 	renovateArmor(supplies); ///< renovate armor
 }
 unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
-	int posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions[priorityTarget]]; ///< find position of last alive priorityTarget unit 
+	int posAlivePriorityTarget = -1;
+	try{
+		posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions.at(priorityTarget)]; ///< find position of last alive priorityTarget unit 
+	}
+	catch (const std::out_of_range&) {
+		posAlivePriorityTarget = -1;
+	}
+	
 	unitHelpers::unitTypes type = priorityTarget; ///< type to attack
 	if (posAlivePriorityTarget == -1) ///< If all priority targets dead, choose type randomly
 		type = chooseRandomTarget(army);
 	return type;
-}
-/// Attack foes army if enough suoolies. Change supplies
-/*!
-* \param[in,out] army Army to attack
-* \param[in,out] supplies Units supplies to attack army. Decrease supplies on 0.1*power.
-*/
-void Unit::attackArmy(Army& army, double& supplies) {
-
 }
 /// Return exact copy of this unit
 Unit* Unit::clone() {

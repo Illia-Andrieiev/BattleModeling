@@ -5,7 +5,7 @@
 #include "main/easy_plot_line_spec.hpp"
 #include "main/easy_plot_window_spec.hpp"
 #include "main/easy_plot_draw.hpp"
-
+#include<iostream>
 namespace easy_plot {
 
     class EasyPlot {

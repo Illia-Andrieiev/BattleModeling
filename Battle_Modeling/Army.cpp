@@ -209,6 +209,12 @@ bool Army::deleteUnit(std::string name) {
 					positionOfFirstAlive[i] = positionOfFirstAlive[i] - 1;
 				}
 				units[i].pop_back();
+				if (units[i].size() == 0) {
+					std::swap(units[i], units[units.size() - 1]);
+					units.pop_back();
+					std::swap(positionOfFirstAlive[i], positionOfFirstAlive[positionOfFirstAlive.size() - 1]);
+					positionOfFirstAlive.pop_back();
+				}
 				return true;
 			}
 		}
@@ -239,6 +245,8 @@ void Army::applyCircumstance(const Circumstance& circ) {
 }
 /// Sort vector of units by placing equal units alongside
 void Army::sortType(std::vector<Unit*>& units) {
+	if (units.size() == 0)
+		return;
 	for (int i = 0; i < units.size() - 1; i++) {
 		int cur = i + 1;
 		int j = i + 1;

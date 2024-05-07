@@ -121,7 +121,7 @@ double MoralUnit::determinePower() {
 	}
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::normal_distribution<> distr(minPower, maxPower);
+	std::uniform_real_distribution<> distr(minPower, maxPower);
 	return distr(gen);
 }
 /// Attack fortification an foe`s units

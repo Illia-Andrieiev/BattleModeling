@@ -9,6 +9,7 @@ AddArmyForm::AddArmyForm(QWidget *parent)
 	ui.setupUi(this);
 	setStyles();
 	fillArmyUnits();
+	ui.ArmyNameLineEdit->setMaxLength(256);
 	QRegularExpression rx("[^/'\":;]*");
 	QValidator* validatorName = new QRegularExpressionValidator(rx, this);
 	ui.ArmyNameLineEdit->setValidator(validatorName);
@@ -21,7 +22,7 @@ AddArmyForm::AddArmyForm(QWidget *parent)
 	}
 	this->setFixedSize(this->size());
 }
-AddArmyForm::AddArmyForm(QString armyName, QWidget* parent = nullptr) {
+AddArmyForm::AddArmyForm(QString armyName, QWidget* parent) {
 	ui.setupUi(this);
 	setStyles();
 	fillArmyUnits();

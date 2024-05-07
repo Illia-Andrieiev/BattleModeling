@@ -3,12 +3,15 @@
 #include"FileManager.h"
 #include <thread>
 #include<random>
+#include<filesystem>
 ///Constructor
 BattleModeling::BattleModeling() {
 	army1RoundReinforcement = 100;
 	army2RoundReinforcement = 100;
 	round = 0;
 	mementoRounds = 0;
+	army1ViabiliryToLoose = 0;
+	army2ViabiliryToLoose = 0;
 }
 std::vector<std::shared_ptr<MementoArmy>> BattleModeling::getArmy1Mementoes() {
 	return army1Mementoes;
@@ -29,6 +32,7 @@ void BattleModeling::setArmy2SpecialCircumstance(const Circumstance& circ) {
 /// One battle round
 void BattleModeling::battleRound() {
 	round++;
+	manageSupplies();
 	///< Attack army
 	std::thread army1Thread([&]() {army1.attackArmy(army2); });
 	army2.attackArmy(army1);
@@ -44,33 +48,53 @@ void BattleModeling::battleRound() {
 	th2.join();
 	th3.join();
 	///< Print armies
-	std::cout << "army1 viability: " << viability1 << std::endl << army1.toString() << std::endl;
-	std::cout << "army2: viability: " << viability2 << std::endl << army2.toString() << std::endl;
-
+	std::fstream log;
+	log.open("log", std::ios::app | std::ios::in | std::ios::out);
+	log << "army1 viability: " << viability1 << std::endl << army1.toString() << std::endl;
+	log << "army2: viability: " << viability2 << std::endl << army2.toString() << std::endl;
+	log.close();
+}
+void BattleModeling::manageSupplies() {
+	if (roundSupplies.army1SupplyRoundAmount >= round) {
+		army1.changeSupplies(roundSupplies.army1RoundSupplies);
+	}
+	if (roundSupplies.army2SupplyRoundAmount >= round) {
+		army2.changeSupplies(roundSupplies.army2RoundSupplies);
+	}
 }
 /// Main Battle modeling method 
-void BattleModeling::operator()() {
+std::vector<std::pair<double, double>> BattleModeling::operator()() {
+	round = 0;
+	resultPoints.clear();
 	Army army1, army2, reinf1, reinf2;
+	this->army1.changeSupplies(-this->army1.getSupplies());
+	this->army1.changeSupplies(roundSupplies.army1StartSupplies);
+	this->army2.changeSupplies(-this->army2.getSupplies());
+	this->army2.changeSupplies(roundSupplies.army2StartSupplies);
 	army1 = this->army1;
 	army2 = this->army2;
 	reinf1 = this->army1Reinforcements;
 	reinf2 = this->army2Reinforcements;
 	prepareForBattle();
-	while (this->army1.getViability() > 0 && this->army2.getViability() > 0) {
+	while (this->army1.getViability() > army1ViabiliryToLoose && this->army2.getViability() > army2ViabiliryToLoose
+		&&(this->army1.getSupplies()>0 || this->army2.getSupplies() > 0)) {
 		if (mementoRounds != 0) { ///< Create mementos
 			if (round % mementoRounds == 0) {
 				army1Mementoes.push_back( army1.createMemento(round));	
 				army2Mementoes.push_back(army2.createMemento(round));
 			}
 		}
+		resultPoints.push_back(std::pair<double, double>(this->army1.getViability(), this->army2.getViability()));
 		battleRound();
 		addReinforcement(); ///< Add reinforcement
-		system("pause");
+		//system("pause");
 	}
+	resultPoints.push_back(std::pair<double, double>(this->army1.getViability(), this->army2.getViability()));
 	this->army1 = army1;
 	this->army2 = army2;
 	this->army1Reinforcements = reinf1;
 	this->army2Reinforcements = reinf2;
+	return resultPoints;
 }
 /// Preparetion for battle
 void BattleModeling::prepareForBattle() {
@@ -101,6 +125,7 @@ void BattleModeling::prepareForBattle() {
 	th1 = std::thread([&]() {this->army1.countViability(); });
 	this->army2.countViability();
 	th1.join();
+	std::filesystem::remove("log");
 }
 std::vector<Circumstance> BattleModeling::getCircumstances() const {
 	return circumstances;
@@ -226,6 +251,11 @@ BattleBuilder* BattleBuilder::setArmy(const Army& army1, const Army& army2) {
 }
 BattleBuilder* BattleBuilder::createMemento(int mementoRounds) {
 	battle.mementoRounds = mementoRounds;
+	return this;
+}
+BattleBuilder* BattleBuilder::setLoosePoints(double army1ViabilityToLoose, double army2ViabilityToLoose) {
+	battle.army1ViabiliryToLoose = army1ViabilityToLoose;
+	battle.army2ViabiliryToLoose = army2ViabilityToLoose;
 	return this;
 }
 void BattleModelingTest::test() {

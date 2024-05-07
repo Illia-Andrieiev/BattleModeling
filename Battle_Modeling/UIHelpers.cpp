@@ -1,4 +1,5 @@
 #include"UIHelpers.h"
+#include"libs/easy_plot_cpp-master/include/easy_plot.hpp"
 namespace styles {
     const QString mainButton = { " QPushButton{"
         "background-color: #F0FFFF;"
@@ -34,6 +35,13 @@ namespace styles {
      "} " };
 }
 namespace uiFunctions {
+    std::string getWininMessage(whoWin winner) {
+        if (winner == whoWin::army1)
+            return "Army 1 win!";
+        if (winner == whoWin::army2)
+            return "Army 2 win!";
+        return "Noone win! Draw!";
+    }
     std::string unitTypesToString(unitHelpers::unitTypes type) {
         using namespace unitHelpers;
         if (type == unitTypes::infantry)
@@ -74,5 +82,21 @@ namespace uiFunctions {
     aviation,
     armoredVehickle,
     infantry*/
+    }
+    void drawGrafik(std::string winMessage, std::vector<std::pair<double, double>> points, int argc, char* argv[]) {
+        ep::init(&argc, argv);
+        std::vector<double> first;
+        std::vector<double> second;
+        for (auto& pair : points) {
+            first.push_back(pair.first);
+            second.push_back(pair.second);
+        }
+        ep::WindowSpec wstyle;
+        ep::plot<double>("Army1 - red, Army2 - blue.", wstyle, 2, first, ep::LineSpec(1, 0, 0), second, ep::LineSpec(0, 0, 1));
+        bool ok = false; 
+        while (!ok) {
+            QInputDialog::getInt(0, "Close Window", QString::fromStdString(winMessage), 0, 0, 0, 1, &ok);
+            std::this_thread::yield();
+        }
     }
 }

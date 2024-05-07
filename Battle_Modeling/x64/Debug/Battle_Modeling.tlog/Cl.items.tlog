@@ -5,6 +5,9 @@ D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\AddItemForm.cpp;D:\Pr
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\AddUnitForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\AddUnitForm.obj
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\Army.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\Army.obj
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\BattleModeling.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\BattleModeling.obj
+D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\BattleSuppliesForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\BattleSuppliesForm.obj
+D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\ChangeBattleCircumstancesForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\ChangeBattleCircumstancesForm.obj
+D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\ChangeBattleReinforcementsForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\ChangeBattleReinforcementsForm.obj
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\ChangeUnitItemsForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\ChangeUnitItemsForm.obj
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\Circumstance.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\Circumstance.obj
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\FileManager.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\FileManager.obj
@@ -22,3 +25,6 @@ D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc\moc_Add
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc\moc_AddItemForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc_AddItemForm.obj
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc\moc_AddUnitForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc_AddUnitForm.obj
 D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc\moc_AddArmyForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc_AddArmyForm.obj
+D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc\moc_ChangeBattleCircumstancesForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc_ChangeBattleCircumstancesForm.obj
+D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc\moc_ChangeBattleReinforcementsForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc_ChangeBattleReinforcementsForm.obj
+D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc\moc_BattleSuppliesForm.cpp;D:\Programming\C++\Curse_2\Battle_Modeling\Battle_Modeling\x64\Debug\moc_BattleSuppliesForm.obj

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\freeglut.3.2.2.v140.1.0.0\build\freeglut.3.2.2.v140.props" Condition="Exists('..\packages\freeglut.3.2.2.v140.1.0.0\build\freeglut.3.2.2.v140.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -104,7 +105,9 @@
     <ClCompile Include="AddUnitForm.cpp" />
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="BattleModeling.cpp" />
+    <ClCompile Include="BattleSuppliesForm.cpp" />
     <ClCompile Include="ChangeBattleCircumstancesForm.cpp" />
+    <ClCompile Include="ChangeBattleReinforcementsForm.cpp" />
     <ClCompile Include="ChangeUnitItemsForm.cpp" />
     <ClCompile Include="Circumstance.cpp" />
     <ClCompile Include="FileManager.cpp" />
@@ -118,7 +121,9 @@
     <QtUic Include="AddCyclingAndPowerCoefForm.ui" />
     <QtUic Include="AddItemForm.ui" />
     <QtUic Include="AddUnitForm.ui" />
+    <QtUic Include="BattleSuppliesForm.ui" />
     <QtUic Include="ChangeBattleCircumstancesForm.ui" />
+    <QtUic Include="ChangeBattleReinforcementsForm.ui" />
     <QtUic Include="ChangeUnitItemsForm.ui" />
     <QtUic Include="MainWindow.ui" />
     <QtMoc Include="MainWindow.h" />
@@ -135,6 +140,8 @@
     <ClInclude Include="Army.h" />
     <ClInclude Include="BattleModeling.h" />
     <QtMoc Include="ChangeBattleCircumstancesForm.h" />
+    <QtMoc Include="ChangeBattleReinforcementsForm.h" />
+    <QtMoc Include="BattleSuppliesForm.h" />
     <ClInclude Include="Circumstance.h" />
     <ClInclude Include="Cloneable.h" />
     <ClInclude Include="FileManager.h" />
@@ -144,10 +151,18 @@
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitHelpers.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
   </ImportGroup>
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\freeglut.3.2.2.v140.1.0.0\build\freeglut.3.2.2.v140.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\freeglut.3.2.2.v140.1.0.0\build\freeglut.3.2.2.v140.props'))" />
+  </Target>
 </Project>

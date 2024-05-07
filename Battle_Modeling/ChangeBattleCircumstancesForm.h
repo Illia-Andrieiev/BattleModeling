@@ -17,7 +17,6 @@ private slots:
 	void on_CircListWidget_itemDoubleClicked(QListWidgetItem* item);
 	void on_RemoveGeneralCircButton_clicked();
 	void on_ApplySpecialCircs_clicked();
-	
 private:
 	BattleModeling& battle;
 	bool isCircExist(QString name);

@@ -4,7 +4,10 @@
 #include"Unit.h"
 #include"Army.h"
 #include<memory>
+/// Supplies paramenters for armies
 struct Supply {
+	double army1StartSupplies = 0; ///< Army1 start supplies
+	double army2StartSupplies = 0; ///< Army1 start supplies
 	double army1RoundSupplies = 0; ///< Round supplies for army1 
 	double army2RoundSupplies = 0; ///< Round supplies for army2 
 	int army1SupplyRoundAmount = 0; ///< How many rounds supplies will add for army1
@@ -19,8 +22,11 @@ private:
 	std::vector<std::shared_ptr<MementoArmy>> army2Mementoes;
 	int round;///< Current battle round
 	int mementoRounds; ///< Every mementoRounds make mementos
+	std::vector<std::pair<double, double>> resultPoints; ///< Pairs <army1 viability, army2 viability> for every battle round
 	Army army1; ///< Army 1
 	Army army2; ///< Army 2
+	double army1ViabiliryToLoose; ///< After army1 viability reach this point, then it loose
+	double army2ViabiliryToLoose; ///< After army2 viability reach this point, then it loose
 	Army army1Reinforcements; ///< Reinforcements for army 1
 	Army army2Reinforcements; ///< Reinforcements for army 2
 	double army1RoundReinforcement; ///< Persents of reinforcements that will add to army 1 per round
@@ -35,6 +41,7 @@ private:
 	void addReinforcement();
 	void prepareForBattle();
 	Unit* chooseRandomUnit(Army& army, unitHelpers::unitTypes type);
+	void manageSupplies();
 public:
 	static BattleModeling& getBattleModeling();
 	void addCircumstance(const Circumstance& circ);
@@ -48,7 +55,7 @@ public:
 	std::vector<std::shared_ptr<MementoArmy>> getArmy1Mementoes();
 	std::vector<std::shared_ptr<MementoArmy>> getArmy2Mementoes();
 	int getRound() const;
-	void operator()();
+	std::vector<std::pair<double,double>> operator()();
 };
 /// Battle builder
 class BattleBuilder {
@@ -62,6 +69,7 @@ public:
 		double  army1RoundReinforcement, double army2RoundReinforcement);
 	BattleBuilder* setArmy(const Army& army1, const Army& army2);
 	BattleBuilder* createMemento(int mementoRounds);
+	BattleBuilder* setLoosePoints(double army1ViabilityToLoose, double army2ViabilityToLoose);
 };
 class BattleModelingTest {
 public:

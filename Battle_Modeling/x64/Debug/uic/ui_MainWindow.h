@@ -20,6 +20,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,25 +31,29 @@ public:
     QWidget *centralWidget;
     QWidget *layoutWidget;
     QGridLayout *gridLayout;
-    QLineEdit *Army2LineEdit;
-    QLineEdit *Army2WiTargetLineEdit;
+    QListWidget *ArmiesListWidget;
+    QLabel *label;
+    QVBoxLayout *verticalLayout;
+    QPushButton *StartButton;
+    QPushButton *ChangeCircumstancesButton;
+    QPushButton *ChangeReinfButton;
+    QPushButton *AddItemButton;
+    QPushButton *AddCircumstanceButton;
+    QPushButton *AddUnitButton;
+    QPushButton *AddArmyButton;
+    QVBoxLayout *verticalLayout_2;
     QLabel *label_2;
-    QLineEdit *Army1WinTargetLineEdit;
+    QLineEdit *Army1LineEdit;
+    QLabel *label_3;
+    QLineEdit *Army2LineEdit;
     QLabel *label_4;
     QLineEdit *AmountLineEdit;
-    QLabel *label_3;
-    QPushButton *AddItemButton;
-    QLineEdit *SaveArmiesStateLineEdit;
-    QLabel *label_5;
-    QLabel *label_7;
     QLabel *label_6;
-    QPushButton *AddCircumstanceButton;
-    QLineEdit *Army1LineEdit;
-    QLabel *label;
-    QPushButton *AddArmyButton;
-    QPushButton *AddUnitButton;
-    QListWidget *ArmiesListWidget;
-    QPushButton *StartButton;
+    QLineEdit *Army2WinTargetLineEdit;
+    QLabel *label_5;
+    QLineEdit *Army1WinTargetLineEdit;
+    QLabel *label_7;
+    QLineEdit *SaveArmiesStateLineEdit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -57,107 +62,30 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName("MainWindowClass");
-        MainWindowClass->resize(772, 550);
+        MainWindowClass->resize(772, 600);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName("centralWidget");
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(7, -1, 761, 491));
+        layoutWidget->setGeometry(QRect(7, -1, 761, 541));
         gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName("gridLayout");
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        Army2LineEdit = new QLineEdit(layoutWidget);
-        Army2LineEdit->setObjectName("Army2LineEdit");
+        ArmiesListWidget = new QListWidget(layoutWidget);
+        ArmiesListWidget->setObjectName("ArmiesListWidget");
 
-        gridLayout->addWidget(Army2LineEdit, 4, 3, 1, 1);
-
-        Army2WiTargetLineEdit = new QLineEdit(layoutWidget);
-        Army2WiTargetLineEdit->setObjectName("Army2WiTargetLineEdit");
-
-        gridLayout->addWidget(Army2WiTargetLineEdit, 10, 3, 1, 1);
-
-        label_2 = new QLabel(layoutWidget);
-        label_2->setObjectName("label_2");
-
-        gridLayout->addWidget(label_2, 1, 3, 1, 1);
-
-        Army1WinTargetLineEdit = new QLineEdit(layoutWidget);
-        Army1WinTargetLineEdit->setObjectName("Army1WinTargetLineEdit");
-
-        gridLayout->addWidget(Army1WinTargetLineEdit, 8, 3, 1, 1);
-
-        label_4 = new QLabel(layoutWidget);
-        label_4->setObjectName("label_4");
-
-        gridLayout->addWidget(label_4, 5, 3, 1, 1);
-
-        AmountLineEdit = new QLineEdit(layoutWidget);
-        AmountLineEdit->setObjectName("AmountLineEdit");
-
-        gridLayout->addWidget(AmountLineEdit, 6, 3, 1, 1);
-
-        label_3 = new QLabel(layoutWidget);
-        label_3->setObjectName("label_3");
-
-        gridLayout->addWidget(label_3, 3, 3, 1, 1);
-
-        AddItemButton = new QPushButton(layoutWidget);
-        AddItemButton->setObjectName("AddItemButton");
-
-        gridLayout->addWidget(AddItemButton, 8, 4, 1, 1);
-
-        SaveArmiesStateLineEdit = new QLineEdit(layoutWidget);
-        SaveArmiesStateLineEdit->setObjectName("SaveArmiesStateLineEdit");
-
-        gridLayout->addWidget(SaveArmiesStateLineEdit, 12, 3, 1, 1);
-
-        label_5 = new QLabel(layoutWidget);
-        label_5->setObjectName("label_5");
-
-        gridLayout->addWidget(label_5, 7, 3, 1, 1);
-
-        label_7 = new QLabel(layoutWidget);
-        label_7->setObjectName("label_7");
-
-        gridLayout->addWidget(label_7, 11, 3, 1, 1);
-
-        label_6 = new QLabel(layoutWidget);
-        label_6->setObjectName("label_6");
-
-        gridLayout->addWidget(label_6, 9, 3, 1, 1);
-
-        AddCircumstanceButton = new QPushButton(layoutWidget);
-        AddCircumstanceButton->setObjectName("AddCircumstanceButton");
-
-        gridLayout->addWidget(AddCircumstanceButton, 10, 4, 1, 1);
-
-        Army1LineEdit = new QLineEdit(layoutWidget);
-        Army1LineEdit->setObjectName("Army1LineEdit");
-
-        gridLayout->addWidget(Army1LineEdit, 2, 3, 1, 1);
+        gridLayout->addWidget(ArmiesListWidget, 1, 0, 18, 2);
 
         label = new QLabel(layoutWidget);
         label->setObjectName("label");
 
         gridLayout->addWidget(label, 0, 0, 1, 2, Qt::AlignmentFlag::AlignHCenter);
 
-        AddArmyButton = new QPushButton(layoutWidget);
-        AddArmyButton->setObjectName("AddArmyButton");
-
-        gridLayout->addWidget(AddArmyButton, 14, 4, 1, 1);
-
-        AddUnitButton = new QPushButton(layoutWidget);
-        AddUnitButton->setObjectName("AddUnitButton");
-
-        gridLayout->addWidget(AddUnitButton, 12, 4, 1, 1);
-
-        ArmiesListWidget = new QListWidget(layoutWidget);
-        ArmiesListWidget->setObjectName("ArmiesListWidget");
-
-        gridLayout->addWidget(ArmiesListWidget, 1, 0, 14, 2);
-
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName("verticalLayout");
         StartButton = new QPushButton(layoutWidget);
         StartButton->setObjectName("StartButton");
         StartButton->setStyleSheet(QString::fromUtf8("background-color:#F0FFFF;\n"
@@ -165,7 +93,106 @@ public:
 "color:black;\n"
 ""));
 
-        gridLayout->addWidget(StartButton, 6, 4, 1, 1);
+        verticalLayout->addWidget(StartButton);
+
+        ChangeCircumstancesButton = new QPushButton(layoutWidget);
+        ChangeCircumstancesButton->setObjectName("ChangeCircumstancesButton");
+
+        verticalLayout->addWidget(ChangeCircumstancesButton);
+
+        ChangeReinfButton = new QPushButton(layoutWidget);
+        ChangeReinfButton->setObjectName("ChangeReinfButton");
+
+        verticalLayout->addWidget(ChangeReinfButton);
+
+        AddItemButton = new QPushButton(layoutWidget);
+        AddItemButton->setObjectName("AddItemButton");
+
+        verticalLayout->addWidget(AddItemButton);
+
+        AddCircumstanceButton = new QPushButton(layoutWidget);
+        AddCircumstanceButton->setObjectName("AddCircumstanceButton");
+
+        verticalLayout->addWidget(AddCircumstanceButton);
+
+        AddUnitButton = new QPushButton(layoutWidget);
+        AddUnitButton->setObjectName("AddUnitButton");
+
+        verticalLayout->addWidget(AddUnitButton);
+
+        AddArmyButton = new QPushButton(layoutWidget);
+        AddArmyButton->setObjectName("AddArmyButton");
+
+        verticalLayout->addWidget(AddArmyButton);
+
+
+        gridLayout->addLayout(verticalLayout, 0, 4, 19, 1);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        label_2 = new QLabel(layoutWidget);
+        label_2->setObjectName("label_2");
+
+        verticalLayout_2->addWidget(label_2);
+
+        Army1LineEdit = new QLineEdit(layoutWidget);
+        Army1LineEdit->setObjectName("Army1LineEdit");
+
+        verticalLayout_2->addWidget(Army1LineEdit);
+
+        label_3 = new QLabel(layoutWidget);
+        label_3->setObjectName("label_3");
+
+        verticalLayout_2->addWidget(label_3);
+
+        Army2LineEdit = new QLineEdit(layoutWidget);
+        Army2LineEdit->setObjectName("Army2LineEdit");
+
+        verticalLayout_2->addWidget(Army2LineEdit);
+
+        label_4 = new QLabel(layoutWidget);
+        label_4->setObjectName("label_4");
+
+        verticalLayout_2->addWidget(label_4);
+
+        AmountLineEdit = new QLineEdit(layoutWidget);
+        AmountLineEdit->setObjectName("AmountLineEdit");
+
+        verticalLayout_2->addWidget(AmountLineEdit);
+
+        label_6 = new QLabel(layoutWidget);
+        label_6->setObjectName("label_6");
+
+        verticalLayout_2->addWidget(label_6);
+
+        Army2WinTargetLineEdit = new QLineEdit(layoutWidget);
+        Army2WinTargetLineEdit->setObjectName("Army2WinTargetLineEdit");
+
+        verticalLayout_2->addWidget(Army2WinTargetLineEdit);
+
+        label_5 = new QLabel(layoutWidget);
+        label_5->setObjectName("label_5");
+
+        verticalLayout_2->addWidget(label_5);
+
+        Army1WinTargetLineEdit = new QLineEdit(layoutWidget);
+        Army1WinTargetLineEdit->setObjectName("Army1WinTargetLineEdit");
+
+        verticalLayout_2->addWidget(Army1WinTargetLineEdit);
+
+        label_7 = new QLabel(layoutWidget);
+        label_7->setObjectName("label_7");
+
+        verticalLayout_2->addWidget(label_7);
+
+        SaveArmiesStateLineEdit = new QLineEdit(layoutWidget);
+        SaveArmiesStateLineEdit->setObjectName("SaveArmiesStateLineEdit");
+
+        verticalLayout_2->addWidget(SaveArmiesStateLineEdit);
+
+
+        gridLayout->addLayout(verticalLayout_2, 0, 3, 19, 1);
 
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
@@ -187,21 +214,23 @@ public:
     void retranslateUi(QMainWindow *MainWindowClass)
     {
         MainWindowClass->setWindowTitle(QCoreApplication::translate("MainWindowClass", "MainWindow", nullptr));
-        Army2WiTargetLineEdit->setText(QCoreApplication::translate("MainWindowClass", "0", nullptr));
+        label->setText(QCoreApplication::translate("MainWindowClass", "Armies", nullptr));
+        StartButton->setText(QCoreApplication::translate("MainWindowClass", "Start Modeling", nullptr));
+        ChangeCircumstancesButton->setText(QCoreApplication::translate("MainWindowClass", "Change circumstances", nullptr));
+        ChangeReinfButton->setText(QCoreApplication::translate("MainWindowClass", "Change reinforcements", nullptr));
+        AddItemButton->setText(QCoreApplication::translate("MainWindowClass", "Add Item", nullptr));
+        AddCircumstanceButton->setText(QCoreApplication::translate("MainWindowClass", "Add circumstance", nullptr));
+        AddUnitButton->setText(QCoreApplication::translate("MainWindowClass", "Add unit", nullptr));
+        AddArmyButton->setText(QCoreApplication::translate("MainWindowClass", "Add army", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindowClass", "Enter army 1 name:<b style=\"color:red;\">*</b>", nullptr));
-        Army1WinTargetLineEdit->setText(QCoreApplication::translate("MainWindowClass", "0", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindowClass", "Enter army 2 name:<b style=\"color:red;\">*</b>", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindowClass", "Enter amount of modelings:", nullptr));
         AmountLineEdit->setText(QCoreApplication::translate("MainWindowClass", "1", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindowClass", "Enter army 2 name:<b style=\"color:red;\">*</b>", nullptr));
-        AddItemButton->setText(QCoreApplication::translate("MainWindowClass", "Add Item", nullptr));
-        label_5->setText(QCoreApplication::translate("MainWindowClass", "Army 1 foes units health to win: ", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindowClass", "Army 1 sum health to loose: ", nullptr));
+        Army2WinTargetLineEdit->setText(QCoreApplication::translate("MainWindowClass", "0", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindowClass", "Army 2 sum health to loose: ", nullptr));
+        Army1WinTargetLineEdit->setText(QCoreApplication::translate("MainWindowClass", "0", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindowClass", "Save armies state every entered round:", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindowClass", "Army 2 foes units health to win: ", nullptr));
-        AddCircumstanceButton->setText(QCoreApplication::translate("MainWindowClass", "Add circumstance", nullptr));
-        label->setText(QCoreApplication::translate("MainWindowClass", "Armies", nullptr));
-        AddArmyButton->setText(QCoreApplication::translate("MainWindowClass", "Add army", nullptr));
-        AddUnitButton->setText(QCoreApplication::translate("MainWindowClass", "Add unit", nullptr));
-        StartButton->setText(QCoreApplication::translate("MainWindowClass", "Start Modeling", nullptr));
     } // retranslateUi
 
 };

@@ -85,6 +85,12 @@
     <ClCompile Include="ChangeBattleCircumstancesForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeBattleReinforcementsForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleSuppliesForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoralUnit.h">
@@ -140,6 +146,12 @@
     <QtMoc Include="ChangeBattleCircumstancesForm.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ChangeBattleReinforcementsForm.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BattleSuppliesForm.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AddUnitForm.ui">
@@ -163,5 +175,14 @@
     <QtUic Include="ChangeBattleCircumstancesForm.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="ChangeBattleReinforcementsForm.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="BattleSuppliesForm.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -95,7 +95,6 @@ public:
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
 	virtual void updateCycle();
 	double getCurrentArmor() const;
-	void attackArmy(Army& army, double& supplies) override;
 	Unit* clone() override;
 	Unit* create() override;
 	void removeItem(const std::string& itemName);
