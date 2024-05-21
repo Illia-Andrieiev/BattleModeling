@@ -16,10 +16,8 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -54,15 +52,13 @@ public:
     QLineEdit *Army1WinTargetLineEdit;
     QLabel *label_7;
     QLineEdit *SaveArmiesStateLineEdit;
-    QMenuBar *menuBar;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName("MainWindowClass");
-        MainWindowClass->resize(772, 600);
+        MainWindowClass->resize(772, 564);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName("centralWidget");
         layoutWidget = new QWidget(centralWidget);
@@ -195,13 +191,6 @@ public:
         gridLayout->addLayout(verticalLayout_2, 0, 3, 19, 1);
 
         MainWindowClass->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainWindowClass);
-        menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 772, 21));
-        MainWindowClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindowClass);
-        mainToolBar->setObjectName("mainToolBar");
-        MainWindowClass->addToolBar(Qt::ToolBarArea::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindowClass);
         statusBar->setObjectName("statusBar");
         MainWindowClass->setStatusBar(statusBar);

@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['getamountofuniqueunits_0',['getAmountOfUniqueUnits',['../class_army.html#aaea17d88bf85229823d759c43987ca7a',1,'Army']]],
+  ['getbasepowerchanges_1',['getBasePowerChanges',['../class_item.html#a8038cabfe0d3b183409d5313fc357456',1,'Item']]],
+  ['getbattlemodeling_2',['getBattleModeling',['../class_battle_modeling.html#a879876ffb959e5594a486d4b35c8fc99',1,'BattleModeling']]],
+  ['getcurrentarmor_3',['getCurrentArmor',['../class_unit.html#a3c13a17d422cf88b5f5f60abbad0f20c',1,'Unit']]],
+  ['getisactive_4',['getIsActive',['../class_unit.html#a5b041b397bc835270e4af61092817e3f',1,'Unit']]],
+  ['getitems_5',['getItems',['../class_unit.html#a8f2d9205bb8de7f37093f4b0599666e4',1,'Unit']]],
+  ['getmaxbasepower_6',['getMaxBasePower',['../class_unit.html#a8b080e15ce67835f075a178533065b7d',1,'Unit']]],
+  ['getminbasepower_7',['getMinBasePower',['../class_unit.html#a13e36c217598ed2c17c183f63025a32b',1,'Unit']]],
+  ['getmorality_8',['getMorality',['../class_moral_unit.html#a3bd0cadcb3a3200c026e61ef22f0e060',1,'MoralUnit']]],
+  ['getname_9',['getName',['../class_army.html#a23b0ec0aa78d6b30a9d18b73ebd38d28',1,'Army::getName()'],['../class_circumstance.html#a68f4a3f6ba6560434bcbd5db262d3624',1,'Circumstance::getName()'],['../class_unit.html#a0497994e384db5c080ec78e9b645fa40',1,'Unit::getName()']]],
+  ['getnext_10',['getNext',['../class_each_type_iterator.html#a21279ca25dfc6fb3b29f0e9989a69f31',1,'EachTypeIterator::getNext()'],['../class_sequentially_type_iterator.html#a46a36300f62752e0fb76bb88c0845253',1,'SequentiallyTypeIterator::getNext()']]],
+  ['getpower_11',['getPower',['../class_army.html#a94167934d38f6a1511788d33c6fb6e5c',1,'Army']]],
+  ['getpowerchanges_12',['getPowerChanges',['../class_circumstance.html#a7fe536406418c195bfec0d03a0d018f4',1,'Circumstance::getPowerChanges()'],['../class_item.html#a2aa528b3520a8790547514f464806be9',1,'Item::getPowerChanges()']]],
+  ['getpowercoef_13',['getPowerCoef',['../class_unit.html#a35ab4dd8f311050e5b4385dc32d3013c',1,'Unit']]],
+  ['getsupplies_14',['getSupplies',['../class_army.html#a6190b618af71aeae4d5111cfadc30fb6',1,'Army::getSupplies()'],['../class_battle_modeling.html#a781338cfefb846271c744c26a0c1fd98',1,'BattleModeling::getSupplies()']]],
+  ['gettype_15',['getType',['../class_unit.html#af78feca34f1a5040b1469da3423120ec',1,'Unit']]],
+  ['gettypeid_16',['getTypeID',['../class_moral_unit.html#ab6fe48e90840e0a543d3c759479d46de',1,'MoralUnit::getTypeID()'],['../class_unit.html#a20331fd0614769771c135ee59add85a5',1,'Unit::getTypeID()']]],
+  ['getviability_17',['getViability',['../class_army.html#a3ded9d922d1d656618f649416fc56ab6',1,'Army::getViability()'],['../class_unit.html#af2b02788af4f0f4e8096dfde4fbf21ff',1,'Unit::getViability()']]],
+  ['getviabilitychanges_18',['getViabilityChanges',['../class_item.html#ae406dd4de3fc3e54aee67d25e550a59c',1,'Item']]]
+];

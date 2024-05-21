@@ -11,6 +11,7 @@
 MainWindow::MainWindow(int argc, char* argv[], QWidget *parent)
     : QMainWindow(parent),argv(argv)
 {
+    setWindowTitle("BattleModeling");
     ui.setupUi(this);
     setStyles();
     QRegularExpression rx("[^/'\":;]*");
@@ -32,11 +33,22 @@ MainWindow::MainWindow(int argc, char* argv[], QWidget *parent)
     for (const auto& entry : fs::directory_iterator("DataBase\\Armies\\")) {
         ui.ArmiesListWidget->addItem(QString::fromStdString(entry.path().filename().string()));
     }
+    QPushButton* infoButton = new QPushButton("Informtion", this);
+    connect(infoButton, &QPushButton::clicked, this, &MainWindow::showInfo);
+    infoButton->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    QToolBar* toolbar = addToolBar("Information222");
+    toolbar->addWidget(infoButton);
     connect(ui.AddUnitButton, &QPushButton::clicked, this, &MainWindow::on_AddUnitButton_clicked);
     connect(ui.AddItemButton, &QPushButton::clicked, this, &MainWindow::on_AddItemButton_clicked);
     connect(ui.AddCircumstanceButton, &QPushButton::clicked, this, &MainWindow::on_AddCircumstanceButton_clicked);
 }
-
+void MainWindow::showInfo() {
+    QString info = "Enter army names in neccessary fields, and press 'start modeling' button. then enter supplies amount for armies. " 
+        "To add army, unit, circumstance or item, press related button. You can apply circumstances for armies in battle by pressing 'change circumstances'"
+        " button, add reinforcements for armies by press 'change reinforcements' button. You do not need change reinforcements, supplies or"
+        " circumstances every modeling.";
+    QMessageBox::information(this, "information", info);
+}
 MainWindow::~MainWindow()
 {
 }
@@ -180,15 +192,14 @@ int MainWindow::findMaxRoundsAmount(const std::vector<std::vector<std::pair<doub
 std::vector<std::pair<double, double>> MainWindow::getAverageViability(const std::vector<std::vector<std::pair<double, double>>>& result) {
     int maxRounds = findMaxRoundsAmount(result);
     std::vector<std::pair<double, double>> averageViability;
-    for (int i = 0; i < maxRounds; i++) {
-        std::pair<double, double> summaryRound(0,0);
-        for (int j = 0; j < result.size();j++) {
-            if (result[j].size() > i ) {
-                summaryRound.first = summaryRound.first + result[j][i].first;
-                summaryRound.second = summaryRound.second + result[j][i].second;
-            }
+    for (int j = 0; j < maxRounds; j++) {
+        averageViability.push_back(std::pair(0, 0));
+    }
+    for (int i = 0; i < result.size(); i++) {
+        for (int j = 0; j < result[i].size(); j++) {
+            averageViability[j].first = averageViability[j].first + result[i][j].first;
+            averageViability[j].second = averageViability[j].second + result[i][j].second;
         }
-        averageViability.push_back(summaryRound);
     }
     for (int i = 0; i < maxRounds; i++) {
         averageViability[i].first = averageViability[i].first / maxRounds;

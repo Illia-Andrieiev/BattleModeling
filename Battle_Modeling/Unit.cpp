@@ -34,16 +34,26 @@ unitHelpers::Cycling Unit::getCycling() const {
 	return cycling;
 }
 /// Attack fortification an foe`s units
-void AttackArmy::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
+int AttackArmy::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
 	attackFortification(fortification, damage);///< At first attack fortification 
 	if (posFirstAlive == -1 || units.size() == 0)///< If all unnits dead, return;
-		return;
+		return 0;
+	int deadAmount = 0;
+	static std::mutex mt;
+	std::lock_guard<std::mutex> g(mt);
 	while (damage > 0 && posFirstAlive != -1) {///< While damage >0 and exists alive units in vector
 		int pos = chooseTargetNomer(units, posFirstAlive); ///< Choose unit to attack
 		if (pos == -1)///< If units do not choosed, return
-			return;
+			return deadAmount;
+		if (!units[pos]->isAlive()) {
+			return deadAmount;
+		}
 		units[pos]->takeDamage(damage);///< attack unit
 		if (!units[pos]->isAlive()) {
+			deadAmount++;
+			if (posFirstAlive == -1) {
+				return deadAmount;
+			}
 			std::swap(units[pos], units[posFirstAlive]);///< If unit dead, send him on vector`s start
 			posFirstAlive++;///< Increase position of first alive
 			if (posFirstAlive == units.size()) { ///< if position of first alive == vector`s size, set pos = -1
@@ -51,6 +61,7 @@ void AttackArmy::attackUnitType(Unit& fortification, double& damage, int& posFir
 			}
 		}
 	}
+	return deadAmount;
 }
 /// Choose type of unit to attack.
 /*!
@@ -69,8 +80,8 @@ unitHelpers::unitTypes AttackArmy::chooseRandomTarget(Army& army) {
 	std::uniform_int_distribution<> distr(0, (int)army.units.size() - 1);
 	for (int i = 0; i < 100; i++) {
 		int param = distr(gen);
-		if (army.positionOfFirstAlive[army.unitTypesPositions[static_cast<unitHelpers::unitTypes>(param)]] != -1)
-			return static_cast<unitHelpers::unitTypes>(param);
+		if (army.positionOfFirstAlive[param] != -1)
+			return army.units[param][0]->getType();
 	}
 	return static_cast<unitHelpers::unitTypes>(0);
 }
@@ -81,13 +92,15 @@ unitHelpers::unitTypes AttackArmy::chooseRandomTarget(Army& army) {
 */
 
 void AttackArmy::attackArmy(Army& army, double& supplies) {
+	//static std::mutex mt;
+	//std::lock_guard<std::mutex> guard(mt);
 	if (!prepareForAttack(supplies))
 		return;
 	double power = determinePower(); ///< Determine units power
 	manageSupplies(supplies, power);
 	unitHelpers::unitTypes type = chooseTarget(army);
 	double damage = determineDamage(type, power); ///< find damage on type
-	attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions[type]], army.units[army.unitTypesPositions[type]]);///< attack choosed type
+	attackUnitType(*(army.fortification), damage, army.positionOfFirstAlive[army.unitTypesPositions.at(type)], army.units[army.unitTypesPositions.at(type)]);///< attack choosed type
 }
 /*
 
@@ -203,6 +216,23 @@ Unit::Unit() :AttackArmy(0, false) {
 	this->currentArmor = 0;
 	fortificationTarget = false;
 }
+Unit::Unit(const Unit& unit) :AttackArmy(0, false) {
+	this->cycling = unit.cycling;
+	this->fortificationTarget = unit.fortificationTarget;
+	for (int i = 0; i < 256; i++)
+		this->name[i] = unit.name[i];
+	this->minPower = unit.minPower;
+	this->maxPower = unit.maxPower;
+	this->viability = unit.viability;
+	this->alive = unit.alive;
+	this->powerCoef = unit.powerCoef;
+	this->type = unit.type;
+	this->isRenovateArmor = unit.isRenovateArmor;
+	this->maxArmor = unit.maxArmor;
+	this->currentArmor = unit.currentArmor;
+	this->items = unit.items;
+	this->priorityTarget = unit.priorityTarget;
+}
 Unit& Unit::operator = (const Unit& unit) {
 	if (this == &unit)
 		return *this;
@@ -222,6 +252,9 @@ Unit& Unit::operator = (const Unit& unit) {
 	this->items = unit.items;
 	this->priorityTarget = unit.priorityTarget;
 	return *this;
+}
+void Unit::operator()(Army& army, double& supplies) {
+	attackArmy(army, supplies);
 }
 ///Get TYPE ID
 int Unit::getTypeID() {
@@ -261,6 +294,7 @@ bool Unit::isEqual(Unit* unit) {
 *  coef = new_viabiliy/old_viability. 0.5 <= coef < 1. With 90% chanse armor takes damage
 */
 void Unit::takeDamage(double& damage) {
+	std::lock_guard guard(mt);
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distr(0, 9);
@@ -284,6 +318,7 @@ void Unit::takeDamage(double& damage) {
 }
 /// renovate armor value to maximum. Reduce supplies on 1 point for each 1 point of armor 
 void Unit::renovateArmor(double& supplies) {
+	std::lock_guard guard(mt);
 	if (isRenovateArmor) {
 		if (currentArmor < maxArmor) {
 			supplies -= (maxArmor - currentArmor);
@@ -291,6 +326,33 @@ void Unit::renovateArmor(double& supplies) {
 			currentArmor = maxArmor;
 		}
 	}
+}
+/// Attack fortification an foe`s units
+int Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
+	attackFortification(fortification, damage);///< At first attack fortification 
+	if (posFirstAlive == -1 || units.size() == 0)///< If all unnits dead, return;
+		return 0;
+	int deadAmount = 0;
+	static std::mutex mt;
+	std::lock_guard<std::mutex> guard(mt);
+	while (damage > 0 && posFirstAlive != -1) {///< While damage >0 and exists alive units in vector
+		int pos = chooseTargetNomer(units, posFirstAlive); ///< Choose unit to attack
+		if (pos == -1)///< If units do not choosed, return
+			return deadAmount;
+		units[pos]->takeDamage(damage);///< attack unit
+		if (!units[pos]->isAlive()) {
+			deadAmount++;
+			if (posFirstAlive == -1) {
+				return deadAmount;
+			}
+			std::swap(units[pos], units[posFirstAlive]);///< If unit dead, send him on vector`s start
+			posFirstAlive++;///< Increase position of first alive
+			if (posFirstAlive == units.size()) { ///< if position of first alive == vector`s size, set pos = -1
+				posFirstAlive = -1;
+			}
+		}
+	}
+	return deadAmount;
 }
 /// Return minimal unit`s power
 double Unit::getMinBasePower() const {
@@ -341,6 +403,7 @@ std::map<unitHelpers::unitTypes, double> Unit::getPowerCoef() const {
 }
 /// Add 1 to current cycle. Manage isActive atribute
 void Unit::updateCycle() {
+	std::lock_guard guard(mt);
 	if (cycling.isActive) {
 		cycling.currentCycle++;
 		if (cycling.currentCycle >= cycling.cyclesToReplenishment) {
@@ -370,7 +433,10 @@ void Unit::applyItems() {
 		if (!items[i].isApply()) {
 			items[i].apply();
 			for (auto& param : items[i].getPowerChanges()) {
-				powerCoef[param.first] *= param.second;
+				try {
+					powerCoef.at(param.first) *= param.second;
+				}
+				catch (const std::out_of_range&) {}
 			}
 		}
 	}
@@ -410,19 +476,18 @@ void Unit::manageSupplies(double& supplies, double power) {
 unitHelpers::unitTypes Unit::chooseTarget(Army& army) const {
 	int posAlivePriorityTarget = -1;
 	try{
-		posAlivePriorityTarget = army.positionOfFirstAlive[army.unitTypesPositions.at(priorityTarget)]; ///< find position of last alive priorityTarget unit 
+		posAlivePriorityTarget = army.positionOfFirstAlive.at(army.unitTypesPositions.at(priorityTarget)); ///< find position of last alive priorityTarget unit 
 	}
 	catch (const std::out_of_range&) {
 		posAlivePriorityTarget = -1;
 	}
-	
 	unitHelpers::unitTypes type = priorityTarget; ///< type to attack
 	if (posAlivePriorityTarget == -1) ///< If all priority targets dead, choose type randomly
 		type = chooseRandomTarget(army);
 	return type;
 }
 /// Return exact copy of this unit
-Unit* Unit::clone() {
+Unit* Unit::clone() const {
 	Unit* newUnit = new Unit();
 	newUnit->cycling = this->cycling;
 	newUnit->fortificationTarget = this->fortificationTarget;
@@ -460,7 +525,7 @@ void Unit::setCycling(const unitHelpers::Cycling& cycling) {
 	this->cycling = cycling;
 }
 /// Return default Unit, but with same type and priority target wis this
-Unit* Unit::create() {
+Unit* Unit::create() const {
 	Unit* res = new Unit();
 	res->type = this->type;
 	res->priorityTarget = this->priorityTarget;

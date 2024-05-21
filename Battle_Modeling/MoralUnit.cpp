@@ -5,6 +5,26 @@ MoralUnit::MoralUnit() {
 	this->morality = 100;
 	this->rateOfMoralityChanges = 1;
 }
+MoralUnit::MoralUnit(const MoralUnit& unit) {
+	this->cycling = unit.cycling;
+	this->fortificationTarget = unit.fortificationTarget;
+	for (int i = 0; i < 256; i++)
+		this->name[i] = unit.name[i];
+	this->minPower = unit.minPower;
+	this->maxPower = unit.maxPower;
+	this->alive = unit.alive;
+	this->rateOfMoralityChanges = unit.rateOfMoralityChanges;
+	this->morality = unit.morality;
+	this->viability = unit.viability;
+	this->powerCoef = unit.powerCoef;
+	this->type = unit.type;
+	this->items = unit.items;
+	this->alive = unit.alive;
+	this->isRenovateArmor = unit.isRenovateArmor;
+	this->maxArmor = unit.maxArmor;
+	this->currentArmor = unit.currentArmor;
+	this->priorityTarget = unit.priorityTarget;
+}
 /// Return units TYPE ID
 int MoralUnit::getTypeID() {
 	return TYPE_ID;
@@ -26,6 +46,7 @@ MoralUnit& MoralUnit::operator = (const MoralUnit& unit) {
 	this->minPower = unit.minPower;
 	this->maxPower = unit.maxPower;
 	this->alive = unit.alive;
+	this->rateOfMoralityChanges = unit.rateOfMoralityChanges;
 	this->morality = unit.morality;
 	this->viability = unit.viability;
 	this->powerCoef = unit.powerCoef;
@@ -52,6 +73,7 @@ void MoralUnit::setMorality(double morality) {
 *  coef = new_viabiliy/old_viability. 0.5 <= coef < 1. With 90% chanse armor takes damage
 */
 void MoralUnit::takeDamage(double& damage) {
+	std::lock_guard guard(mt);
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distr(0, 9);
@@ -83,6 +105,7 @@ void MoralUnit::takeDamage(double& damage) {
 *   and increase by 3.5 at round, when unit go unactive.
 */
 void MoralUnit::updateCycle() {
+	std::lock_guard guard(mt);
 	if (cycling.isActive) {
 		cycling.currentCycle++;
 		if (cycling.currentCycle >= cycling.cyclesToReplenishment) {
@@ -125,31 +148,18 @@ double MoralUnit::determinePower() {
 	return distr(gen);
 }
 /// Attack fortification an foe`s units
-void MoralUnit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
-	attackFortification(fortification, damage);///< At first attack fortification 
-	if (posFirstAlive == -1 || units.size() == 0) ///< If all unnits dead, return;
-		return;
-	while (damage > 0 && posFirstAlive != -1) { ///< While damage >0 and exists alive units in vector
-		int pos = chooseTargetNomer(units, posFirstAlive); ///< Choose unit to attack
-		if (pos == -1) ///< If units do not choosed, return
-			return;
-		units[pos]->takeDamage(damage); ///< attack unit
-		if (!units[pos]->isAlive()) {
-			std::swap(units[pos], units[posFirstAlive]); ///< If unit dead, send him on vector`s start
-			posFirstAlive++; ///< Increase position of first alive
-			if (posFirstAlive == units.size()) { ///< if position of first alive == vector`s size, set pos = -1
-				posFirstAlive = -1;
-			}
-			setMorality(this->morality + 5); ///< increase units morality
-		}
-	}
+int MoralUnit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
+	int deadAmount = Unit::attackUnitType(fortification, damage, posFirstAlive, units);
+	setMorality(this->morality + 5*deadAmount); ///< increase units morality
+	return deadAmount;
 }
 /// Return string representation of MoralUnit
 std::string MoralUnit::toString() {
 	return Unit::toString() + " morality: " + std::to_string(morality);
 }
+
 /// Return exact copy of this unit
-MoralUnit* MoralUnit::clone() {
+MoralUnit* MoralUnit::clone() const {
 	MoralUnit* newUnit = new MoralUnit();
 	newUnit->cycling = this->cycling;
 	newUnit->fortificationTarget = this->fortificationTarget;
@@ -170,7 +180,7 @@ MoralUnit* MoralUnit::clone() {
 	return newUnit;
 }
 /// Return default MoralUnit, but with same type and priority target wis this
-MoralUnit* MoralUnit::create() {
+MoralUnit* MoralUnit::create() const  {
 	MoralUnit* res = new MoralUnit();
 	res->type = this->type;
 	res->priorityTarget = this->priorityTarget;

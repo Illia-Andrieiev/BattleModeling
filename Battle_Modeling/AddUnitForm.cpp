@@ -44,6 +44,8 @@ void AddUnitForm::on_UnitsListWidget_itemDoubleClicked(QListWidgetItem* item) {
 	FileManager f;
 	int amount;
 	Unit* unit = f.readUnit(stream, amount);
+	ui.UnitMorality->clear();
+	ui.UnitMoralityChanges->clear();
 	ui.UnitNameLineEdit->setText(QString::fromStdString(unit->getName()));
 	ui.UnitMinPower->setText(QString::fromStdString(std::to_string(unit->getMinBasePower())));
 	ui.UnitMaxPower->setText(QString::fromStdString(std::to_string(unit->getMaxBasePower())));

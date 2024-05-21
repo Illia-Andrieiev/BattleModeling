@@ -2,8 +2,10 @@
 #include"MoralUnit.h"
 #include"FileManager.h"
 #include <thread>
+#include <tbb/tbb.h>
 #include<random>
 #include<filesystem>
+#define	BATTLEBENCHMARK true
 ///Constructor
 BattleModeling::BattleModeling() {
 	army1RoundReinforcement = 100;
@@ -34,25 +36,33 @@ void BattleModeling::battleRound() {
 	round++;
 	manageSupplies();
 	///< Attack army
-	std::thread army1Thread([&]() {army1.attackArmy(army2); });
+	tbb::task_group g;
+	g.run([&] {
+		try {
+			army1.attackArmy(army2);
+		}
+		catch (const std::exception& e) {
+			// Handle exceptions if needed
+			std::cerr << "Exception in army1.attackArmy: " << e.what() << std::endl;
+		}
+		});
+
+	// Execute the second attack task synchronously
 	army2.attackArmy(army1);
-	army1Thread.join();
+
+	// Wait for all tasks in the group to complete
+	g.wait();
 	///< Count viability
 	double viability1 = 0, viability2 = 0;
-	std::thread th1([&]() {viability1 = army1.countViability(); });
-	std::thread th2([&]() {viability2 = army2.countViability(); });
-	///< Count power
-	std::thread th3([&]() {army1.countPower(); });
-	army2.countPower();
-	th1.join();
-	th2.join();
-	th3.join();
+	viability1 = army1.countViability(); 
+	viability2 = army2.countViability(); 
+
 	///< Print armies
-	std::fstream log;
+	/*std::fstream log;
 	log.open("log", std::ios::app | std::ios::in | std::ios::out);
 	log << "army1 viability: " << viability1 << std::endl << army1.toString() << std::endl;
 	log << "army2: viability: " << viability2 << std::endl << army2.toString() << std::endl;
-	log.close();
+	log.close();*/
 }
 void BattleModeling::manageSupplies() {
 	if (roundSupplies.army1SupplyRoundAmount >= round) {
@@ -64,6 +74,11 @@ void BattleModeling::manageSupplies() {
 }
 /// Main Battle modeling method 
 std::vector<std::pair<double, double>> BattleModeling::operator()() {
+#ifdef BATTLEBENCHMARK
+	// start counting
+	auto start = std::chrono::high_resolution_clock::now();
+
+#endif
 	round = 0;
 	resultPoints.clear();
 	Army army1, army2, reinf1, reinf2;
@@ -94,37 +109,42 @@ std::vector<std::pair<double, double>> BattleModeling::operator()() {
 	this->army2 = army2;
 	this->army1Reinforcements = reinf1;
 	this->army2Reinforcements = reinf2;
+#ifdef BATTLEBENCHMARK
+	// stop counting
+	auto end = std::chrono::high_resolution_clock::now();
+	// find time
+	std::chrono::duration<double> resTime = end - start;
+	// log
+	static std::mutex mt;
+	std::lock_guard<std::mutex> guard(mt);
+	std::fstream log;
+	log.open("log_benchmark", std::ios::app | std::ios::in | std::ios::out);
+	log << "simulation battle betwen: " << army1.name << " " << army2.name <<" time: " << resTime << std::endl;
+	log.close();
+#endif
 	return resultPoints;
 }
 /// Preparetion for battle
 void BattleModeling::prepareForBattle() {
 	Circumstance summaryCirc = getSummCircumstance();
 	///< Apply circumstances for armies
-	std::thread th1([&]() {this->army1.applyCircumstance(summaryCirc); });
-	std::thread th2([&]() {this->army1Reinforcements.applyCircumstance(summaryCirc); });
-	std::thread th3([&]() {this->army2Reinforcements.applyCircumstance(summaryCirc); });
+	std::thread th1([&]() {this->army1.applyCircumstance(summaryCirc); 
+	this->army1.applyCircumstance(army1SpecialCirc);
+	this->army1.applyItems(); });
+	std::thread th2([&]() {this->army1Reinforcements.applyCircumstance(summaryCirc);
+	this->army1Reinforcements.applyCircumstance(army1SpecialCirc);
+	this->army1Reinforcements.applyItems(); });
+	std::thread th3([&]() {this->army2Reinforcements.applyCircumstance(summaryCirc); 
+	this->army2Reinforcements.applyCircumstance(army2SpecialCirc); 
+	this->army2Reinforcements.applyItems(); });
 	this->army2.applyCircumstance(summaryCirc);
-	th1.join();
-	th2.join();
-	th3.join();
-	th1 = std::thread([&]() {this->army1.applyCircumstance(army1SpecialCirc); });
-	th2 = std::thread([&]() {this->army1Reinforcements.applyCircumstance(army1SpecialCirc); });
-	th3 = std::thread([&]() {this->army2Reinforcements.applyCircumstance(army2SpecialCirc); });
 	this->army2.applyCircumstance(army2SpecialCirc);
-	th1.join();
-	th2.join();
-	th3.join();
-	///Apply items
-	th1 = std::thread([&]() {this->army1.applyItems(); });
-	th2 = std::thread([&]() {this->army1Reinforcements.applyItems(); });
-	th3 = std::thread([&]() {this->army2Reinforcements.applyItems(); });
 	this->army2.applyItems();
 	th1.join();
 	th2.join();
 	th3.join();
-	th1 = std::thread([&]() {this->army1.countViability(); });
+	this->army1.countViability();
 	this->army2.countViability();
-	th1.join();
 	std::filesystem::remove("log");
 }
 std::vector<Circumstance> BattleModeling::getCircumstances() const {

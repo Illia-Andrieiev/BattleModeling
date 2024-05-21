@@ -429,7 +429,6 @@ void FileManagerTest::armyTest() {
 	std::string fileName = "armyTest";
 	FileManager f;
 	"MoralUnit_read/write"_test = [&] {
-		army1.countPower();
 		army1.countViability();
 		f.writeArmy(army1, fileName);
 		expect(std::filesystem::exists(fileName) == true >> fatal);

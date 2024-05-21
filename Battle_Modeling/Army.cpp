@@ -1,6 +1,9 @@
 #include "Army.h"
 #include<thread>
+#include <tbb/tbb.h>
 #include"MoralUnit.h"
+#include <chrono>
+//#define ISBENCHMARK true;
 ///Constructor
 Army::Army() {
 	viability = countViability();
@@ -64,20 +67,7 @@ void Army::setName(const std::string& name) {
 	for (int i = 0; i < 256 && i < name.size(); i++)
 		this->name[i] = name[i];
 }
-/// Summ of average power * damageCoef of every unit in army  
-void Army::countPower() {
-	power.clear();
-	for (int i = 0; i < units.size(); i++) {
-		power[units[i][0]->type] = 0;
-	}
-	for (int i = 0; i < units.size(); i++) {
-		for (int j = 0; j < units[i].size(); j++) {
-			for (int k = 0; k < units.size(); k++) {
-				power[units[k][0]->type] += (units[i][j]->maxPower + units[i][j]->minPower) / 2 * units[i][j]->powerCoef[units[k][0]->type];
-			}
-		}
-	}
-}
+
 void Army::setFortification(Unit& unit) {
 	delete fortification;
 	fortification = unit.clone();
@@ -122,18 +112,61 @@ void Army::addUnit(Unit& unit, int amount) {
 		--amount;
 	}
 }
+/// Class for attackType thread pool. Used as functor
+class ApplyAttackType {
+	std::vector<Unit*>& units;
+	Army& army;
+	double& sup;
+public:
+	void operator()(const tbb::blocked_range<size_t>& r) const {
+		std::vector<Unit*>& newUnits = units;
+		for (size_t i = r.begin(); i != r.end(); ++i)
+			units[i]->attackArmy(army, sup);
+	}
+	ApplyAttackType(std::vector<Unit*>& units, Army& army, double& sup) :
+		units(units), army(army), sup(sup)
+	{}
+};
 /// Every units in vector attack foes army
 void Army::attackType(Army& army, std::vector<Unit*>& type, int posFirstAlive) {
 	if (posFirstAlive != -1) {
-		for (int i = posFirstAlive; i < type.size(); i++) {
-			mt.lock();
-			type[i]->attackArmy(army, supplies); ///< Attack army
-			mt.unlock();
-		}
+		//AttackFunctor f;
+#ifdef ISBENCHMARK
+		int threadAmount = 1;
+		tbb::task_arena limited_arena(threadAmount); // init task area
+		// for every type call attackType method in new thread in thread pool
+		limited_arena.execute([&] {
+			tbb::parallel_for(tbb::blocked_range<std::size_t>(posFirstAlive, type.size()), ApplyAttackType(type, army, supplies));
+			});
+		
+#endif
+#ifndef ISBENCHMARK
+		// for every unit call attackType method in new thread in thread pool
+		tbb::parallel_for(tbb::blocked_range<std::size_t>(posFirstAlive, type.size()), ApplyAttackType(type, army, supplies));
+#endif
+		
 	}
 }
+/// Class for attackArmy thread pool. Used as functor
+class ApplyAttackArmy {
+	std::vector<std::vector<Unit*>>& units;
+	Army& elseArmy;
+	Army* thisArmy;
+	std::vector<int>& posFirstAlive;
+public:
+	void operator()(const tbb::blocked_range<size_t>& r) const {
+		for (size_t i = r.begin(); i != r.end(); ++i)
+			thisArmy->attackType(elseArmy, units[i], posFirstAlive[i]);
+	}
+	ApplyAttackArmy(std::vector<std::vector<Unit*>>& units,Army* thisArmy ,Army& elseArmy, std::vector<int>& posFirstAlive) :
+		units(units), elseArmy(elseArmy), posFirstAlive(posFirstAlive)
+	{
+		this->thisArmy = thisArmy;
+	}
+};
 /// Attack another army
 void Army::attackArmy(Army& army) {
+	/* Old realisation
 	std::vector<std::thread> threads;
 	for (int i = 0; i < units.size(); ++i)
 	{
@@ -144,6 +177,35 @@ void Army::attackArmy(Army& army) {
 	{
 		thread.join();
 	}
+	*/
+	if (units.size() == 0)
+		return;
+#ifdef ISBENCHMARK
+	// start counting
+	auto start = std::chrono::high_resolution_clock::now();
+	int threadAmount = 1;
+	tbb::task_arena limited_arena(threadAmount); // init task area
+
+	// for every type call attackType method in new thread in thread pool
+	limited_arena.execute([&] {
+		tbb::parallel_for(tbb::blocked_range<std::size_t>(0, units.size()), ApplyAttackArmy(units, this, army, positionOfFirstAlive));
+});
+	// stop counting
+	auto end = std::chrono::high_resolution_clock::now();
+	// find time
+	std::chrono::duration<double> resTime = end - start;
+	// log
+	static std::mutex mt;
+	std::lock_guard<std::mutex> guard(mt);
+	std::fstream log;
+	log.open("log_benchmark", std::ios::app | std::ios::in | std::ios::out);
+	log << "Army: " << this->name << " attack time: " << resTime << std::endl;
+	log.close();
+#endif
+#ifndef ISBENCHMARK
+	// for every type call attackType method in new thread in thread pool
+	tbb::parallel_for(tbb::blocked_range<std::size_t>(0, units.size()), ApplyAttackArmy(units,this ,army, positionOfFirstAlive));
+#endif
 }
 /// Return string interpretation of Army
 std::string Army::toString() {

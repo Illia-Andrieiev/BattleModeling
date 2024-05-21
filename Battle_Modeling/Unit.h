@@ -1,4 +1,5 @@
 #pragma once
+#include<mutex>
 #include<vector>
 #include<map>
 #include<iostream>
@@ -24,8 +25,9 @@ protected:
 	AttackArmy(double damage, bool fortificationTarget);
 	virtual int chooseTargetNomer(std::vector<Unit*>& units, int firstAlive);
 	virtual double determinePower() { return damage; };
+	
 	virtual void attackFortification(Unit& fortification, double& damage);
-	virtual void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
+	virtual int attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units);
 	virtual unitHelpers::unitTypes chooseTarget(Army& army) const;
 	static unitHelpers::unitTypes chooseRandomTarget(Army& army);
 public:
@@ -58,6 +60,7 @@ protected:
 	double currentArmor; ///< Current armor value
 	bool isRenovateArmor; ///< Is renovate armor from supplies
 	double viability; ///< Display unit`s chance to survive 
+	std::mutex mt; ///< mutex
 	std::vector<Item> items; ///< All unit`s items
 	unitHelpers::Cycling cycling; ///< Cycling unit on battlefield
 	std::map<unitHelpers::unitTypes, double> powerCoef; ///< Multiply on default damage to another unit`s types 
@@ -74,6 +77,8 @@ protected:
 public:
 	virtual int getTypeID();
 	Unit();
+	virtual ~Unit() = default;
+	Unit(const Unit& unit);
 	void setPowerCoef(const std::pair<unitHelpers::unitTypes, double>& powerCoef);
 	void setCycling(const unitHelpers::Cycling& cycling);
 	Unit& operator =(const Unit& unit);
@@ -83,9 +88,11 @@ public:
 	bool getIsRenovateArmor() const;
 	double getMaxArmor() const;
 	void applyItems();
+	int attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) override;
 	double getMaxBasePower() const;
 	double getMinBasePower() const;
 	double getViability() const;
+	virtual void operator()(Army& army, double& supplies);
 	virtual void takeDamage(double& damage);
 	std::string getName() const;
 	std::vector<Item> getItems() const;
@@ -95,8 +102,8 @@ public:
 	std::map<unitHelpers::unitTypes, double> getPowerCoef() const;
 	virtual void updateCycle();
 	double getCurrentArmor() const;
-	Unit* clone() override;
-	Unit* create() override;
+	Unit* clone() const override;
+	Unit* create() const override;
 	void removeItem(const std::string& itemName);
 	unitHelpers::unitTypes getType() const;
 	unitHelpers::unitTypes getPriorityTargetType() const;

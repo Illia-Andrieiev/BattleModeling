@@ -21,7 +21,7 @@ AddCircumstanceForm::AddCircumstanceForm(QWidget *parent)
 	this->setFixedSize(this->size());
 	setStyles();
 	connect(ui.AddCircumstanceButton, &QPushButton::clicked, this, &AddCircumstanceForm::on_AddCircumstanceButton_clicked);
-	connect(ui.ToMenu, &QPushButton::clicked, this, &AddCircumstanceForm::on_ToMenu_clicked);
+	//connect(ui.ToMenu, &QPushButton::clicked, this, &AddCircumstanceForm::on_ToMenu_clicked);
 	connect(ui.AddPowerCoef, &QPushButton::clicked, this, &AddCircumstanceForm::on_AddPowerCoef_clicked);
 	connect(ui.DeleteCircumstanceButton, &QPushButton::clicked, this, &AddCircumstanceForm::on_DeleteCircumstanceButton_clicked);
 	connect(ui.UnitTypes, &QListWidget::itemDoubleClicked, this, &AddCircumstanceForm::on_UnitTypes_itemDoubleClicked);

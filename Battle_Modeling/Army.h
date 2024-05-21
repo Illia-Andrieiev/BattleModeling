@@ -31,11 +31,11 @@ class Army : public ArmyCollection
 	friend class FileManager;
 	friend class AttackArmy;
 	friend class MementoArmy;
+	friend class ApplyAttackArmy;
 protected:
 	char name[256];
 	std::vector<std::vector<Unit*>> units;///< All army units. Each subVector represent each unit type  
 	std::map<unitHelpers::unitTypes, int> unitTypesPositions;///< Positions of unit`s types in unit vector
-	std::mutex mt;
 	double supplies; ///< Current available supplies. Represent can units attack, or not
 	Unit* fortification; ///< Take 50% of all foe`s units damage and damage them. By default viability and power = 0.  
 	std::map<unitHelpers::unitTypes, double> power; ///< General army power
@@ -49,7 +49,6 @@ public:
 	Army(Unit& fortification);
 	Army(const Army& army);
 	~Army();
-	void countPower();
 	double getSupplies() const;
 	void changeSupplies(double supply);
 	int getAmountOfUniqueUnits();

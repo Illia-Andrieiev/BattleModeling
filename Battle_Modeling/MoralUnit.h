@@ -10,11 +10,12 @@ class MoralUnit :public Unit
 	double morality; ///< Units morality
 	double rateOfMoralityChanges; ///< Represent rate of morality droping
 	const int TYPE_ID = 1; ///< TYPE ID
-	void attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) override;
+	int attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) override;
 	double determinePower() override;
 public:
 	virtual int getTypeID() override;
 	MoralUnit();
+	MoralUnit(const MoralUnit& unit);
 	bool isEqual(Unit* unit) override;
 	MoralUnit& operator = (const MoralUnit& unit);
 	void setMorality(double morality);
@@ -23,8 +24,8 @@ public:
 	void takeDamage(double& damage) override;
 	void updateCycle() override;
 	std::string toString() override;
-	MoralUnit* clone() override;
-	MoralUnit* create() override;
+	MoralUnit* clone() const override;
+	MoralUnit* create() const override;
 };
 
 ///Concrete MoralUnit builder

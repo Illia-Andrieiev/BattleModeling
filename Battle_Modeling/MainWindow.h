@@ -19,6 +19,7 @@ private slots:
     void on_ChangeReinfButton_clicked();
     void on_StartButton_clicked();
     void on_ArmiesListWidget_itemDoubleClicked(QListWidgetItem* item);
+    void showInfo();
 private:
     bool isArmyExist(QString name);
     void setStyles();

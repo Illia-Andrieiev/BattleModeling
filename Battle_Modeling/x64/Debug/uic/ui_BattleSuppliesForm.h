@@ -187,7 +187,7 @@ public:
         label_9->setText(QCoreApplication::translate("BattleSuppliesFormClass", "Army 2 start supplies: ", nullptr));
         Army2supplies->setText(QCoreApplication::translate("BattleSuppliesFormClass", "0", nullptr));
         label_3->setText(QString());
-        ToMenu->setText(QCoreApplication::translate("BattleSuppliesFormClass", "Go back", nullptr));
+        ToMenu->setText(QCoreApplication::translate("BattleSuppliesFormClass", "Start modeling", nullptr));
         ApplySupplies->setText(QCoreApplication::translate("BattleSuppliesFormClass", "Apply supplies", nullptr));
     } // retranslateUi
 
