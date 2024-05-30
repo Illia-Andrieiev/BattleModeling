@@ -132,7 +132,7 @@ void Army::attackType(Army& army, std::vector<Unit*>& type, int posFirstAlive) {
 	if (posFirstAlive != -1) {
 		//AttackFunctor f;
 #ifdef ISBENCHMARK
-		int threadAmount = 1;
+		int threadAmount = 2;
 		tbb::task_arena limited_arena(threadAmount); // init task area
 		// for every type call attackType method in new thread in thread pool
 		limited_arena.execute([&] {
@@ -183,7 +183,7 @@ void Army::attackArmy(Army& army) {
 #ifdef ISBENCHMARK
 	// start counting
 	auto start = std::chrono::high_resolution_clock::now();
-	int threadAmount = 1;
+	int threadAmount = 2;
 	tbb::task_arena limited_arena(threadAmount); // init task area
 
 	// for every type call attackType method in new thread in thread pool
@@ -195,12 +195,12 @@ void Army::attackArmy(Army& army) {
 	// find time
 	std::chrono::duration<double> resTime = end - start;
 	// log
-	static std::mutex mt;
-	std::lock_guard<std::mutex> guard(mt);
-	std::fstream log;
-	log.open("log_benchmark", std::ios::app | std::ios::in | std::ios::out);
-	log << "Army: " << this->name << " attack time: " << resTime << std::endl;
-	log.close();
+	//static std::mutex mt;
+	//std::lock_guard<std::mutex> guard(mt);
+	//std::fstream log;
+	//log.open("log_benchmark.txt", std::ios::app | std::ios::in | std::ios::out);
+	//log << "Army: " << this->name << " attack time: " << resTime << std::endl;
+	//log.close();
 #endif
 #ifndef ISBENCHMARK
 	// for every type call attackType method in new thread in thread pool

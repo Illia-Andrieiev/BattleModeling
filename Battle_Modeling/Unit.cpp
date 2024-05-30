@@ -45,9 +45,6 @@ int AttackArmy::attackUnitType(Unit& fortification, double& damage, int& posFirs
 		int pos = chooseTargetNomer(units, posFirstAlive); ///< Choose unit to attack
 		if (pos == -1)///< If units do not choosed, return
 			return deadAmount;
-		if (!units[pos]->isAlive()) {
-			return deadAmount;
-		}
 		units[pos]->takeDamage(damage);///< attack unit
 		if (!units[pos]->isAlive()) {
 			deadAmount++;
@@ -329,30 +326,7 @@ void Unit::renovateArmor(double& supplies) {
 }
 /// Attack fortification an foe`s units
 int Unit::attackUnitType(Unit& fortification, double& damage, int& posFirstAlive, std::vector<Unit*>& units) {
-	attackFortification(fortification, damage);///< At first attack fortification 
-	if (posFirstAlive == -1 || units.size() == 0)///< If all unnits dead, return;
-		return 0;
-	int deadAmount = 0;
-	static std::mutex mt;
-	std::lock_guard<std::mutex> guard(mt);
-	while (damage > 0 && posFirstAlive != -1) {///< While damage >0 and exists alive units in vector
-		int pos = chooseTargetNomer(units, posFirstAlive); ///< Choose unit to attack
-		if (pos == -1)///< If units do not choosed, return
-			return deadAmount;
-		units[pos]->takeDamage(damage);///< attack unit
-		if (!units[pos]->isAlive()) {
-			deadAmount++;
-			if (posFirstAlive == -1) {
-				return deadAmount;
-			}
-			std::swap(units[pos], units[posFirstAlive]);///< If unit dead, send him on vector`s start
-			posFirstAlive++;///< Increase position of first alive
-			if (posFirstAlive == units.size()) { ///< if position of first alive == vector`s size, set pos = -1
-				posFirstAlive = -1;
-			}
-		}
-	}
-	return deadAmount;
+	return AttackArmy::attackUnitType(fortification, damage, posFirstAlive, units);
 }
 /// Return minimal unit`s power
 double Unit::getMinBasePower() const {

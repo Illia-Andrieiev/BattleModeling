@@ -48,10 +48,22 @@ void BattleModeling::battleRound() {
 		});
 
 	// Execute the second attack task synchronously
-	army2.attackArmy(army1);
+	try {
+		army2.attackArmy(army1);
+	}
+	catch (const std::exception& e) {
+		// Handle exceptions if needed
+		std::cerr << "Exception in army2.attackArmy: " << e.what() << std::endl;
+	}
 
-	// Wait for all tasks in the group to complete
-	g.wait();
+	try {
+		g.wait();
+	}
+	catch (const std::exception& e) {
+		// Handle exceptions if needed
+		std::cerr << "Exception in wait: " << e.what() << std::endl;
+	}
+	
 	///< Count viability
 	double viability1 = 0, viability2 = 0;
 	viability1 = army1.countViability(); 
@@ -118,7 +130,7 @@ std::vector<std::pair<double, double>> BattleModeling::operator()() {
 	static std::mutex mt;
 	std::lock_guard<std::mutex> guard(mt);
 	std::fstream log;
-	log.open("log_benchmark", std::ios::app | std::ios::in | std::ios::out);
+	log.open("log_benchmark.txt", std::ios::app | std::ios::in | std::ios::out);
 	log << "simulation battle betwen: " << army1.name << " " << army2.name <<" time: " << resTime << std::endl;
 	log.close();
 #endif
